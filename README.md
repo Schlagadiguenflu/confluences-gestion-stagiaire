@@ -1,4 +1,4 @@
-# vue_authentification_id4
+# confluences-gestion-stagiaire
 
 ## Project setup
 ```
