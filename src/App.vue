@@ -210,4 +210,14 @@ export default {
   color: #999;
   cursor: default;
 }
+
+/* Progress bar */
+#nprogress .bar {
+  background: white !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: white !important;
+  border-left-color: white !important;
+}
 </style>
