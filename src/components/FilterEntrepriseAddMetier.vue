@@ -62,7 +62,7 @@ export default {
     validCreateMetier: true,
     dialog: false,
     metier: {
-      metierId: 0,
+      typeMetierId: 0,
       libelle: ''
     }
   }),

@@ -134,7 +134,7 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
-                      v-model="entreprise.filter.dateCreation"
+                      v-model="entreprise.filter.dateModification"
                       label="Date de modification"
                       readonly
                       v-bind="attrs"
@@ -143,7 +143,7 @@
                     ></v-text-field>
                   </template>
                   <v-date-picker
-                    v-model="entreprise.filter.dateCreation"
+                    v-model="entreprise.filter.dateModification"
                     no-title
                     scrollable
                   >
@@ -179,7 +179,7 @@
           <v-btn color="blue darken-1" text @click="dialog = false">
             Fermer
           </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
+          <v-btn color="blue darken-1" text @click="deletefilterEntreprise()">
             Effacer le filtre
           </v-btn>
           <v-btn color="blue darken-1" text @click="filterEntreprise()">
@@ -245,8 +245,32 @@ export default {
         .dispatch('entreprise/deleteFilterEntreprise')
         .then(() => {})
         .catch(() => {})
+      store
+        .dispatch('entreprise/fetchEntreprises')
+        .then(() => {})
+        .catch(() => {})
       this.dialog = false
       NProgress.done()
+    },
+    deleteMetier(typeMetierId) {
+      NProgress.start()
+      store
+        .dispatch('entreprise/deleteFilterMetier', typeMetierId)
+        .then(() => {})
+        .catch(() => {})
+      NProgress.done()
+    },
+    deleteDomaine(typeDomaineId) {
+      store
+        .dispatch('entreprise/deleteFilterDomaine', typeDomaineId)
+        .then(() => {})
+        .catch(() => {})
+    },
+    deleteOffre(typeOffreId) {
+      store
+        .dispatch('entreprise/deleteFilterOffre', typeOffreId)
+        .then(() => {})
+        .catch(() => {})
     }
   }
 }

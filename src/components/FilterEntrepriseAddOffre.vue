@@ -62,7 +62,7 @@ export default {
     validCreateOffre: true,
     dialog: false,
     offre: {
-      offreId: 0,
+      typeOffreId: 0,
       libelle: ''
     }
   }),

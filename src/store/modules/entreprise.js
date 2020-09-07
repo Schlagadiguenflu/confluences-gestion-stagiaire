@@ -94,6 +94,32 @@ export const mutations = {
   },
   SAVE_FILTER_ENTREPRISE(state, filter) {
     state.filter = filter
+  },
+  DELETE_FILTER_ENTREPRISE() {
+    state.filter = {
+      metiers: [],
+      domaines: [],
+      offres: [],
+      codePostal: null,
+      nom: null,
+      dateModification: null,
+      createur: null
+    }
+  },
+  DELETE_FILTER_METIER(state, typeMetierId) {
+    state.filter.metiers = state.filter.metiers.filter(
+      metier => metier.typeMetierId !== typeMetierId
+    )
+  },
+  DELETE_FILTER_OFFRE(state, typeOffreId) {
+    state.filter.offres = state.filter.offres.filter(
+      offre => offre.typeOffreId !== typeOffreId
+    )
+  },
+  DELETE_FILTER_DOMAINE(state, typeDomaineId) {
+    state.filter.domaines = state.filter.domaines.filter(
+      domaine => domaine.typeDomaineId !== typeDomaineId
+    )
   }
 }
 
@@ -237,7 +263,35 @@ export const actions = {
   addFilterEntrepriseDomaine({ commit }, domaine) {
     commit('ADD_FILTER_DOMAINE_ENTREPRISE', domaine)
   },
-  saveFilterEntreprise({ commit }, filter) {
+  saveFilterEntreprise({ commit, dispatch }, filter) {
     commit('SAVE_FILTER_ENTREPRISE', filter)
+    return EntrepriseService.getEntreprisesWithFilter(filter)
+      .then(response => {
+        commit('SET_ENTREPRISES', response.data)
+        const notification = {
+          type: 'success',
+          message: 'Entreprises chargées avec filtre'
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: 'Problème entreprises avec filtre : ' + error.message
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
+  deleteFilterEntreprise({ commit }) {
+    commit('DELETE_FILTER_ENTREPRISE')
+  },
+  deleteFilterMetier({ commit }, typeMetierId) {
+    commit('DELETE_FILTER_METIER', typeMetierId)
+  },
+  deleteFilterDomaine({ commit }, typeDomaineId) {
+    commit('DELETE_FILTER_DOMAINE', typeDomaineId)
+  },
+  deleteFilterOffre({ commit }, typeOffreId) {
+    commit('DELETE_FILTER_OFFRE', typeOffreId)
   }
 }

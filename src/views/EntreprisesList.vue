@@ -25,9 +25,10 @@
       class="elevation-1"
       @click:row="selectRow"
       @update:items-per-page="updateNumberItems"
+      :options.sync="options"
     >
       <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+        Pas de données disponibles
       </template>
     </v-data-table>
   </v-container>
@@ -45,6 +46,29 @@ function getEntreprises(routeTo, next) {
   })
 }
 
+function getEntreprisesWithFilter(routeTo, next, filter) {
+  store.dispatch('entreprise/saveFilterEntreprise', filter).then(() => {
+    next()
+  })
+}
+
+function loadData(routeTo, routeFrom, next) {
+  if (
+    store.state.entreprise.filter.metiers.length > 0 ||
+    store.state.entreprise.filter.offres.length > 0 ||
+    store.state.entreprise.filter.domaines.length > 0 ||
+    store.state.entreprise.filter.codePostal != null ||
+    store.state.entreprise.filter.nom != null ||
+    store.state.entreprise.filter.createur != null ||
+    store.state.entreprise.filter.dateModification != null
+  ) {
+    console.log('with filter')
+    getEntreprisesWithFilter(routeTo, next, store.state.entreprise.filter)
+  } else {
+    getEntreprises(routeTo, next)
+  }
+}
+
 export default {
   components: {
     CreateEntreprise,
@@ -52,6 +76,7 @@ export default {
   },
 
   data: () => ({
+    options: {},
     search: '',
     headers: [
       {
@@ -66,10 +91,22 @@ export default {
   }),
 
   beforeRouteEnter(routeTo, routeFrom, next) {
-    getEntreprises(routeTo, next)
+    loadData(routeTo, routeFrom, next)
   },
   beforeRouteUpdate(routeTo, routeFrom, next) {
-    getEntreprises(routeTo, next)
+    loadData(routeTo, routeFrom, next)
+  },
+  beforeRouteLeave(routeTo, routeFrom, next) {
+    store
+      .dispatch('variables/setCurrentPageEntreprise', {
+        number: this.options.page
+      })
+      .then(() => {})
+    next()
+  },
+
+  created() {
+    this.options.page = store.state.variables.currentPageEntreprise
   },
 
   computed: {
