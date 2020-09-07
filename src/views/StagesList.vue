@@ -25,8 +25,8 @@
       @update:items-per-page="updateNumberItems"
       :options.sync="options"
     >
-      <template v-slot:item.name="{ item }">
-        {{ item.stagiaire.firstname }} {{ item.stagiaire.lastName }}
+      <template v-slot:item.stagiaire.firstname="{ item }">
+        {{ item.stagiaire.firstname + ' ' + item.stagiaire.lastName }}
       </template>
       <template v-slot:item.debut="{ item }">
         {{ formatDate(item.debut) }}
@@ -74,7 +74,7 @@ export default {
       { text: 'Entreprise', value: 'entreprise.nom' },
       {
         text: 'Stagiaire',
-        value: 'name'
+        value: 'stagiaire.firstname'
       },
       { text: 'Début', value: 'debut' },
       { text: 'Fin', value: 'fin' }
@@ -122,7 +122,11 @@ export default {
     },
 
     formatDate(value) {
-      return moment(value).format('YYYY-MM-DD')
+      let date = moment(value).format('YYYY-MM-DD')
+      if (date == 'Invalid date') {
+        date = null
+      }
+      return date
     }
   }
 }

@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 import EntreprisesList from '../views/EntreprisesList.vue'
 import EntrepriseEdit from '../views/EntrepriseEdit.vue'
 import StagesList from '../views/StagesList.vue'
+import StageEdit from '../views/StageEdit.vue'
 import Callback from '../views/Callback'
+import NotFound from '../views/NotFound.vue'
 import NProgress from 'nprogress'
 import store from '../store'
 
@@ -48,9 +50,40 @@ const routes = [
     component: StagesList
   },
   {
+    path: '/stage/modifier/:id',
+    name: 'Stage-Modifier',
+    component: StageEdit,
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('stage/fetchStage', routeTo.params.id)
+        .then(stage => {
+          routeTo.params.stage = stage
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'stage' } })
+          } else {
+            next({ name: 'network-issue' })
+          }
+        })
+    }
+  },
+  {
     path: '/callback',
     name: 'Callback',
     component: Callback
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: NotFound,
+    props: true
+  },
+  {
+    path: '*',
+    redirect: { name: '404', params: { resource: 'page' } }
   }
 ]
 

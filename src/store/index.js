@@ -10,6 +10,8 @@ import * as typeEntreprise from '@/store/modules/typeEntreprise.js'
 import * as typeDomaine from '@/store/modules/typeDomaine.js'
 import * as typeOffre from '@/store/modules/typeOffre.js'
 import * as typeMetier from '@/store/modules/typeMetier.js'
+import * as typeAnnonce from '@/store/modules/typeAnnonce.js'
+import * as typeStage from '@/store/modules/typeStage.js'
 import * as contact from '@/store/modules/contact.js'
 import * as user from '@/store/modules/user.js'
 import * as stage from '@/store/modules/stage.js'
@@ -31,6 +33,8 @@ export default new Vuex.Store({
     typeDomaine,
     typeOffre,
     typeMetier,
+    typeAnnonce,
+    typeStage,
     contact,
     user,
     stage

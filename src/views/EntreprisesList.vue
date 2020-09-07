@@ -41,7 +41,7 @@ import CreateEntreprise from '@/components/CreateEntreprise.vue'
 import FilterEntreprise from '@/components/FilterEntreprise.vue'
 
 function getEntreprises(routeTo, next) {
-  store.dispatch('entreprise/fetchEntreprises', {}).then(() => {
+  store.dispatch('entreprise/fetchEntreprises', true).then(() => {
     next()
   })
 }

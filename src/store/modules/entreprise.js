@@ -124,15 +124,17 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchEntreprises({ commit, dispatch }) {
+  fetchEntreprises({ commit, dispatch }, notify) {
     return EntrepriseService.getEntreprises()
       .then(response => {
         commit('SET_ENTREPRISES', response.data)
-        const notification = {
-          type: 'success',
-          message: 'Entreprises chargées'
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Entreprises chargées'
+          }
+          dispatch('notification/add', notification, { root: true })
         }
-        dispatch('notification/add', notification, { root: true })
       })
       .catch(error => {
         const notification = {
@@ -146,11 +148,6 @@ export const actions = {
     return EntrepriseService.getEntreprise(id)
       .then(response => {
         commit('SET_ENTREPRISE', response.data)
-        const notification = {
-          type: 'success',
-          message: 'Entreprise chargée'
-        }
-        dispatch('notification/add', notification, { root: true })
         return response.data
       })
       .catch(error => {
