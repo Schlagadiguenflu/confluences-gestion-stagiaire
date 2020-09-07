@@ -116,7 +116,7 @@ export default {
         },
         {
           label: 'Stages',
-          url: '/404',
+          url: '/stages',
           icon: 'mdi-briefcase-outline',
           loggedIn: true
         },

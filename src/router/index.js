@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import EntreprisesList from '../views/EntreprisesList.vue'
 import EntrepriseEdit from '../views/EntrepriseEdit.vue'
+import StagesList from '../views/StagesList.vue'
 import Callback from '../views/Callback'
 import NProgress from 'nprogress'
 import store from '../store'
@@ -40,6 +41,11 @@ const routes = [
           }
         })
     }
+  },
+  {
+    path: '/stages',
+    name: 'Stages',
+    component: StagesList
   },
   {
     path: '/callback',

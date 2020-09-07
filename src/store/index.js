@@ -12,6 +12,7 @@ import * as typeOffre from '@/store/modules/typeOffre.js'
 import * as typeMetier from '@/store/modules/typeMetier.js'
 import * as contact from '@/store/modules/contact.js'
 import * as user from '@/store/modules/user.js'
+import * as stage from '@/store/modules/stage.js'
 
 Vue.use(Vuex)
 
@@ -31,6 +32,7 @@ export default new Vuex.Store({
     typeOffre,
     typeMetier,
     contact,
-    user
+    user,
+    stage
   }
 })
