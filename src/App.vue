@@ -220,4 +220,13 @@ export default {
   border-top-color: white !important;
   border-left-color: white !important;
 }
+
+/* Action button layout */
+.action-container {
+  position: fixed;
+  bottom: 0px;
+  right: 0;
+  padding-right: 40px;
+  z-index: 10;
+}
 </style>

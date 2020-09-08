@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <p>Sign-in in progress</p>
-  </div>
+  <v-container>
+    <v-row class="mt-5">
+      <v-col class="text-center" cols="12">
+        <h2>Connexion en cours...</h2>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
