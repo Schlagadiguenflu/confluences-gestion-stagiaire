@@ -14,6 +14,7 @@
           label="Rechercher"
           single-line
           hide-details
+          @click="updatePageSearch"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -127,6 +128,10 @@ export default {
           number: event
         })
         .then(() => {})
+    },
+
+    updatePageSearch() {
+      this.options.page = 1
     }
   }
 }

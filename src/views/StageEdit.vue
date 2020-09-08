@@ -1,15 +1,309 @@
 <template>
   <v-container>
-    <v-row> </v-row>
+    <v-row>
+      <v-col>
+        <h1>Stage</h1>
+      </v-col>
+    </v-row>
+    <v-form ref="formStage" v-model="valid" lazy-validation>
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-text-field
+            v-model="stage.nom"
+            :counter="50"
+            :rules="nameRules"
+            label="Nom"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col cols="12" md="2">
+          <v-autocomplete
+            v-model="stage.typeStageId"
+            :items="typeStage.typeStages"
+            item-value="typeStageId"
+            item-text="nom"
+            label="Type de stage"
+            :rules="requiredRule"
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-autocomplete
+            v-model="stage.createurId"
+            :items="user.users"
+            item-value="id"
+            item-text="nom"
+            label="Créateur-trice"
+            :rules="requiredRule"
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="3">
+          <v-autocomplete
+            v-model="stage.typeAnnonceId"
+            :items="typeAnnonce.typeAnnonces"
+            item-value="typeAnnonceId"
+            item-text="libelle"
+            label="Stage à annoncer"
+            clearable
+          ></v-autocomplete>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-autocomplete
+            v-model="stage.typeMetierId"
+            :items="typeMetier.typeMetiers"
+            item-value="typeMetierId"
+            item-text="libelle"
+            label="Métier"
+            :rules="requiredRule"
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-autocomplete
+            v-model="stage.entrepriseId"
+            :items="entreprise.entreprises"
+            item-value="entrepriseId"
+            item-text="nom"
+            label="Entreprise"
+            clearable
+          ></v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-autocomplete
+            v-model="stage.stagiaireId"
+            :items="user.users"
+            item-value="id"
+            item-text="nom"
+            label="Stagiaire"
+            :rules="requiredRule"
+          ></v-autocomplete>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="4">
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-menu
+                ref="menuDebut"
+                v-model="menuDebut"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="stage.debut"
+                    label="Début"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                    :rules="requiredRule"
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="stage.debut" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menuDebut = false"
+                    >Cancel</v-btn
+                  >
+                  <v-btn
+                    text
+                    color="primary"
+                    @click="$refs.menuDebut.save(date)"
+                    >OK</v-btn
+                  >
+                </v-date-picker>
+              </v-menu>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-menu
+                ref="menuFin"
+                v-model="menuFin"
+                :close-on-content-click="false"
+                :return-value.sync="date"
+                transition="scale-transition"
+                offset-y
+                min-width="290px"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-text-field
+                    v-model="stage.fin"
+                    label="Fin"
+                    readonly
+                    v-bind="attrs"
+                    v-on="on"
+                    clearable
+                  ></v-text-field>
+                </template>
+                <v-date-picker v-model="stage.fin" no-title scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="menuFin = false"
+                    >Cancel</v-btn
+                  >
+                  <v-btn text color="primary" @click="$refs.menuFin.save(date)"
+                    >OK</v-btn
+                  >
+                </v-date-picker>
+              </v-menu>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="6" md="6">
+              <v-checkbox v-model="stage.repas" label="Repas"></v-checkbox>
+            </v-col>
+            <v-col cols="6" md="6">
+              <v-checkbox v-model="stage.trajets" label="Trajets"></v-checkbox>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12" md="4">
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-text-field
+                v-model="stage.horaireMatin"
+                :counter="11"
+                :rules="horaireRules"
+                label="Horaire matin"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-text-field
+                v-model="stage.horaireApresMidi"
+                :counter="11"
+                :rules="horaireRules"
+                label="Horaire après-midi"
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="12" md="4">
+          <label for="DernierContact">Reçu</label>
+          <v-checkbox
+            v-model="stage.attestation"
+            label="Attestation"
+          ></v-checkbox>
+          <v-checkbox v-model="stage.rapport" label="Rapport"></v-checkbox>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="6">
+          <label for="remarques">Remarques</label>
+          <v-textarea
+            v-model="stage.remarque"
+            counter
+            maxlength="500"
+            full-width
+            auto-grow
+            single-line
+          ></v-textarea>
+        </v-col>
+        <v-col cols="12" md="6">
+          <label for="bilan">Bilan du stage</label>
+          <v-textarea
+            v-model="stage.bilan"
+            counter
+            full-width
+            auto-grow
+            single-line
+          ></v-textarea>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <label for="bilan">Suivi</label>
+          <v-textarea
+            v-model="stage.actionSuivi"
+            counter
+            maxlength="500"
+            full-width
+            auto-grow
+            single-line
+          ></v-textarea>
+        </v-col>
+      </v-row>
+      <div class="action-container">
+        <v-row>
+          <v-col>
+            <div class="text-center">
+              <v-btn
+                class="ma-2"
+                tile
+                color="success"
+                dark
+                min-width="150"
+                @click="submit()"
+              >
+                Sauvegarder
+              </v-btn>
+              <DeleteStage :stage="this.stage" />
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </v-form>
   </v-container>
 </template>
 
 <script>
+import store from '@/store/index.js'
+import { mapState } from 'vuex'
+import NProgress from 'nprogress'
+import DeleteStage from '@/components/DeleteStage.vue'
+
 export default {
   props: {
     stage: {
       type: Object,
       required: true
+    }
+  },
+
+  components: {
+    DeleteStage
+  },
+
+  data: () => ({
+    date: null,
+    menuDebut: false,
+    menuFin: false,
+    valid: true,
+    nameRules: [
+      v => !!v || 'Le nom est obligatoire',
+      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+    ],
+    horaireRules: [
+      v =>
+        (v && v.length <= 11) ||
+        !v ||
+        "L'horaire doit être moins que 11 caractères"
+    ],
+    requiredRule: [v => !!v || 'Obligatoire'],
+    select: null
+  }),
+
+  computed: {
+    ...mapState([
+      'entreprise',
+      'typeStage',
+      'typeAnnonce',
+      'typeMetier',
+      'user'
+    ])
+  },
+
+  methods: {
+    submit() {
+      if (this.$refs.formStage.validate()) {
+        NProgress.start()
+        store
+          .dispatch('stage/editStage', this.stage)
+          .then(() => {
+            this.$router.push({ name: 'Stages' })
+          })
+          .catch(() => {})
+        NProgress.done()
+      }
     }
   }
 }

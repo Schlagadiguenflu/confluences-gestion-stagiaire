@@ -6,7 +6,15 @@
   >
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" tile color="red" dark class="ma-2">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          tile
+          color="red"
+          dark
+          min-width="150"
+          class="ma-2"
+        >
           Supprimer
         </v-btn>
       </template>
@@ -16,7 +24,8 @@
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">
-            Attention cela supprimera non seulement l'entreprise mais aussi :
+            Attention une supression est définitive et supprimera non seulement
+            l'entreprise mais aussi :
           </h3>
           <v-card class="mx-auto" tile>
             <v-list disabled>

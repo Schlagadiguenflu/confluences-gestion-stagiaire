@@ -199,34 +199,15 @@
       </v-row>
       <v-row>
         <v-col>
+          <label for="remarques">Remarques</label>
           <v-textarea
             v-model="entreprise.remarque"
-            label="Remarque"
             counter
             maxlength="10000"
             full-width
             auto-grow
             single-line
           ></v-textarea>
-        </v-col>
-      </v-row>
-      <v-row class="mb-4">
-        <v-col>
-          <div class="text-center">
-            <v-btn class="ma-2" tile color="success" dark @click="submit()">
-              Sauvegarder
-            </v-btn>
-
-            <v-btn
-              class="ma-2"
-              tile
-              color="primary"
-              dark
-              @click="$router.push('/entreprises')"
-              >Annuler</v-btn
-            >
-            <DeleteEntreprise :entreprise="this.entreprise" />
-          </div>
         </v-col>
       </v-row>
       <v-row>
@@ -242,6 +223,25 @@
           </v-card>
         </v-col>
       </v-row>
+      <div class="action-container">
+        <v-row>
+          <v-col>
+            <div class="text-center">
+              <v-btn
+                class="ma-2"
+                tile
+                color="success"
+                dark
+                min-width="150"
+                @click="submit()"
+              >
+                Sauvegarder
+              </v-btn>
+              <DeleteEntreprise :entreprise="this.entreprise" />
+            </div>
+          </v-col>
+        </v-row>
+      </div>
     </v-form>
   </v-container>
 </template>
@@ -313,7 +313,9 @@ export default {
         NProgress.start()
         store
           .dispatch('entreprise/editEntreprise', this.entreprise)
-          .then(() => {})
+          .then(() => {
+            this.$router.push({ name: 'Entreprises' })
+          })
           .catch(() => {})
         NProgress.done()
       }

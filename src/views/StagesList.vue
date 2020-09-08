@@ -12,6 +12,7 @@
           label="Rechercher"
           single-line
           hide-details
+          @click="updatePageSearch"
         ></v-text-field>
       </v-col>
     </v-row>
@@ -127,6 +128,10 @@ export default {
         date = null
       }
       return date
+    },
+
+    updatePageSearch() {
+      this.options.page = 1
     }
   }
 }
