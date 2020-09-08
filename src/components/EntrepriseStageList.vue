@@ -1,27 +1,25 @@
 <template>
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-left">Date début</th>
-          <th class="text-left">Date Fin</th>
-          <th class="text-left">Stagiaire</th>
-          <th class="text-left">Métier</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, i) in entreprise.stages" :key="i">
-          <td>{{ frontEndDateFormat(item.debut) }}</td>
-          <td>{{ frontEndDateFormat(item.fin) }}</td>
-          <td>
-            {{ item.stagiaire.firstname }}
-            {{ item.stagiaire.lastName }}
-          </td>
-          <td>{{ item.typeMetier.libelle }}</td>
-        </tr>
-      </tbody>
+  <v-data-table
+    :headers="headers"
+    :items="entreprise.stages"
+    :items-per-page="5"
+    @click:row="viewStage"
+    class="elevation-1"
+    outlined
+  >
+    <template v-slot:item.stagiaire.firstname="{ item }">
+      {{ item.stagiaire.firstname + ' ' + item.stagiaire.lastName }}
     </template>
-  </v-simple-table>
+    <template v-slot:item.debut="{ item }">
+      {{ formatDate(item.debut) }}
+    </template>
+    <template v-slot:item.fin="{ item }">
+      {{ formatDate(item.fin) }}
+    </template>
+    <template v-slot:no-data>
+      Pas de données disponibles
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -35,9 +33,30 @@ export default {
     }
   },
 
+  data() {
+    return {
+      headers: [
+        {
+          text: 'Date début',
+          value: 'debut'
+        },
+        { text: 'Date Fin', value: 'fin' },
+        { text: 'Stagiaire', value: 'stagiaire.firstname' },
+        { text: 'Métier', value: 'typeMetier.libelle' }
+      ]
+    }
+  },
+
   methods: {
-    frontEndDateFormat: function(date) {
-      return moment(date, 'YYYY-MM-DD').format('DD/MM/YYYY')
+    formatDate: function(date) {
+      return moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
+    },
+    viewStage(item) {
+      console.log('goooo')
+      this.$router.push({
+        name: 'Stage-Modifier',
+        params: { id: item.stageId }
+      })
     }
   }
 }

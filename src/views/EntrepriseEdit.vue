@@ -215,7 +215,7 @@
           <EntrepriseContactList :entreprise="entreprise" />
         </v-col>
         <v-col cols="12" md="6">
-          <v-card class="mx-auto" outlined>
+          <v-card class="mx-auto px-0" outlined>
             <v-list>
               <v-subheader>Stages</v-subheader>
               <EntrepriseStageList :entreprise="entreprise" />
