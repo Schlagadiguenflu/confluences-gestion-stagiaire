@@ -52,7 +52,6 @@ export default {
       return moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
     },
     viewStage(item) {
-      console.log('goooo')
       this.$router.push({
         name: 'Stage-Modifier',
         params: { id: item.stageId }
