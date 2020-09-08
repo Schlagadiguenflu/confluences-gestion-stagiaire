@@ -148,6 +148,11 @@ export const actions = {
     return EntrepriseService.getEntreprise(id)
       .then(response => {
         commit('SET_ENTREPRISE', response.data)
+        const notification = {
+          type: 'success',
+          message: 'Entreprise chargée'
+        }
+        dispatch('notification/add', notification, { root: true })
         return response.data
       })
       .catch(error => {

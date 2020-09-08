@@ -35,9 +35,6 @@
       <template v-slot:item.fin="{ item }">
         {{ formatDate(item.fin) }}
       </template>
-      <template v-slot:no-data>
-        Pas de données disponibles
-      </template>
     </v-data-table>
   </v-container>
 </template>

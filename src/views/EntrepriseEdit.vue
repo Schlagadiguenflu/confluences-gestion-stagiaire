@@ -25,7 +25,7 @@
         <v-col cols="12" md="9">
           <label for="DernierContact">Dernier contact</label>
           <v-row>
-            <v-col>
+            <v-col cols="12" md="4">
               <v-menu
                 ref="menuContact"
                 v-model="menuContact"
@@ -37,7 +37,7 @@
               >
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
-                    v-model="entreprise.DernierContact"
+                    v-model="entreprise.dateDernierContact"
                     label="Date"
                     readonly
                     v-bind="attrs"
@@ -45,13 +45,13 @@
                   ></v-text-field>
                 </template>
                 <v-date-picker
-                  v-model="entreprise.DernierContact"
+                  v-model="entreprise.dateDernierContact"
                   no-title
                   scrollable
                 >
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menuContact = false"
-                    >Cancel</v-btn
+                    >Annuler</v-btn
                   >
                   <v-btn
                     text
@@ -62,7 +62,7 @@
                 </v-date-picker>
               </v-menu>
             </v-col>
-            <v-col>
+            <v-col cols="12" md="4">
               <v-autocomplete
                 v-model="entreprise.formateurIdDernierContact"
                 :items="user.users"
@@ -72,7 +72,7 @@
                 clearable
               ></v-autocomplete>
             </v-col>
-            <v-col>
+            <v-col cols="12" md="4">
               <v-autocomplete
                 v-model="entreprise.stagiaireIdDernierContact"
                 :items="user.users"
@@ -97,27 +97,32 @@
           <v-text-field
             v-model="entreprise.adr1"
             :counter="50"
+            :rules="adressRules"
             label="Adresse"
           ></v-text-field>
           <v-text-field
             v-model="entreprise.adr2"
             :counter="50"
+            :rules="adressRules"
             label="Complément d'adresse"
           ></v-text-field>
           <v-text-field
             v-model="entreprise.ville"
             :counter="50"
+            :rules="nameRules"
             label="Ville"
+            required
           ></v-text-field>
           <v-row>
-            <v-col>
+            <v-col cols="12" md="6">
               <v-text-field
                 v-model="entreprise.codePostal"
                 :counter="4"
+                :rules="[codePostalRules]"
                 label="Code postal"
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col cols="12" md="6">
               <v-menu
                 ref="menuCreation"
                 v-model="menuCreation"
@@ -143,7 +148,7 @@
                 >
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menuCreation = false"
-                    >Cancel</v-btn
+                    >Annuler</v-btn
                   >
                   <v-btn
                     text
@@ -166,6 +171,7 @@
               <v-text-field
                 v-model="entreprise.telFix"
                 :counter="13"
+                :rules="phonesRules"
                 label="Téléphone fixe"
               ></v-text-field>
             </v-col>
@@ -173,6 +179,7 @@
               <v-text-field
                 v-model="entreprise.telFax"
                 :counter="13"
+                :rules="phonesRules"
                 label="Natel"
               ></v-text-field>
             </v-col>
@@ -188,10 +195,10 @@
             clearable
           ></v-autocomplete>
           <v-row>
-            <v-col>
+            <v-col cols="12" md="6">
               <EntrepriseMetierList :entreprise="entreprise" />
             </v-col>
-            <v-col>
+            <v-col cols="12" md="6">
               <EntrepriseOffreList :entreprise="entreprise" />
             </v-col>
           </v-row>
@@ -255,6 +262,7 @@ import EntrepriseMetierList from '@/components/EntrepriseMetierList.vue'
 import EntrepriseStageList from '@/components/EntrepriseStageList.vue'
 import EntrepriseContactList from '@/components/EntrepriseContactList.vue'
 import DeleteEntreprise from '@/components/DeleteEntreprise.vue'
+import moment from 'moment'
 
 function getTypeEntreprises() {
   store.dispatch('typeEntreprise/fetchTypeEntreprises', {}).then(() => {})
@@ -293,7 +301,21 @@ export default {
       v => !!v || 'Le nom est obligatoire',
       v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
     ],
-    emailRules: [v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide"],
+    adressRules: [
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
+    ],
+    emailRules: [
+      v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide",
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
+    ],
+    codePostalRules: v => {
+      if (!isNaN(parseFloat(v)) && v >= 0 && v <= 9999) return true
+      return 'En Suisse, 4 chiffres'
+    },
+    phonesRules: [
+      v => !v || v.length <= 13 || 'Le champ doit être moins que 13 caractères'
+    ],
+    requiredRule: [v => !!v || 'Obligatoire'],
     select: null
   }),
 
@@ -301,6 +323,13 @@ export default {
     getTypeEntreprises(routeTo, next)
     getTypeDomaines(routeTo, next)
     getUsers(routeTo, next)
+  },
+
+  created() {
+    this.entreprise.dateDernierContact = this.formatDate(
+      this.entreprise.dateDernierContact
+    )
+    this.entreprise.dateCreation = this.formatDate(this.entreprise.dateCreation)
   },
 
   computed: {
@@ -318,6 +347,14 @@ export default {
           })
           .catch(() => {})
         NProgress.done()
+      }
+    },
+    formatDate: function(date) {
+      let dateFormat = moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
+      if (dateFormat == 'Invalid date') {
+        return null
+      } else {
+        return dateFormat
       }
     }
   }

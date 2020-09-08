@@ -17,15 +17,15 @@
             <v-text-field
               v-model="contact.prenom"
               :counter="50"
+              :rules="nameRules"
               label="Prénom"
-              :rules="requiredRule"
               required
             ></v-text-field>
             <v-text-field
               v-model="contact.nom"
               :counter="50"
+              :rules="nameRules"
               label="Nom"
-              :rules="requiredRule"
               required
             ></v-text-field>
             <v-text-field
@@ -37,11 +37,13 @@
             <v-text-field
               v-model="contact.telFix"
               :counter="13"
+              :rules="phonesRules"
               label="Téléphone fixe"
             ></v-text-field>
             <v-text-field
               v-model="contact.natel"
               :counter="13"
+              :rules="phonesRules"
               label="Natel"
             ></v-text-field>
           </v-card-text>
@@ -74,7 +76,17 @@ export default {
   data: () => ({
     validEditContact: true,
     dialog: false,
-    emailRules: [v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide"],
+    nameRules: [
+      v => !!v || 'Le nom est obligatoire',
+      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+    ],
+    emailRules: [
+      v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide",
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
+    ],
+    phonesRules: [
+      v => !v || v.length <= 13 || 'Le champ doit être moins que 13 caractères'
+    ],
     requiredRule: [v => !!v || 'Obligatoire']
   }),
 

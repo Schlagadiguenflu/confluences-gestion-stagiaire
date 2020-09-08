@@ -89,7 +89,7 @@
               <v-date-picker v-model="stage.debut" no-title scrollable>
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="menuDebut = false"
-                  >Cancel</v-btn
+                  >Annuler</v-btn
                 >
                 <v-btn text color="primary" @click="$refs.menuDebut.save(date)"
                   >OK</v-btn
@@ -113,12 +113,13 @@
                   v-bind="attrs"
                   v-on="on"
                   clearable
+                  :rules="dateFinRules"
                 ></v-text-field>
               </template>
               <v-date-picker v-model="stage.fin" no-title scrollable>
                 <v-spacer></v-spacer>
                 <v-btn text color="primary" @click="menuFin = false"
-                  >Cancel</v-btn
+                  >Annuler</v-btn
                 >
                 <v-btn text color="primary" @click="$refs.menuFin.save(date)"
                   >OK</v-btn
@@ -129,7 +130,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" text @click="dialog = false">
-              Fermer
+              Annuler
             </v-btn>
             <v-btn color="blue darken-1" text @click="submit()">
               Sauvegarder
@@ -195,11 +196,11 @@ export default {
       typeStageId: null
     },
     nameRules: [
-      v => !!v || 'Le nom est obligatoire',
-      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+      v => !!v || 'Le champ est obligatoire',
+      v => (v && v.length <= 50) || 'Le champ doit être moins que 50 caractères'
     ],
     emailRules: [v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide"],
-    requiredRule: [v => !!v || 'Obligatoire']
+    requiredRule: [v => !!v || 'Le champ est obligatoire']
   }),
 
   beforeCreate(routeTo, routeFrom, next) {
@@ -217,7 +218,15 @@ export default {
       'typeAnnonce',
       'typeMetier',
       'user'
-    ])
+    ]),
+    dateFinRules() {
+      return [
+        () =>
+          !this.stage.fin ||
+          this.stage.debut <= this.stage.fin ||
+          'La date de début doit être plus petite ou égale à la date de fin'
+      ]
+    }
   },
 
   methods: {

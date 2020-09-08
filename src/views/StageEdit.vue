@@ -105,7 +105,7 @@
                 <v-date-picker v-model="stage.debut" no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menuDebut = false"
-                    >Cancel</v-btn
+                    >Annuler</v-btn
                   >
                   <v-btn
                     text
@@ -139,7 +139,7 @@
                 <v-date-picker v-model="stage.fin" no-title scrollable>
                   <v-spacer></v-spacer>
                   <v-btn text color="primary" @click="menuFin = false"
-                    >Cancel</v-btn
+                    >Annuler</v-btn
                   >
                   <v-btn text color="primary" @click="$refs.menuFin.save(date)"
                     >OK</v-btn
@@ -250,6 +250,7 @@ import store from '@/store/index.js'
 import { mapState } from 'vuex'
 import NProgress from 'nprogress'
 import DeleteStage from '@/components/DeleteStage.vue'
+import moment from 'moment'
 
 export default {
   props: {
@@ -282,6 +283,11 @@ export default {
     select: null
   }),
 
+  created() {
+    this.stage.debut = this.formatDate(this.stage.debut)
+    this.stage.fin = this.formatDate(this.stage.fin)
+  },
+
   computed: {
     ...mapState([
       'entreprise',
@@ -303,6 +309,14 @@ export default {
           })
           .catch(() => {})
         NProgress.done()
+      }
+    },
+    formatDate: function(date) {
+      let dateFormat = moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
+      if (dateFormat == 'Invalid date') {
+        return null
+      } else {
+        return dateFormat
       }
     }
   }

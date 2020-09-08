@@ -6,7 +6,7 @@
         <v-spacer></v-spacer>
         <CreateContact :typeEntrepriseId="entreprise.entrepriseId" />
       </v-subheader>
-      <v-simple-table>
+      <v-simple-table v-if="entreprise.contacts.length > 0">
         <template v-slot:default>
           <thead>
             <tr>

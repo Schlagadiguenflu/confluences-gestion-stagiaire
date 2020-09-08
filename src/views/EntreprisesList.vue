@@ -28,9 +28,6 @@
       @update:items-per-page="updateNumberItems"
       :options.sync="options"
     >
-      <template v-slot:no-data>
-        Pas de données disponibles
-      </template>
     </v-data-table>
   </v-container>
 </template>

@@ -26,11 +26,13 @@
             <v-text-field
               v-model="entreprise.adr1"
               :counter="50"
+              :rules="adressRules"
               label="Adresse"
             ></v-text-field>
             <v-text-field
               v-model="entreprise.adr2"
               :counter="50"
+              :rules="adressRules"
               label="Complément d'adresse"
             ></v-text-field>
             <v-text-field
@@ -45,6 +47,7 @@
                 <v-text-field
                   v-model="entreprise.codePostal"
                   :counter="4"
+                  :rules="[codePostalRules]"
                   label="Code postal"
                 ></v-text-field>
               </v-col>
@@ -74,7 +77,7 @@
                   >
                     <v-spacer></v-spacer>
                     <v-btn text color="primary" @click="menuCreation = false"
-                      >Cancel</v-btn
+                      >Annuler</v-btn
                     >
                     <v-btn
                       text
@@ -97,6 +100,7 @@
                 <v-text-field
                   v-model="entreprise.telFix"
                   :counter="13"
+                  :rules="phonesRules"
                   label="Téléphone fixe"
                 ></v-text-field>
               </v-col>
@@ -104,6 +108,7 @@
                 <v-text-field
                   v-model="entreprise.telFax"
                   :counter="13"
+                  :rules="phonesRules"
                   label="Natel"
                 ></v-text-field>
               </v-col>
@@ -160,10 +165,24 @@ export default {
       typeMoyen: null
     },
     nameRules: [
-      v => !!v || 'Le nom est obligatoire',
-      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+      v => !!v || 'Le champ est obligatoire',
+      v =>
+        (v && v.length <= 50) || 'Le champs doit être moins que 50 caractères'
     ],
-    emailRules: [v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide"],
+    adressRules: [
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
+    ],
+    codePostalRules: v => {
+      if (!isNaN(parseFloat(v)) && v >= 0 && v <= 9999) return true
+      return 'En Suisse, 4 chiffres'
+    },
+    emailRules: [
+      v => !v || /.+@.+\..+/.test(v) || "L'email doit être valide",
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
+    ],
+    phonesRules: [
+      v => !v || v.length <= 13 || 'Le champ doit être moins que 13 caractères'
+    ],
     requiredRule: [v => !!v || 'Obligatoire']
   }),
 

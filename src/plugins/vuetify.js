@@ -1,7 +1,16 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
+import fr from 'vuetify/src/locale/fr.ts'
 
 Vue.use(Vuetify)
+
+Vue.component('my-component', {
+  methods: {
+    changeLocale() {
+      this.$vuetify.lang.current = 'fr'
+    }
+  }
+})
 
 export default new Vuetify({
   theme: {
@@ -19,5 +28,9 @@ export default new Vuetify({
         primary: '#73523d'
       }
     }
+  },
+  lang: {
+    locales: { fr },
+    current: 'fr'
   }
 })
