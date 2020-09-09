@@ -6,7 +6,8 @@ export const state = {
   apiUrl: 'http://localhost:5001',
   itemsPerPage: 10,
   currentPageEntreprise: 1,
-  currentPageStage: 1
+  currentPageStage: 1,
+  currentPageStagiaire: 1
 }
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
   },
   SET_CURRENTPAGESTAGE(state, number) {
     state.currentPageStage = number
+  },
+  SET_CURRENTPAGESTAGIAIRE(state, number) {
+    state.currentPageStagiaire = number
   }
 }
 
@@ -30,5 +34,8 @@ export const actions = {
   },
   setCurrentPageStage({ commit }, number) {
     commit('SET_CURRENTPAGESTAGE', number.number)
+  },
+  setCurrentPageStagiaire({ commit }, number) {
+    commit('SET_CURRENTPAGESTAGIAIRE', number.number)
   }
 }

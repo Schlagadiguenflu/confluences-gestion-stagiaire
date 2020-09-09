@@ -122,7 +122,7 @@ export default {
         },
         {
           label: 'Stages par stagiaire',
-          url: '/404',
+          url: '/stagiaires',
           icon: 'mdi-account-hard-hat',
           loggedIn: true
         },

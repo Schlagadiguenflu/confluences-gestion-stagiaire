@@ -5,6 +5,8 @@ import EntreprisesList from '../views/EntreprisesList.vue'
 import EntrepriseEdit from '../views/EntrepriseEdit.vue'
 import StagesList from '../views/StagesList.vue'
 import StageEdit from '../views/StageEdit.vue'
+import StagiairesList from '../views/StagiairesList.vue'
+import StagiaireEdit from '../views/StagiaireEdit.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
 import NProgress from 'nprogress'
@@ -64,6 +66,32 @@ const routes = [
         .catch(error => {
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'stage' } })
+          } else {
+            next({ name: 'network-issue' })
+          }
+        })
+    }
+  },
+  {
+    path: '/stagiaires',
+    name: 'Stagiaires',
+    component: StagiairesList
+  },
+  {
+    path: '/stagiaire/modifier/:id',
+    name: 'Stagiaire-Modifier',
+    component: StagiaireEdit,
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('stagiaire/fetchStagiaire', routeTo.params.id)
+        .then(stagiaire => {
+          routeTo.params.stagiaire = stagiaire
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'stagiaire' } })
           } else {
             next({ name: 'network-issue' })
           }
