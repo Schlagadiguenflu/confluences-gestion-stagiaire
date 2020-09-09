@@ -86,6 +86,7 @@
               >
                 Sauvegarder
               </v-btn>
+              <DeleteStagiaire :stagiaire="this.stagiaire" />
             </div>
           </v-col>
         </v-row>
@@ -99,6 +100,7 @@ import store from '@/store/index.js'
 import { mapState } from 'vuex'
 import NProgress from 'nprogress'
 import moment from 'moment'
+import DeleteStagiaire from '@/components/DeleteStagiaire.vue'
 
 function getTypeAffiliations() {
   store.dispatch('typeAffiliation/fetchTypeAffiliations', {}).then(() => {})
@@ -112,7 +114,7 @@ export default {
     }
   },
 
-  components: {},
+  components: { DeleteStagiaire },
 
   data: () => ({
     headers: [

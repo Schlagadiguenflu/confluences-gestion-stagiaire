@@ -52,13 +52,13 @@ export default {
         },
         {
           label: 'Contacts',
-          url: '/404',
+          url: '/contacts',
           icon: 'mdi-card-account-mail',
           loggedIn: true
         },
         {
           label: 'Métiers',
-          url: '/404',
+          url: '/metiers',
           icon: 'mdi-card-account-mail',
           loggedIn: true
         }

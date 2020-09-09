@@ -3,10 +3,14 @@ import ContactService from '@/services/contactService.js'
 export const namespaced = true
 
 export const state = {
+  contacts: [],
   contact: {}
 }
 
 export const mutations = {
+  SET_CONTACTS(state, contacts) {
+    state.contacts = contacts
+  },
   ADD_CONTACT(state, contact) {
     state.contact = contact
   },
@@ -19,6 +23,24 @@ export const mutations = {
 }
 
 export const actions = {
+  fetchContacts({ commit, dispatch }) {
+    return ContactService.getContacts()
+      .then(response => {
+        commit('SET_CONTACTS', response.data)
+        const notification = {
+          type: 'success',
+          message: 'Contacts chargés'
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: 'Problème au chargement des contacts : ' + error.message
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
   createContact({ commit, dispatch }, contact) {
     return ContactService.postContact(contact)
       .then(response => {

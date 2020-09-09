@@ -13,5 +13,8 @@ export default {
       state.apiUrl + '/api/stagiaires/' + stagiaire.stagiaireId,
       stagiaire
     )
+  },
+  deleteStagiaire(stagiaireId) {
+    return axios.delete(state.apiUrl + '/api/stagiaires/' + stagiaireId)
   }
 }

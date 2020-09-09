@@ -7,6 +7,8 @@ import StagesList from '../views/StagesList.vue'
 import StageEdit from '../views/StageEdit.vue'
 import StagiairesList from '../views/StagiairesList.vue'
 import StagiaireEdit from '../views/StagiaireEdit.vue'
+import ContactsList from '../views/ContactsList.vue'
+import MetiersList from '../views/MetiersList.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
 import NProgress from 'nprogress'
@@ -97,6 +99,16 @@ const routes = [
           }
         })
     }
+  },
+  {
+    path: '/contacts',
+    name: 'Contacts',
+    component: ContactsList
+  },
+  {
+    path: '/metiers',
+    name: 'Metiers',
+    component: MetiersList
   },
   {
     path: '/callback',

@@ -21,6 +21,9 @@ export const mutations = {
     state.stagiaires.push({
       ...stagiaireNew
     })
+  },
+  DELETE_STAGIAIRE(state) {
+    state.stagiaire = null
   }
 }
 
@@ -85,6 +88,24 @@ export const actions = {
         }
         dispatch('notification/add', notification, { root: true })
         throw error
+      })
+  },
+  deleteStagiaire({ commit, dispatch }, stagiaireId) {
+    return StagiaireService.deleteStagiaire(stagiaireId)
+      .then(() => {
+        commit('DELETE_STAGIAIRE')
+        const notification = {
+          type: 'success',
+          message: 'Un stagiaire a été supprimée !'
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: "Problème de suppression d'un stagiaire ! : " + error.message
+        }
+        dispatch('notification/add', notification, { root: true })
       })
   }
 }

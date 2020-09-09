@@ -7,7 +7,9 @@ export const state = {
   itemsPerPage: 10,
   currentPageEntreprise: 1,
   currentPageStage: 1,
-  currentPageStagiaire: 1
+  currentPageStagiaire: 1,
+  currentPageContact: 1,
+  currentPageTypeMetier: 1
 }
 
 export const mutations = {
@@ -22,6 +24,12 @@ export const mutations = {
   },
   SET_CURRENTPAGESTAGIAIRE(state, number) {
     state.currentPageStagiaire = number
+  },
+  SET_CURRENTPAGECONTACT(state, number) {
+    state.currentPageContact = number
+  },
+  SET_CURRENTPAGETYPEMETIER(state, number) {
+    state.currentPageTypeMetier = number
   }
 }
 
@@ -37,5 +45,11 @@ export const actions = {
   },
   setCurrentPageStagiaire({ commit }, number) {
     commit('SET_CURRENTPAGESTAGIAIRE', number.number)
+  },
+  setCurrentPageContact({ commit }, number) {
+    commit('SET_CURRENTPAGECONTACT', number.number)
+  },
+  setCurrentPageTypeMetier({ commit }, number) {
+    commit('SET_CURRENTPAGETYPEMETIER', number.number)
   }
 }

@@ -13,10 +13,17 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchTypeMetiers({ commit, dispatch }) {
+  fetchTypeMetiers({ commit, dispatch }, notify) {
     return TypeMetierService.getTypeMetiers()
       .then(response => {
         commit('SET_TYPEMETIERS', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Métiers chargés'
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {
