@@ -4,7 +4,7 @@ import { state } from '../store/modules/variables'
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),
   authority: state.authorityUrl,
-  client_id: 'js',
+  client_id: 'gestion-stagiaire',
   redirect_uri: state.applicationUrl + '/callback',
   response_type: 'id_token token',
   scope: 'openid profile api1 roles',
@@ -47,7 +47,6 @@ mgr.events.addSilentRenewError(function() {
 })
 
 mgr.events.addUserSignedOut(function() {
-  alert('Going out!')
   console.log('UserSignedOut：', arguments)
   mgr
     .signoutRedirect()
