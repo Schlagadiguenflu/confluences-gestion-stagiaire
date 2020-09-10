@@ -11,6 +11,9 @@ export const mutations = {
   SET_CONTACTS(state, contacts) {
     state.contacts = contacts
   },
+  SET_CONTACT(state, contact) {
+    state.contact = contact
+  },
   ADD_CONTACT(state, contact) {
     state.contact = contact
   },
@@ -37,6 +40,25 @@ export const actions = {
         const notification = {
           type: 'error',
           message: 'Problème au chargement des contacts : ' + error.message
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
+  fetchContact({ commit, dispatch }, id) {
+    return ContactService.getContact(id)
+      .then(response => {
+        commit('SET_CONTACT', response.data)
+        const notification = {
+          type: 'success',
+          message: 'Contact chargé'
+        }
+        dispatch('notification/add', notification, { root: true })
+        return response.data
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: 'Il y un problème pour charger un contact ' + error.message
         }
         dispatch('notification/add', notification, { root: true })
       })
@@ -107,6 +129,7 @@ export const actions = {
           message: "Problème de suppression d'un contact ! : " + error.message
         }
         dispatch('notification/add', notification, { root: true })
+        throw error
       })
   }
 }

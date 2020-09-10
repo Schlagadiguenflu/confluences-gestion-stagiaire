@@ -8,7 +8,9 @@ import StageEdit from '../views/StageEdit.vue'
 import StagiairesList from '../views/StagiairesList.vue'
 import StagiaireEdit from '../views/StagiaireEdit.vue'
 import ContactsList from '../views/ContactsList.vue'
+import ContactEdit from '../views/ContactEdit.vue'
 import MetiersList from '../views/MetiersList.vue'
+import MetierEdit from '../views/MetierEdit.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
 import NProgress from 'nprogress'
@@ -106,9 +108,51 @@ const routes = [
     component: ContactsList
   },
   {
+    path: '/contact/modifier/:id',
+    name: 'Contact-Modifier',
+    component: ContactEdit,
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('contact/fetchContact', routeTo.params.id)
+        .then(contact => {
+          routeTo.params.contact = contact
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'contact' } })
+          } else {
+            next({ name: 'network-issue' })
+          }
+        })
+    }
+  },
+  {
     path: '/metiers',
     name: 'Metiers',
     component: MetiersList
+  },
+  {
+    path: '/metier/modifier/:id',
+    name: 'TypeMetier-Modifier',
+    component: MetierEdit,
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeMetier/fetchTypeMetier', routeTo.params.id)
+        .then(typeMetier => {
+          routeTo.params.typeMetier = typeMetier
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'metier' } })
+          } else {
+            next({ name: 'network-issue' })
+          }
+        })
+    }
   },
   {
     path: '/callback',
@@ -133,11 +177,11 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   NProgress.start()
-  const loggedIn = localStorage.getItem('user')
+  const loggedIn = await localStorage.getItem('user')
   if (loggedIn && !store.state.authentification.user) {
-    store.dispatch('authentification/authenticate', to.path).then(() => {
+    await store.dispatch('authentification/authenticate', to.path).then(() => {
       console.log('authenticating a protected url:' + to.path)
       if (!store.state.authentification.user) {
         console.log('error in authentification, see logs for more info')

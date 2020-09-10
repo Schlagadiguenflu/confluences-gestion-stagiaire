@@ -105,8 +105,8 @@ export default {
   methods: {
     selectRow(event) {
       this.$router.push({
-        name: 'Entreprise-Modifier',
-        params: { id: event.entrepriseId }
+        name: 'Contact-Modifier',
+        params: { id: event.contactId }
       })
     },
 

@@ -58,7 +58,7 @@ export const actions = {
       console.log(err)
     }
   },
-  signIn(returnPath) {
+  async signIn(returnPath) {
     console.log('signs in')
     console.log(returnPath)
     returnPath

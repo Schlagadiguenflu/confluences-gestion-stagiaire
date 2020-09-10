@@ -1,7 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="4"> </v-col>
+      <v-col cols="12" md="4">
+        <CreateMetierFromList />
+      </v-col>
       <v-col cols="12" md="4"> </v-col>
       <v-col cols="12" md="4" class="pt-0">
         <v-text-field
@@ -31,6 +33,7 @@
 <script>
 import store from '@/store/index.js'
 import { mapState } from 'vuex'
+import CreateMetierFromList from '@/components/CreateMetierFromList.vue'
 
 function getTypeMetiers(routeTo, next) {
   store.dispatch('typeMetier/fetchTypeMetiers', true).then(() => {
@@ -43,6 +46,10 @@ function loadData(routeTo, routeFrom, next) {
 }
 
 export default {
+  components: {
+    CreateMetierFromList
+  },
+
   data: () => ({
     options: {},
     search: '',
