@@ -1,11 +1,12 @@
-import mgr from '@/security/index.js'
+import SecurityService from '@/security/index'
 import axios from 'axios'
 
 export const namespaced = true
 
+var mgr = new SecurityService()
+
 export const state = {
-  user: null,
-  mgr: mgr
+  user: null
 }
 
 export const mutations = {
@@ -29,41 +30,17 @@ export const mutations = {
       }
     )
   },
-  CLEAR_USER_DATA() {
-    localStorage.clear()
-    location.reload()
-    state.mgr.signoutRedirect({ id_token_hint: state.user.id_token })
-  }
+  CLEAR_USER_DATA() {}
 }
 
 export const actions = {
-  logout({ commit }) {
+  async logout({ commit }) {
+    mgr.signOut(state.user.id_token)
     commit('CLEAR_USER_DATA')
   },
-  async authenticate({ commit }, returnPath) {
-    console.log('is authenticating')
-    const user = await actions.getUser() //see if the user details are in local storage
-    if (user) {
-      commit('SET_USER_DATA', user)
-    } else {
-      await actions.signIn(returnPath)
-    }
-  },
-  async getUser() {
-    console.log('gets user')
-    try {
-      let user = await state.mgr.getUser()
-      return user
-    } catch (err) {
-      console.log(err)
-    }
-  },
-  async signIn(returnPath) {
-    console.log('signs in')
-    console.log(returnPath)
-    returnPath
-      ? state.mgr.signinRedirect({ state: returnPath })
-      : state.mgr.signinRedirect()
+  async authenticate({ commit }) {
+    const user = await mgr.getUser() //see if the user details are in local storage
+    commit('SET_USER_DATA', user)
   }
 }
 

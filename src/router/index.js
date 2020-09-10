@@ -27,12 +27,14 @@ const routes = [
   {
     path: '/entreprises',
     name: 'Entreprises',
-    component: EntreprisesList
+    component: EntreprisesList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/entreprise/modifier/:id',
     name: 'Entreprise-Modifier',
     component: EntrepriseEdit,
+    meta: { requiresAuth: true },
     props: true,
     beforeEnter(routeTo, routeFrom, next) {
       store
@@ -53,12 +55,14 @@ const routes = [
   {
     path: '/stages',
     name: 'Stages',
-    component: StagesList
+    component: StagesList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/stage/modifier/:id',
     name: 'Stage-Modifier',
     component: StageEdit,
+    meta: { requiresAuth: true },
     props: true,
     beforeEnter(routeTo, routeFrom, next) {
       store
@@ -79,12 +83,14 @@ const routes = [
   {
     path: '/stagiaires',
     name: 'Stagiaires',
-    component: StagiairesList
+    component: StagiairesList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/stagiaire/modifier/:id',
     name: 'Stagiaire-Modifier',
     component: StagiaireEdit,
+    meta: { requiresAuth: true },
     props: true,
     beforeEnter(routeTo, routeFrom, next) {
       store
@@ -111,6 +117,7 @@ const routes = [
     path: '/contact/modifier/:id',
     name: 'Contact-Modifier',
     component: ContactEdit,
+    meta: { requiresAuth: true },
     props: true,
     beforeEnter(routeTo, routeFrom, next) {
       store
@@ -131,12 +138,14 @@ const routes = [
   {
     path: '/metiers',
     name: 'Metiers',
-    component: MetiersList
+    component: MetiersList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/metier/modifier/:id',
     name: 'TypeMetier-Modifier',
     component: MetierEdit,
+    meta: { requiresAuth: true },
     props: true,
     beforeEnter(routeTo, routeFrom, next) {
       store
@@ -179,19 +188,12 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
-  const loggedIn = await localStorage.getItem('user')
-  if (loggedIn && !store.state.authentification.user) {
-    await store.dispatch('authentification/authenticate', to.path).then(() => {
-      console.log('authenticating a protected url:' + to.path)
-      if (!store.state.authentification.user) {
-        console.log('error in authentification, see logs for more info')
-      } else {
-        next()
-      }
-    })
-  }
-  if (to.matched.some(record => record.meta.requiresAuth) && loggedIn == null) {
-    next('/')
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.state.authentification.user) {
+      await store
+        .dispatch('authentification/authenticate', to.path)
+        .then(() => {})
+    }
   }
   next()
 })

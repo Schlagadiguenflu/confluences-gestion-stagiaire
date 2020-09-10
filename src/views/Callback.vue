@@ -9,15 +9,22 @@
 </template>
 
 <script>
+import Oidc from 'oidc-client'
+
 export default {
   async created() {
+    var mgr = new Oidc.UserManager({
+      userStore: new Oidc.WebStorageStateStore(),
+      loadUserInfo: true,
+      filterProtocolClaims: true
+    })
     try {
-      var result = await this.$store.state.authentification.mgr.signinRedirectCallback()
+      var result = await mgr.signinRedirectCallback()
       var returnToUrl = '/'
       if (result.state !== undefined) {
         returnToUrl = result.state
       }
-      this.$store
+      await this.$store
         .dispatch('authentification/authenticate', this.$route.path)
         .then(() => {
           console.log('authenticating a protected url:' + this.$route.path)
