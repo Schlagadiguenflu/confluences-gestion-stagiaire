@@ -1,6 +1,6 @@
 import axios from 'axios'
 import mgr from './security/SecurityService'
-import { state } from '../store/modules/variables'
+import { state } from '../store/modules/settings'
 
 const baseUrl = state.apiUrl
 var user = new mgr()

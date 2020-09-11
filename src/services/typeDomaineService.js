@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { state } from '../store/modules/variables'
+import { state } from '../store/modules/settings'
 
 export default {
   getTypeDomaines() {

@@ -1,5 +1,5 @@
 import Oidc from 'oidc-client'
-import { state } from '../store/modules/variables'
+import { state } from '../store/modules/settings'
 
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),

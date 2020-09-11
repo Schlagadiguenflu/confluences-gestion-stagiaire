@@ -17,7 +17,7 @@
     <v-data-table
       :headers="headers"
       :items="stagiaire.stagiaires"
-      :items-per-page="variables.itemsPerPage"
+      :items-per-page="settings.itemsPerPage"
       :search="search"
       class="elevation-1"
       @click:row="selectRow"
@@ -68,7 +68,7 @@ export default {
   },
   beforeRouteLeave(routeTo, routeFrom, next) {
     store
-      .dispatch('variables/setCurrentPageStagiaire', {
+      .dispatch('settings/setCurrentPageStagiaire', {
         number: this.options.page
       })
       .then(() => {})
@@ -76,11 +76,11 @@ export default {
   },
 
   created() {
-    this.options.page = store.state.variables.currentPageStagiaire
+    this.options.page = store.state.settings.currentPageStagiaire
   },
 
   computed: {
-    ...mapState(['stagiaire', 'variables'])
+    ...mapState(['stagiaire', 'settings'])
   },
 
   methods: {
@@ -93,7 +93,7 @@ export default {
 
     updateNumberItems(event) {
       store
-        .dispatch('variables/setItemsPerPage', {
+        .dispatch('settings/setItemsPerPage', {
           number: event
         })
         .then(() => {})

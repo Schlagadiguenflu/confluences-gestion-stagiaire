@@ -19,7 +19,7 @@
     <v-data-table
       :headers="headers"
       :items="contact.contacts"
-      :items-per-page="variables.itemsPerPage"
+      :items-per-page="settings.itemsPerPage"
       :search="search"
       class="elevation-1"
       @click:row="selectRow"
@@ -87,7 +87,7 @@ export default {
   },
   beforeRouteLeave(routeTo, routeFrom, next) {
     store
-      .dispatch('variables/setCurrentPageContact', {
+      .dispatch('settings/setCurrentPageContact', {
         number: this.options.page
       })
       .then(() => {})
@@ -95,11 +95,11 @@ export default {
   },
 
   created() {
-    this.options.page = store.state.variables.currentPageContact
+    this.options.page = store.state.settings.currentPageContact
   },
 
   computed: {
-    ...mapState(['contact', 'variables'])
+    ...mapState(['contact', 'settings'])
   },
 
   methods: {
@@ -112,7 +112,7 @@ export default {
 
     updateNumberItems(event) {
       store
-        .dispatch('variables/setItemsPerPage', {
+        .dispatch('settings/setItemsPerPage', {
           number: event
         })
         .then(() => {})

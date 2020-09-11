@@ -19,7 +19,7 @@
     <v-data-table
       :headers="headers"
       :items="typeMetier.typeMetiers"
-      :items-per-page="variables.itemsPerPage"
+      :items-per-page="settings.itemsPerPage"
       :search="search"
       class="elevation-1"
       @click:row="selectRow"
@@ -74,7 +74,7 @@ export default {
   },
   beforeRouteLeave(routeTo, routeFrom, next) {
     store
-      .dispatch('variables/setCurrentPageTypeMetier', {
+      .dispatch('settings/setCurrentPageTypeMetier', {
         number: this.options.page
       })
       .then(() => {})
@@ -82,11 +82,11 @@ export default {
   },
 
   created() {
-    this.options.page = store.state.variables.currentPageTypeMetier
+    this.options.page = store.state.settings.currentPageTypeMetier
   },
 
   computed: {
-    ...mapState(['typeMetier', 'variables'])
+    ...mapState(['typeMetier', 'settings'])
   },
 
   methods: {
@@ -99,7 +99,7 @@ export default {
 
     updateNumberItems(event) {
       store
-        .dispatch('variables/setItemsPerPage', {
+        .dispatch('settings/setItemsPerPage', {
           number: event
         })
         .then(() => {})

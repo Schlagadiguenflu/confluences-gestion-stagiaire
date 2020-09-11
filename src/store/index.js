@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as variables from '@/store/modules/variables.js'
+import * as settings from '@/store/modules/settings.js'
 import * as notification from '@/store/modules/notification.js'
 import * as authentification from '@/store/modules/authentification.js'
 import * as entreprise from '@/store/modules/entreprise.js'
@@ -25,7 +25,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    variables,
+    settings,
     notification,
     authentification,
     entreprise,
