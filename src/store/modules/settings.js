@@ -1,9 +1,9 @@
 export const namespaced = true
 
 export const state = {
-  authorityUrl: 'https://confluences-id4.nnamella.ch',
-  applicationUrl: 'https://administration-confluences.nnamella.ch',
-  apiUrl: 'https://confluences-api.nnamella.ch',
+  authorityUrl: 'https://localhost:5000',
+  applicationUrl: 'http://localhost:8080',
+  apiUrl: 'http://localhost:5001',
   itemsPerPage: 10,
   currentPageEntreprise: 1,
   currentPageStage: 1,
