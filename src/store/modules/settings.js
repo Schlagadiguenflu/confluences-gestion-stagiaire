@@ -1,9 +1,9 @@
 export const namespaced = true
 
 export const state = {
-  authorityUrl: 'https://localhost:5000',
-  applicationUrl: 'http://localhost:8080',
-  apiUrl: 'http://localhost:5001',
+  authorityUrl: process.env.VUE_APP_AUTHORITY_URL,
+  applicationUrl: process.env.VUE_APP_APPLICATION_URL,
+  apiUrl: process.env.VUE_APP_API_URL,
   itemsPerPage: 10,
   currentPageEntreprise: 1,
   currentPageStage: 1,

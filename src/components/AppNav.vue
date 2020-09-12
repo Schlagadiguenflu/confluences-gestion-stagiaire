@@ -144,7 +144,6 @@ export default {
   computed: {
     ...authComputed,
     getMenus: function() {
-      console.log(this.loggedIn)
       if (this.loggedIn) {
         return this.links
       } else {
