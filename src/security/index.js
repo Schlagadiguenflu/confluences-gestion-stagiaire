@@ -17,8 +17,10 @@ var mgr = new Oidc.UserManager({
   loadUserInfo: true
 })
 
-Oidc.Log.logger = console
-Oidc.Log.level = Oidc.Log.INFO
+if (process.env.NODE_ENV == 'development') {
+  Oidc.Log.logger = console
+  Oidc.Log.level = Oidc.Log.INFO
+}
 
 mgr.events.addUserLoaded(function(user) {
   if (process.env.NODE_ENV == 'development') {

@@ -26,12 +26,7 @@ export default {
       }
       await this.$store
         .dispatch('authentification/authenticate', this.$route.path)
-        .then(() => {
-          console.log('authenticating a protected url:' + this.$route.path)
-          if (!this.$store.state.authentification.user) {
-            console.log('error in authentification, see logs for more info')
-          }
-        })
+        .then(() => {})
       this.$router.push({ path: returnToUrl })
     } catch (e) {
       console.log(e)
