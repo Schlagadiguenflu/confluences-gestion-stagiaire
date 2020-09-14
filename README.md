@@ -28,4 +28,4 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Don't forget to change variables.js in \src\store\modules
+### Don't forget to change settings.js in \src\store\modules and the environment variables
