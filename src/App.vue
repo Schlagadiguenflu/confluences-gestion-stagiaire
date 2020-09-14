@@ -229,4 +229,9 @@ export default {
   padding-right: 40px;
   z-index: 10;
 }
+
+/* Striped datatable */
+tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
 </style>
