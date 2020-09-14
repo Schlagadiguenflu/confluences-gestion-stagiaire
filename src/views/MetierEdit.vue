@@ -45,6 +45,16 @@
               Sauvegarder
             </v-btn>
             <DeleteTypeMetier :typeMetier="this.typeMetier" />
+            <v-btn
+              class="ma-2"
+              tile
+              color="primary"
+              dark
+              min-width="150"
+              @click="$router.go(-1)"
+            >
+              Annuler
+            </v-btn>
           </div>
         </v-col>
       </v-row>

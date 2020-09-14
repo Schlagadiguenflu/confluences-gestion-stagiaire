@@ -1,5 +1,6 @@
 import Oidc from 'oidc-client'
 import { state } from '../store/modules/settings'
+import axios from 'axios'
 
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),
@@ -20,17 +21,26 @@ Oidc.Log.logger = console
 Oidc.Log.level = Oidc.Log.INFO
 
 mgr.events.addUserLoaded(function(user) {
-  console.log('New User Loaded：', arguments)
-  console.log('Access_token: ', user.access_token)
+  if (process.env.NODE_ENV == 'development') {
+    console.log('New User Loaded：', arguments)
+    console.log('Access_token: ', user.access_token)
+  }
+
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token
 })
 
 mgr.events.addAccessTokenExpiring(function() {
-  console.log('AccessToken Expiring：', arguments)
+  if (process.env.NODE_ENV == 'development') {
+    console.log('AccessToken Expiring：', arguments)
+  }
 })
 
 mgr.events.addAccessTokenExpired(function() {
-  console.log('AccessToken Expired：', arguments)
-  console.log(mgr.getUser())
+  if (process.env.NODE_ENV == 'development') {
+    console.log('AccessToken Expired：', arguments)
+    console.log(mgr.getUser())
+  }
+
   alert('La session est expirée! Vous allez être déconnecté.')
   mgr
     .signoutRedirect()
@@ -43,11 +53,15 @@ mgr.events.addAccessTokenExpired(function() {
 })
 
 mgr.events.addSilentRenewError(function() {
-  console.error('Silent Renew Error：', arguments)
+  if (process.env.NODE_ENV == 'development') {
+    console.error('Silent Renew Error：', arguments)
+  }
 })
 
 mgr.events.addUserSignedOut(function() {
-  console.log('UserSignedOut：', arguments)
+  if (process.env.NODE_ENV == 'development') {
+    console.log('UserSignedOut：', arguments)
+  }
   mgr
     .signoutRedirect()
     .then(function(resp) {

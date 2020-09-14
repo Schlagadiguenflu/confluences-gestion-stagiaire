@@ -12,7 +12,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 v-model="stagiaire.nom"
-                :rules="nameRules"
+                :rules="lastnameRules"
                 label="Nom du stagiaire"
                 required
               ></v-text-field>
@@ -20,7 +20,7 @@
             <v-col cols="12" md="4">
               <v-text-field
                 v-model="stagiaire.prenom"
-                :rules="nameRules"
+                :rules="firstnameRules"
                 label="Prénom du stagiaire"
                 required
               ></v-text-field>
@@ -87,6 +87,16 @@
                 Sauvegarder
               </v-btn>
               <DeleteStagiaire :stagiaire="this.stagiaire" />
+              <v-btn
+                class="ma-2"
+                tile
+                color="primary"
+                dark
+                min-width="150"
+                @click="$router.go(-1)"
+              >
+                Annuler
+              </v-btn>
             </div>
           </v-col>
         </v-row>
@@ -131,9 +141,14 @@ export default {
       { text: 'Attestation', value: 'attestation' }
     ],
     valid: true,
-    nameRules: [
-      v => !!v || 'Le nom est obligatoire',
-      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+    lastnameRules: [
+      v => /(\b[A-Z0-9]{1,}\b)/.test(v) || 'En majuscule seulement',
+      v => !!v || 'Le champ est obligatoire',
+      v => (v && v.length <= 50) || 'Le champ doit être moins que 50 caractères'
+    ],
+    firstnameRules: [
+      v => !!v || 'Le champ est obligatoire',
+      v => (v && v.length <= 50) || 'Le champ doit être moins que 50 caractères'
     ],
     select: null
   }),

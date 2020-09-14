@@ -155,10 +155,6 @@ export default {
         .dispatch('entreprise/addContact', data)
         .then(() => {})
         .catch(() => {})
-      store
-        .dispatch('contact/fetchContacts', this.contact)
-        .then(() => {})
-        .catch(() => {})
     }
   }
 }
