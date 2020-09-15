@@ -9,12 +9,7 @@
         <v-btn v-bind="attrs" v-on="on" color="primary" dark>
           Filtrer
         </v-btn>
-        <v-btn
-          v-if="entreprise.filter != null"
-          color="primary"
-          dark
-          @click="deletefilterEntreprise()"
-        >
+        <v-btn color="primary" dark @click="deletefilterEntreprise()">
           Effacer le filtre
         </v-btn>
       </template>
