@@ -67,6 +67,10 @@ export default {
         value: 'prenom'
       },
       {
+        text: 'Fonction',
+        value: 'fonction'
+      },
+      {
         text: 'Email',
         value: 'email'
       },

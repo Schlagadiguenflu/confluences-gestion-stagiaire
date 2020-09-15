@@ -40,6 +40,13 @@
               required
             ></v-text-field>
             <v-text-field
+              v-model="contact.fonction"
+              :counter="50"
+              :rules="nameRules"
+              label="Fonction"
+              required
+            ></v-text-field>
+            <v-text-field
               v-model="contact.email"
               :counter="50"
               :rules="emailRules"
@@ -96,6 +103,7 @@ export default {
       fax: null,
       modificateurId: null,
       natel: null,
+      fonction: null,
       nom: null,
       prenom: null,
       telFix: null

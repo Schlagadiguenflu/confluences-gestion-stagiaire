@@ -11,6 +11,7 @@
           <thead>
             <tr>
               <th class="text-left">Nom</th>
+              <th class="text-left">Fonction</th>
               <th class="text-left">Email</th>
               <th class="text-left">TelFixe</th>
               <th class="text-left">Natel</th>
@@ -24,6 +25,7 @@
                 {{ item.prenom }}
                 {{ item.nom }}
               </td>
+              <td>{{ item.fonction }}</td>
               <td>{{ item.email }}</td>
               <td>{{ item.telFix }}</td>
               <td>{{ item.natel }}</td>
