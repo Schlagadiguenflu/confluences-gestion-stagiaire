@@ -177,7 +177,7 @@
             </v-col>
             <v-col cols="12" md="6">
               <v-text-field
-                v-model="entreprise.telFax"
+                v-model="entreprise.telNatel"
                 :counter="13"
                 :rules="phonesRules"
                 label="Natel"

@@ -106,7 +106,7 @@
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
-                  v-model="entreprise.telFax"
+                  v-model="entreprise.telNatel"
                   :counter="13"
                   :rules="phonesRules"
                   label="Natel"
@@ -145,7 +145,7 @@ export default {
       nom: null,
       ville: null,
       telFix: null,
-      telFax: null,
+      telNatel: null,
       adr1: null,
       adr2: null,
       codePostal: null,
