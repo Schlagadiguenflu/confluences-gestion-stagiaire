@@ -15,6 +15,7 @@ export const mutations = {
     state.contact = contact
   },
   ADD_CONTACT(state, contact) {
+    state.contact = contact
     state.contacts.unshift({
       ...contact
     })

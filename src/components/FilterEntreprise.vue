@@ -9,6 +9,14 @@
         <v-btn v-bind="attrs" v-on="on" color="primary" dark>
           Filtrer
         </v-btn>
+        <v-btn
+          v-if="entreprise.filter != null"
+          color="primary"
+          dark
+          @click="deletefilterEntreprise()"
+        >
+          Effacer le filtre
+        </v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -16,7 +24,7 @@
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">
-            Tous les filtres sont optionnelles :
+            Tous les filtres sont optionnels :
           </h3>
           <v-card class="mx-auto" tile>
             <v-list>
@@ -116,6 +124,7 @@
                 <v-text-field
                   v-model="entreprise.filter.codePostal"
                   :counter="4"
+                  :rules="[codePostalRules]"
                   label="Code postal"
                 ></v-text-field>
                 <v-text-field
@@ -167,7 +176,7 @@
                   :items="user.users"
                   item-value="id"
                   item-text="nom"
-                  label="Createur"
+                  label="Créateur-trice"
                   clearable
                 ></v-autocomplete>
               </v-col>
@@ -178,9 +187,6 @@
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Fermer
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="deletefilterEntreprise()">
-            Effacer le filtre
           </v-btn>
           <v-btn color="blue darken-1" text @click="filterEntreprise()">
             Filtrer
@@ -218,7 +224,11 @@ export default {
     nameRules: [
       v => !!v || 'Le nom est obligatoire',
       v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
-    ]
+    ],
+    codePostalRules: v => {
+      if (v >= 0 && v <= 9999) return true
+      return 'En Suisse, 4 chiffres'
+    }
   }),
 
   beforeCreate(routeTo, routeFrom, next) {
@@ -246,7 +256,7 @@ export default {
         .then(() => {})
         .catch(() => {})
       store
-        .dispatch('entreprise/fetchEntreprises')
+        .dispatch('entreprise/fetchEntreprises', true)
         .then(() => {})
         .catch(() => {})
       this.dialog = false
