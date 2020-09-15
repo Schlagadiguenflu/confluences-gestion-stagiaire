@@ -8,7 +8,6 @@
     <v-form ref="formEntreprise" v-model="valid" lazy-validation>
       <v-row>
         <v-col cols="12" md="3">
-          <label style="color: white !important">blank</label>
           <v-row>
             <v-col>
               <v-autocomplete
@@ -23,7 +22,6 @@
           </v-row>
         </v-col>
         <v-col cols="12" md="9">
-          <label for="DernierContact">Dernier contact</label>
           <v-row>
             <v-col cols="12" md="4">
               <v-menu
@@ -38,7 +36,7 @@
                 <template v-slot:activator="{ on, attrs }">
                   <v-text-field
                     v-model="entreprise.dateDernierContact"
-                    label="Date"
+                    label="Date du dernier contact"
                     readonly
                     v-bind="attrs"
                     v-on="on"
@@ -206,14 +204,13 @@
       </v-row>
       <v-row>
         <v-col>
-          <label for="remarques">Remarques</label>
           <v-textarea
             v-model="entreprise.remarque"
+            outlined
+            label="Remarques"
             counter
             maxlength="10000"
-            full-width
             auto-grow
-            single-line
           ></v-textarea>
         </v-col>
       </v-row>

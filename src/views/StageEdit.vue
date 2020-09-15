@@ -178,7 +178,6 @@
           </v-row>
         </v-col>
         <v-col cols="12" md="4">
-          <label for="DernierContact">Reçu</label>
           <v-checkbox
             v-model="stage.attestation"
             label="Attestation"
@@ -188,37 +187,34 @@
       </v-row>
       <v-row>
         <v-col cols="12" md="6">
-          <label for="remarques">Remarques</label>
           <v-textarea
             v-model="stage.remarque"
+            outlined
+            label="Remarques"
             counter
             maxlength="500"
-            full-width
             auto-grow
-            single-line
           ></v-textarea>
         </v-col>
         <v-col cols="12" md="6">
-          <label for="bilan">Bilan du stage</label>
           <v-textarea
             v-model="stage.bilan"
+            outlined
+            label="Bilan du stage"
             counter
-            full-width
             auto-grow
-            single-line
           ></v-textarea>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <label for="bilan">Suivi</label>
           <v-textarea
             v-model="stage.actionSuivi"
+            outlined
+            label="Suivi"
             counter
             maxlength="500"
-            full-width
             auto-grow
-            single-line
           ></v-textarea>
         </v-col>
       </v-row>
