@@ -24,12 +24,15 @@
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">
-            Attention une supression est définitive et supprimera non seulement
-            le stagiaire mais aussi :
+            La suppression est bloquée
           </h3>
-          <v-card class="mx-auto" tile>
+          <v-card
+            class="mx-auto"
+            tile
+            v-if="stagiaire.stageStagiaires.length > 0"
+          >
             <v-list disabled>
-              <v-subheader>Les stages liées à une entreprise</v-subheader>
+              <v-subheader>Il faut supprimer ces stages :</v-subheader>
               <v-list-item-group
                 v-model="stagiaire.stageStagiaires"
                 color="primary"
@@ -143,8 +146,8 @@
             </v-list>
           </v-card>
           <h3 class="mt-3 red--text">
-            Ainsi que tous les liens avec le site de télétravail (exercice fait,
-            rendez-vous, etc.)
+            Une fois les stages supprimés, il faut supprimer l'utilisateur
+            depuis le site de télétravail.
           </h3>
         </v-card-text>
         <v-card-actions>
@@ -156,7 +159,14 @@
             color="red darken-1"
             text
             @click="deleteStagiaire"
-            v-if="deleteOn"
+            v-if="
+              stagiaire.entreprisStagiaireIdDernierContactNavigations.length ==
+                0 &&
+                stagiaire.entreprisFormateurIdDernierContactNavigations
+                  .length == 0 &&
+                stagiaire.stageCreateurs.length == 0 &&
+                stagiaire.stageStagiaires.length == 0
+            "
           >
             Supprimer
           </v-btn>
@@ -182,21 +192,6 @@ export default {
     validCreateStagiaire: true,
     dialog: false
   }),
-
-  computed: {
-    deleteOn: function() {
-      if (
-        this.stagiaire.entreprisStagiaireIdDernierContactNavigations.length ==
-          0 &&
-        this.stagiaire.entreprisFormateurIdDernierContactNavigations.length ==
-          0 &&
-        this.stagiaire.stageCreateurs.length == 0
-      ) {
-        return true
-      }
-      return false
-    }
-  },
 
   methods: {
     deleteStagiaire() {

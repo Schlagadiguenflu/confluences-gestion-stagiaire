@@ -24,12 +24,14 @@
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">
-            Attention une supression est définitive et supprimera non seulement
-            l'entreprise mais aussi :
+            Attention une supression est définitive
           </h3>
-          <v-card class="mx-auto" tile>
+          <v-card class="mx-auto" tile v-if="entreprise.stages.length > 0">
             <v-list disabled>
-              <v-subheader>Les stages liées à l'entreprise</v-subheader>
+              <v-subheader
+                >Il faut supprimer les stages liées à l'entreprise avant de
+                pouvoir supprimer l'entreprise</v-subheader
+              >
               <v-list-item-group v-model="entreprise.stages" color="primary">
                 <v-list-item v-for="(stage, i) in entreprise.stages" :key="i">
                   <v-list-item-content>
@@ -48,9 +50,12 @@
               </v-list-item-group>
             </v-list>
           </v-card>
-          <v-card class="mx-auto" tile>
+          <v-card class="mx-auto" tile v-if="entreprise.contacts.length > 0">
             <v-list disabled>
-              <v-subheader>Les contacts liées à l'entreprise</v-subheader>
+              <v-subheader
+                >Il faut supprimer les contacts liées à l'entreprise avant de
+                pouvoir supprimer l'entreprise</v-subheader
+              >
               <v-list-item-group v-model="entreprise.contacts" color="primary">
                 <v-list-item
                   v-for="(contact, i) in entreprise.contacts"
@@ -72,7 +77,14 @@
           <v-btn color="blue darken-1" text @click="dialog = false">
             Fermer
           </v-btn>
-          <v-btn color="red darken-1" text @click="deleteEntreprise()">
+          <v-btn
+            v-if="
+              entreprise.contacts.length == 0 && entreprise.stages.length == 0
+            "
+            color="red darken-1"
+            text
+            @click="deleteEntreprise()"
+          >
             Supprimer
           </v-btn>
         </v-card-actions>
