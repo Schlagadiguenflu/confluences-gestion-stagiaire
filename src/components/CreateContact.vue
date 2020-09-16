@@ -127,13 +127,6 @@ export default {
 
   created() {
     this.contact.entrepriseId = this.typeEntrepriseId
-    this.contact.createurId = this.$store.state.authentification.user.profile.sub
-    this.contact.dateCreation = new Date()
-      .toJSON()
-      .slice(0, 10)
-      .replace(/-/g, '/')
-    this.contact.modificateurId = this.contact.createurId
-    this.contact.dateModification = this.contact.dateCreation
   },
 
   methods: {

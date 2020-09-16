@@ -126,16 +126,6 @@ export default {
     getEntreprises(routeTo, next)
   },
 
-  created() {
-    this.contact.createurId = this.$store.state.authentification.user.profile.sub
-    this.contact.dateCreation = new Date()
-      .toJSON()
-      .slice(0, 10)
-      .replace(/-/g, '/')
-    this.contact.modificateurId = this.contact.createurId
-    this.contact.dateModification = this.contact.dateCreation
-  },
-
   computed: {
     ...mapState(['entreprise'])
   },
