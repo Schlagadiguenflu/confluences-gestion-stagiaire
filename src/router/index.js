@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Fichier de configuration pour la navigation entre les composants
+ * Fichier : index.js
+ **/
+
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -186,6 +194,7 @@ const router = new VueRouter({
   routes
 })
 
+// Vérification de connexion de l'utilisateur, utile surtout si l'utilisateur rafraichit la page
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
   if (to.matched.some(record => record.meta.requiresAuth)) {

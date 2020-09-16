@@ -1,17 +1,23 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configurations des requêtes API pour les entrepriseMetiers
+ * Fichier : entrepriseMetierService.js
+ **/
+
 import axios from 'axios'
-import { state } from '../store/modules/settings'
+
+const API_URL = process.env.VUE_APP_API_URL
+const CONTROLLER = '/api/entrepriseMetiers'
 
 export default {
   postEntrepriseMetier(entrepriseMetier) {
-    return axios.post(state.apiUrl + '/api/EntrepriseMetiers', entrepriseMetier)
+    return axios.post(API_URL + CONTROLLER, entrepriseMetier)
   },
   deleteEntrepriseMetier(payload) {
     return axios.delete(
-      state.apiUrl +
-        '/api/EntrepriseMetiers/' +
-        payload.entrepriseId +
-        '/' +
-        payload.metierId
+      API_URL + CONTROLLER + payload.entrepriseId + '/' + payload.metierId
     )
   }
 }

@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Fichier de configuration pour les couleurs par défauts et la langue (cdate et calendrier)
+ * Fichier : vuetify.js
+ **/
+
 import Vue from 'vue'
 import Vuetify from 'vuetify/lib'
 import fr from 'vuetify/src/locale/fr.ts'

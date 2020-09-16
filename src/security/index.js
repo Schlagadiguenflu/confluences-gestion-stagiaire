@@ -1,16 +1,24 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Fichier de configuration pour l'authentification
+ * Fichier : index.js
+ **/
+
 import Oidc from 'oidc-client'
-import { state } from '../store/modules/settings'
 import axios from 'axios'
 
 var mgr = new Oidc.UserManager({
   userStore: new Oidc.WebStorageStateStore(),
-  authority: state.authorityUrl,
+  authority: process.env.VUE_APP_AUTHORITY_URL,
   client_id: 'gestion-stagiaire',
-  redirect_uri: state.applicationUrl + '/callback',
+  redirect_uri: process.env.VUE_APP_APPLICATION_URL + '/callback',
   response_type: 'id_token token',
   scope: 'openid profile api1 roles',
-  post_logout_redirect_uri: state.applicationUrl,
-  silent_redirect_uri: state.applicationUrl + '/static/silent-renew.html',
+  post_logout_redirect_uri: process.env.VUE_APP_APPLICATION_URL,
+  silent_redirect_uri:
+    process.env.VUE_APP_APPLICATION_URL + '/static/silent-renew.html',
   accessTokenExpiringNotificationTime: 10,
   automaticSilentRenew: true,
   filterProtocolClaims: true,
@@ -22,21 +30,25 @@ if (process.env.NODE_ENV == 'development') {
   Oidc.Log.level = Oidc.Log.INFO
 }
 
+// Evénement affichant l'utilisateur chargé
 mgr.events.addUserLoaded(function(user) {
   if (process.env.NODE_ENV == 'development') {
     console.log('New User Loaded：', arguments)
     console.log('Access_token: ', user.access_token)
+    console.log("User' role(s): ", user.profile.role)
   }
-
+  // Ajoute le jeton d'accès dans l'entête
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.access_token
 })
 
+// Evénement affichant l'utilisateur chargé
 mgr.events.addAccessTokenExpiring(function() {
   if (process.env.NODE_ENV == 'development') {
     console.log('AccessToken Expiring：', arguments)
   }
 })
 
+// Evénement alertant l'expiration du jeton d'accès
 mgr.events.addAccessTokenExpired(function() {
   if (process.env.NODE_ENV == 'development') {
     console.log('AccessToken Expired：', arguments)
@@ -54,12 +66,14 @@ mgr.events.addAccessTokenExpired(function() {
     })
 })
 
+// Evénement alertant un problème de rennouvellement du jeton d'accès
 mgr.events.addSilentRenewError(function() {
   if (process.env.NODE_ENV == 'development') {
     console.error('Silent Renew Error：', arguments)
   }
 })
 
+// Evénement affichant l'utilisateur déconnecté
 mgr.events.addUserSignedOut(function() {
   if (process.env.NODE_ENV == 'development') {
     console.log('UserSignedOut：', arguments)
@@ -75,7 +89,7 @@ mgr.events.addUserSignedOut(function() {
 })
 
 export default class SecurityService {
-  // Renew the token manually
+  // Renouvelle le jeton d'accès manuellement
   renewToken() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -95,7 +109,7 @@ export default class SecurityService {
     })
   }
 
-  // Get the user who is logged in
+  // Retourne l'utilisateur connecté
   getUser() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -116,7 +130,7 @@ export default class SecurityService {
     })
   }
 
-  // Check if there is any user logged in
+  // Vérifie si un utilisateur est connecté
   getSignedIn() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -137,14 +151,14 @@ export default class SecurityService {
     })
   }
 
-  // Redirect of the current window to the authorization endpoint.
+  // Redirige la fenêtre courante vers le service d'authentificaiton (login)
   signIn() {
     mgr.signinRedirect().catch(function(err) {
       console.log(err)
     })
   }
 
-  // Redirect of the current window to the end session endpoint
+  // Redirige la fenêtre courante vers le service d'authentificaiton (logout)
   signOut(id_token) {
     console.log(id_token)
     if (id_token != null && id_token != undefined) {
@@ -168,7 +182,7 @@ export default class SecurityService {
     }
   }
 
-  // Get the profile of the user logged in
+  // Retourne le profil de l'utilisateur connecté
   getProfile() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -189,7 +203,7 @@ export default class SecurityService {
     })
   }
 
-  // Get the token id
+  // Retourne le jeton d'identité
   getIdToken() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -210,7 +224,7 @@ export default class SecurityService {
     })
   }
 
-  // Get the session state
+  // Retourne l'état de la session
   getSessionState() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -231,7 +245,7 @@ export default class SecurityService {
     })
   }
 
-  // Get the access token of the logged in user
+  // Retourne le jeton d'accès
   getAcessToken() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -252,7 +266,7 @@ export default class SecurityService {
     })
   }
 
-  // Takes the scopes of the logged in user
+  // Retourne les ressources authorisé par l'utilisateur
   getScopes() {
     let self = this
     return new Promise((resolve, reject) => {
@@ -273,7 +287,7 @@ export default class SecurityService {
     })
   }
 
-  // Get the user roles logged in
+  // Retourne les rôles de l'utilisateur
   getRole() {
     let self = this
     return new Promise((resolve, reject) => {

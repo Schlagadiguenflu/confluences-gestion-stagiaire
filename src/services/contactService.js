@@ -1,23 +1,30 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configurations des requêtes API pour les contacts
+ * Fichier : contactService.js
+ **/
+
 import axios from 'axios'
-import { state } from '../store/modules/settings'
+
+const API_URL = process.env.VUE_APP_API_URL
+const CONTROLLER = '/api/contacts'
 
 export default {
   getContacts() {
-    return axios.get(state.apiUrl + '/api/Contacts')
+    return axios.get(API_URL + CONTROLLER)
   },
   getContact(id) {
-    return axios.get(state.apiUrl + '/api/Contacts/' + id)
+    return axios.get(API_URL + `${CONTROLLER}/${id}`)
   },
   postContact(contact) {
-    return axios.post(state.apiUrl + '/api/Contacts', contact)
+    return axios.post(API_URL + CONTROLLER, contact)
   },
   putContact(contact) {
-    return axios.put(
-      state.apiUrl + '/api/Contacts/' + contact.contactId,
-      contact
-    )
+    return axios.put(API_URL + `${CONTROLLER}/${contact.contactId}`, contact)
   },
   deleteContact(contactId) {
-    return axios.delete(state.apiUrl + '/api/Contacts/' + contactId)
+    return axios.delete(API_URL + `${CONTROLLER}/${contactId}`)
   }
 }
