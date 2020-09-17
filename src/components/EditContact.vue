@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de modification d'un contact
+  -- Fichier : EditContact.vue
+  -->
+
 <template>
   <v-row justify="center">
     <v-form ref="formEditContact" v-model="validEditContact" lazy-validation>
@@ -97,15 +105,8 @@ export default {
     requiredRule: [v => !!v || 'Obligatoire']
   }),
 
-  created() {
-    this.contact.modificateurId = this.$store.state.authentification.user.profile.sub
-    this.contact.dateModification = new Date()
-      .toJSON()
-      .slice(0, 10)
-      .replace(/-/g, '/')
-  },
-
   methods: {
+    // Sauvegarde les modifications d'un contact
     submit() {
       if (this.$refs.formEditContact.validate()) {
         NProgress.start()
@@ -121,6 +122,7 @@ export default {
         NProgress.done()
       }
     },
+    // Sauvegarde les modifications d'un contact à l'entreprise
     editData(data) {
       store
         .dispatch('entreprise/editContact', data)

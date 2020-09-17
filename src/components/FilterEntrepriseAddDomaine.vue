@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire d'ajout d'un domaine au filtre
+  -- Fichier : FilterEntrepriseAddDomaine.vue
+  -->
+
 <template>
   <v-row justify="end">
     <v-form
@@ -71,6 +79,7 @@ export default {
     }
   }),
 
+  // Chargement la liste des domaines
   beforeCreate(routeTo, routeFrom, next) {
     getTypeDomaines(routeTo, next)
   },
@@ -80,6 +89,7 @@ export default {
   },
 
   methods: {
+    // Ajoute le domaine au filtre
     submit() {
       if (this.$refs.formCreateDomaine.validate()) {
         this.domaine.libelle = this.typeDomaine.typeDomaines.find(

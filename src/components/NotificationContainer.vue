@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Conteneur des notifications
+  -- Fichier : NotificationContainer.vue
+  -->
+
 <template>
   <div class="notification-container">
     <transition-group name="fade" tag="ul" appear>

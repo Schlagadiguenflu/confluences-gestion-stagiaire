@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire d'ajout d'une offre au filtre
+  -- Fichier : FilterEntrepriseAddOffre.vue
+  -->
+
 <template>
   <v-row justify="end">
     <v-form ref="formCreateOffre" v-model="validCreateOffre" lazy-validation>
@@ -67,6 +75,7 @@ export default {
     }
   }),
 
+  // Chargement des offres avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getTypeOffres(routeTo, next)
   },
@@ -76,6 +85,7 @@ export default {
   },
 
   methods: {
+    // Ajout d'une offre au filtre
     submit() {
       if (this.$refs.formCreateOffre.validate()) {
         this.offre.libelle = this.typeOffre.typeOffres.find(

@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de création d'un métier depuis la liste des métiers
+  -- Fichier : CreateMetierFromList.vue
+  -->
+
 <template>
   <v-row>
     <v-form ref="formCreateMetier" v-model="validCreateMetier" lazy-validation>
@@ -70,11 +78,13 @@ export default {
     ]
   }),
 
+  // Charger les différents possibilités de choix avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getEntreprises(routeTo, next)
   },
 
   methods: {
+    // Si le formulaire est valide, création d'un métier à une entreprise
     submit() {
       if (this.$refs.formCreateMetier.validate()) {
         NProgress.start()
@@ -89,6 +99,7 @@ export default {
         NProgress.done()
       }
     },
+    // Ajoute le métier à l'entreprise
     addNewData() {
       store
         .dispatch('typeMetier/fetchTypeMetiers', this.typeMetier)

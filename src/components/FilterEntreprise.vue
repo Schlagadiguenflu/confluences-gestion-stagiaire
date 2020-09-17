@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Filtre de l'entreprise
+  -- Fichier : FilterEntreprise.vue
+  -->
+
 <template>
   <v-form
     ref="formFilterEntreprise"
@@ -226,6 +234,7 @@ export default {
     }
   }),
 
+  // Charge la liste des utilisateurs avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getUsers(routeTo, next)
   },
@@ -235,6 +244,7 @@ export default {
   },
 
   methods: {
+    // Sauvegarde et filtre l'entreprise
     filterEntreprise() {
       NProgress.start()
       store
@@ -244,6 +254,7 @@ export default {
       this.dialog = false
       NProgress.done()
     },
+    // Efface le filtre
     deletefilterEntreprise() {
       NProgress.start()
       store
@@ -257,6 +268,7 @@ export default {
       this.dialog = false
       NProgress.done()
     },
+    // Supprime un métier du filtre
     deleteMetier(typeMetierId) {
       NProgress.start()
       store
@@ -265,12 +277,14 @@ export default {
         .catch(() => {})
       NProgress.done()
     },
+    // Supprime un domaine du filtre
     deleteDomaine(typeDomaineId) {
       store
         .dispatch('entreprise/deleteFilterDomaine', typeDomaineId)
         .then(() => {})
         .catch(() => {})
     },
+    // Supprime une offre du filtre
     deleteOffre(typeOffreId) {
       store
         .dispatch('entreprise/deleteFilterOffre', typeOffreId)

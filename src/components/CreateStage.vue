@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de création d'un stage
+  -- Fichier : CreateStage.vue
+  -->
+
 <template>
   <v-row>
     <v-form ref="formCreateStage" v-model="validCreateStage" lazy-validation>
@@ -203,6 +211,7 @@ export default {
     requiredRule: [v => !!v || 'Le champ est obligatoire']
   }),
 
+  // Charger les différents possibilités de choix avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getTypeEntreprises(routeTo, next)
     getTypeStages(routeTo, next)
@@ -230,6 +239,7 @@ export default {
   },
 
   methods: {
+    // Si le formulaire est valide, création d'un stage
     submit() {
       if (this.$refs.formCreateStage.validate()) {
         NProgress.start()

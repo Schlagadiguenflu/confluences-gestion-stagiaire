@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Liste des métiers depuis une entreprise
+  -- Fichier : EntrepriseMetierList.vue
+  -->
+
 <template>
   <v-card class="mx-auto" outlined>
     <v-list>
@@ -50,6 +58,7 @@ export default {
   },
 
   methods: {
+    // Supprime un métier
     deleteMetier(entrepriseId, metierId) {
       NProgress.start()
       store

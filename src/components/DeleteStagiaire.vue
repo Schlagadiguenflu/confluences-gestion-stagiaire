@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de suppression d'un stagiaire
+  -- Fichier : DeleteStagiaire.vue
+  -->
+
 <template>
   <v-form
     ref="formDeleteStagiaire"
@@ -194,6 +202,7 @@ export default {
   }),
 
   methods: {
+    // Supprime un stagiaire
     deleteStagiaire() {
       NProgress.start()
       store

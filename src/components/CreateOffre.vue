@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de création d'une offre depuis une entreprise
+  -- Fichier : CreateOffre.vue
+  -->
+
 <template>
   <v-row justify="end">
     <v-form ref="formCreateOffre" v-model="validCreateOffre" lazy-validation>
@@ -78,6 +86,7 @@ export default {
     }
   }),
 
+  // Charger les différents possibilités de choix avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getTypeOffres(routeTo, next)
   },
@@ -91,6 +100,7 @@ export default {
   },
 
   methods: {
+    // Si le formulaire est valide, création d'une offre à une entreprise
     submit() {
       if (this.$refs.formCreateOffre.validate()) {
         NProgress.start()
@@ -113,6 +123,7 @@ export default {
         NProgress.done()
       }
     },
+    // Ajoute l'offre à l'entreprise
     addNewData(data) {
       store
         .dispatch('entreprise/addOffre', data)

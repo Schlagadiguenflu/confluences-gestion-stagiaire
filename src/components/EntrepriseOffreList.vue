@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Liste des offres depuis une entreprise
+  -- Fichier : EntrepriseOffreList.vue
+  -->
+
 <template>
   <v-card class="mx-auto" outlined>
     <v-list>
@@ -50,6 +58,7 @@ export default {
   },
 
   methods: {
+    // Supprime une offre
     deleteOffre(entrepriseId, offreId) {
       NProgress.start()
       store

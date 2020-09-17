@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de suppression d'un contact
+  -- Fichier : DeleteContact.vue
+  -->
+
 <template>
   <v-form ref="formDeleteContact" v-model="validCreateContact" lazy-validation>
     <v-dialog v-model="dialog" max-width="600px">
@@ -55,6 +63,7 @@ export default {
   }),
 
   methods: {
+    // Supprime le contact
     deleteContact() {
       NProgress.start()
       store

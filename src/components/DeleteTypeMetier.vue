@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de suppression d'un métier
+  -- Fichier : DeleteTypeMetier.vue
+  -->
+
 <template>
   <v-form
     ref="formDeleteTypeMetier"
@@ -59,6 +67,7 @@ export default {
   }),
 
   methods: {
+    // Supprime un métier
     deleteTypeMetier() {
       NProgress.start()
       store

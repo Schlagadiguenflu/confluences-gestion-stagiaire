@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de création d'une entreprise depuis la liste des contacts
+  -- Fichier : CreateEntreprise.vue
+  -->
+
 <template>
   <v-row>
     <v-form
@@ -187,6 +195,7 @@ export default {
   }),
 
   methods: {
+    // Si le formulaire est valide, création d'une entreprise
     submit() {
       if (this.$refs.formCreateEntreprise.validate()) {
         NProgress.start()

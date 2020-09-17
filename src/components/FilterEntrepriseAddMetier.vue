@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire d'ajout d'un métier au filtre
+  -- Fichier : FilterEntrepriseAddMetier.vue
+  -->
+
 <template>
   <v-row justify="end">
     <v-form ref="formCreateMetier" v-model="validCreateMetier" lazy-validation>
@@ -67,6 +75,7 @@ export default {
     }
   }),
 
+  // Chargement les métiers avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getTypeMetiers(routeTo, next)
   },
@@ -76,6 +85,7 @@ export default {
   },
 
   methods: {
+    // Ajoute le métier au filtre
     submit() {
       if (this.$refs.formCreateMetier.validate()) {
         this.metier.libelle = this.typeMetier.typeMetiers.find(

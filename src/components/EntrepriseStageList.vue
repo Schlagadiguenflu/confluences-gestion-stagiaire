@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Liste des stages depuis une entreprise
+  -- Fichier : EntrepriseStageList.vue
+  -->
+
 <template>
   <v-data-table
     :headers="headers"
@@ -48,6 +56,7 @@ export default {
     formatDate: function(date) {
       return moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
     },
+    // Permet de d'accéder à la page de modification d'un stage
     viewStage(item) {
       this.$router.push({
         name: 'Stage-Modifier',

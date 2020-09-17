@@ -2,7 +2,7 @@
   -- Projet: Gestion des stagiaires
   -- Auteur : Tim Allemann
   -- Date : 16.09.2020
-  -- Description : Formulaire de création d'un contact depuis la listes des contacts
+  -- Description : Formulaire de création d'un contact depuis la liste des contacts
   -- Fichier : CreateContactFromList.vue
   -->
 
@@ -130,6 +130,7 @@ export default {
     requiredRule: [v => !!v || 'Le champ est obligatoire']
   }),
 
+  // Charger les différents possibilités de choix avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getEntreprises(routeTo, next)
   },
@@ -139,6 +140,7 @@ export default {
   },
 
   methods: {
+    // Si le formulaire est valide, création du contact
     submit() {
       if (this.$refs.formCreateContact.validate()) {
         NProgress.start()
@@ -156,6 +158,7 @@ export default {
         NProgress.done()
       }
     },
+    // Ajoute le contact à l'entreprise
     addNewData(data) {
       store
         .dispatch('entreprise/addContact', data)

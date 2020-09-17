@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de suppression d'une entreprise
+  -- Fichier : DeleteEntreprise.vue
+  -->
+
 <template>
   <v-form
     ref="formDeleteEntreprise"
@@ -111,6 +119,7 @@ export default {
   }),
 
   methods: {
+    // Supprime une entreprise
     deleteEntreprise() {
       NProgress.start()
       store
