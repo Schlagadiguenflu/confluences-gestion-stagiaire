@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Liste des stagiaires
+  -- Fichier : StagiairesList.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -67,6 +75,7 @@ export default {
     loadData(routeTo, routeFrom, next)
   },
   beforeRouteLeave(routeTo, routeFrom, next) {
+    // Sauvegarde le numéro de page consulté du tableau stagiaire avant de changer de page
     store
       .dispatch('settings/setCurrentPageStagiaire', {
         number: this.options.page
@@ -76,6 +85,7 @@ export default {
   },
 
   created() {
+    // Récupère la dernier numéro de page consulté
     this.options.page = store.state.settings.currentPageStagiaire
   },
 
@@ -84,13 +94,14 @@ export default {
   },
 
   methods: {
+    // Lorsqu'une donnée est selectionnée dans le tableau, redirige vers le formulaire de modification
     selectRow(event) {
       this.$router.push({
         name: 'Stagiaire-Modifier',
         params: { id: event.stagiaireId }
       })
     },
-
+    // Met à jour le nombre d'élément à afficher dans un tableau
     updateNumberItems(event) {
       store
         .dispatch('settings/setItemsPerPage', {
@@ -98,7 +109,7 @@ export default {
         })
         .then(() => {})
     },
-
+    // Quand une recherche est effectuée, partir de la première page
     updatePageSearch() {
       this.options.page = 1
     }

@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Composant racine du projet
+  -- Fichier : App.vue
+  -->
+
 <template>
   <v-app>
     <AppNav />

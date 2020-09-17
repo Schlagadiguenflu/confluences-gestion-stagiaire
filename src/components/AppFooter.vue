@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Footer de l'application
+  -- Fichier : AppFooter.vue
+  -->
+
 <template>
   <v-footer color="primary lighten-1" padless>
     <v-row justify="center" no-gutters>

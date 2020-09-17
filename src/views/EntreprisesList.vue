@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Liste des entreprises
+  -- Fichier : EntreprisesList.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -50,6 +58,8 @@ function getEntreprisesWithFilter(routeTo, next, filter) {
   })
 }
 
+// Si un filtre existe l'appliquer, permet de ne pas relectionner
+// le filtre à chaque chargement de la liste des entreprises
 function loadData(routeTo, routeFrom, next) {
   if (
     store.state.entreprise.filter.metiers.length > 0 ||
@@ -95,6 +105,7 @@ export default {
     loadData(routeTo, routeFrom, next)
   },
   beforeRouteLeave(routeTo, routeFrom, next) {
+    // Sauvegarde le numéro de page consulté du tableau entreprise avant de changer de page
     store
       .dispatch('settings/setCurrentPageEntreprise', {
         number: this.options.page
@@ -104,6 +115,7 @@ export default {
   },
 
   created() {
+    // Récupère le dernier numéro de page consulté
     this.options.page = store.state.settings.currentPageEntreprise
   },
 
@@ -112,13 +124,14 @@ export default {
   },
 
   methods: {
+    // Lorsqu'une donnée est selectionnée dans le tableau, redirige vers le formulaire de modification
     selectRow(event) {
       this.$router.push({
         name: 'Entreprise-Modifier',
         params: { id: event.entrepriseId }
       })
     },
-
+    // Met à jour le nombre d'élément à afficher dans un tableau
     updateNumberItems(event) {
       store
         .dispatch('settings/setItemsPerPage', {
@@ -126,7 +139,7 @@ export default {
         })
         .then(() => {})
     },
-
+    // Quand une recherche est effectuée, partir de la première page
     updatePageSearch() {
       this.options.page = 1
     }

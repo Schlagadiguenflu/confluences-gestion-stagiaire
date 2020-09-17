@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de modification d'une entreprise
+  -- Fichier : EntrepriseEdit.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -326,6 +334,7 @@ export default {
     select: null
   }),
 
+  // Charger les différents possibilités de choix avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getTypeEntreprises(routeTo, next)
     getTypeDomaines(routeTo, next)
@@ -333,6 +342,7 @@ export default {
   },
 
   created() {
+    // Formattage des dates afin qu'elles s'affichent correctement
     this.entreprise.dateDernierContact = this.formatDate(
       this.entreprise.dateDernierContact
     )
@@ -344,6 +354,7 @@ export default {
   },
 
   methods: {
+    // Si le formulaire est valide, sauvegarde de l'entreprise
     submit() {
       if (this.$refs.formEntreprise.validate()) {
         NProgress.start()

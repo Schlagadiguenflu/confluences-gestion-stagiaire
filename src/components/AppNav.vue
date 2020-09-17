@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Barre de navigation de l'application
+  -- Fichier : AppNav.vue
+  -->
+
 <template>
   <div>
     <v-navigation-drawer

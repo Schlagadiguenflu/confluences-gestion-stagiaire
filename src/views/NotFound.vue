@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Page 404 sert à signaler à l'utilisateur que la ressource qu'il cherche n'existe pas
+  -- Fichier : NotFound.vue
+  -->
+
 <template>
   <v-container>
     <v-row class="mt-5">

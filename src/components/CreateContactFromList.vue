@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de création d'un contact depuis la listes des contacts
+  -- Fichier : CreateContactFromList.vue
+  -->
+
 <template>
   <v-row>
     <v-form

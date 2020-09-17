@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de modification d'un stage
+  -- Fichier : StageEdit.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -290,6 +298,7 @@ export default {
   }),
 
   created() {
+    // Formattage des dates afin qu'elles s'affichent correctement
     this.stage.debut = this.formatDate(this.stage.debut)
     this.stage.fin = this.formatDate(this.stage.fin)
   },
@@ -305,6 +314,7 @@ export default {
   },
 
   methods: {
+    // Si le formulaire est valide, sauvegarde du stage
     submit() {
       if (this.$refs.formStage.validate()) {
         NProgress.start()

@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Après un login réussi, l'utilisateur est redirigé sur cette page
+  -- Fichier : Callback.vue
+  -->
+
 <template>
   <v-container>
     <v-row class="mt-5">
@@ -19,11 +27,13 @@ export default {
       filterProtocolClaims: true
     })
     try {
+      // Récupération de l'url
       var result = await mgr.signinRedirectCallback()
       var returnToUrl = '/'
       if (result.state !== undefined) {
         returnToUrl = result.state
       }
+      // Authentification de l'utilisateur
       await this.$store
         .dispatch('authentification/authenticate', this.$route.path)
         .then(() => {})

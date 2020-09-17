@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Fichier de configuration du projet. Point central de l'application
+ * Fichier : main.js
+ **/
+
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -41,6 +49,7 @@ requireComponent.keys().forEach(fileName => {
   )
 })
 
+// Enlever l'avertissement dans la console javascript
 Vue.config.productionTip = false
 
 new Vue({

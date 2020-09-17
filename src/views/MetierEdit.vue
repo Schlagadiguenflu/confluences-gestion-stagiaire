@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de modification d'un métier
+  -- Fichier : MetierEdit.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -94,6 +102,7 @@ export default {
   }),
 
   methods: {
+    // Si le formulaire est valide, sauvegarde du métier
     submit() {
       if (this.$refs.formCreateTypeMetier.validate()) {
         NProgress.start()

@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de modification d'un contact
+  -- Fichier : ContactEdit.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -136,17 +144,8 @@ export default {
   }),
 
   beforeCreate(routeTo, routeFrom, next) {
+    // Charger les entreprises avant de créer le composant
     getEntreprises(routeTo, next)
-  },
-
-  created() {
-    this.contact.createurId = this.$store.state.authentification.user.profile.sub
-    this.contact.dateCreation = new Date()
-      .toJSON()
-      .slice(0, 10)
-      .replace(/-/g, '/')
-    this.contact.modificateurId = this.contact.createurId
-    this.contact.dateModification = this.contact.dateCreation
   },
 
   computed: {
@@ -154,6 +153,7 @@ export default {
   },
 
   methods: {
+    // Si le formulaire est valide, sauvegarde du contact
     submit() {
       if (this.$refs.formCreateContact.validate()) {
         NProgress.start()

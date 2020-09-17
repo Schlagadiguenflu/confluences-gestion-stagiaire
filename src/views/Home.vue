@@ -1,10 +1,18 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Page d'accueil de l'application
+  -- Fichier : Home.vue
+  -->
+
 <template>
   <div>
     <section id="hero">
       <v-row no-gutters>
         <v-img
           :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-          src="background-img.jpg"
+          src="@/assets/background-img.jpg"
         >
           <v-theme-provider dark>
             <v-container fill-height>

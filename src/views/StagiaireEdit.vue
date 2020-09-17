@@ -1,3 +1,11 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de modification d'un stagiaire
+  -- Fichier : StagiaireEdit.vue
+  -->
+
 <template>
   <v-container>
     <v-row>
@@ -153,17 +161,17 @@ export default {
     select: null
   }),
 
+  // Charger les différents possibilités de choix avant la création du composant
   beforeCreate(routeTo, routeFrom, next) {
     getTypeAffiliations(routeTo, next)
   },
-
-  created() {},
 
   computed: {
     ...mapState(['typeAffiliation'])
   },
 
   methods: {
+    // Si le formulaire est valide, sauvegarde du stagiaire
     submit() {
       if (this.$refs.formStagiaire.validate()) {
         NProgress.start()
@@ -182,6 +190,7 @@ export default {
         NProgress.done()
       }
     },
+    // Affiche le stage séléctionné du tableau des stages
     viewStage(item) {
       this.$router.push({
         name: 'Stage-Modifier',
