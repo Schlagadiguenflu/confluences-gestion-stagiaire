@@ -1,11 +1,41 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configurations des requêtes API pour les entreprises
+ * Fichier : entrepriseService.js
+ **/
+
 import axios from 'axios'
-import { state } from '../store/modules/settings'
+
+const API_URL = process.env.VUE_APP_API_URL
+const CONTROLLER = '/api/entreprise'
 
 export default {
   getEntreprises() {
-    return axios.get(state.apiUrl + '/api/entreprise')
+    return axios.get(API_URL + CONTROLLER)
   },
   getEntreprisesWithFilter(filter) {
+    let query = this.getQuery(filter)
+    return axios.get(API_URL + CONTROLLER + query)
+  },
+  getEntreprise(id) {
+    return axios.get(API_URL + CONTROLLER + '/' + id)
+  },
+  postEntreprise(entreprise) {
+    return axios.post(API_URL + CONTROLLER, entreprise)
+  },
+  putEntreprise(entreprise) {
+    return axios.put(
+      API_URL + CONTROLLER + '/' + entreprise.entrepriseId,
+      entreprise
+    )
+  },
+  deleteEntreprise(entrepriseId) {
+    return axios.delete(API_URL + CONTROLLER + '/' + entrepriseId)
+  },
+  // Permet de retourner les paramètres pour la requête permettant de filtrer les entreprises
+  getQuery(filter) {
     let queryCharacter = '?'
     let query = ''
     if (filter.codePostal != null && filter.codePostal != '') {
@@ -46,21 +76,6 @@ export default {
     if (filter.domaines.length > 0) {
       queryCharacter = '&'
     }
-    return axios.get(`${state.apiUrl}/api/entreprise${query}`)
-  },
-  getEntreprise(id) {
-    return axios.get(state.apiUrl + '/api/entreprise/' + id)
-  },
-  postEntreprise(entreprise) {
-    return axios.post(state.apiUrl + '/api/entreprise', entreprise)
-  },
-  putEntreprise(entreprise) {
-    return axios.put(
-      state.apiUrl + '/api/entreprise/' + entreprise.entrepriseId,
-      entreprise
-    )
-  },
-  deleteEntreprise(entrepriseId) {
-    return axios.delete(state.apiUrl + '/api/entreprise/' + entrepriseId)
+    return query
   }
 }

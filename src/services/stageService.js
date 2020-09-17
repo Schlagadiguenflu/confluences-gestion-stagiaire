@@ -1,20 +1,30 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configurations des requêtes API pour les stages
+ * Fichier : stageService.js
+ **/
+
 import axios from 'axios'
-import { state } from '../store/modules/settings'
+
+const API_URL = process.env.VUE_APP_API_URL
+const CONTROLLER = '/api/stages'
 
 export default {
   getStages() {
-    return axios.get(state.apiUrl + '/api/stages')
+    return axios.get(API_URL + CONTROLLER)
   },
   getStage(id) {
-    return axios.get(state.apiUrl + '/api/stages/' + id)
+    return axios.get(API_URL + CONTROLLER + '/' + id)
   },
   postStage(stage) {
-    return axios.post(state.apiUrl + '/api/stages', stage)
+    return axios.post(API_URL + CONTROLLER, stage)
   },
   putStage(stage) {
-    return axios.put(state.apiUrl + '/api/stages/' + stage.stageId, stage)
+    return axios.put(API_URL + CONTROLLER + '/' + stage.stageId, stage)
   },
   deleteStage(stageId) {
-    return axios.delete(state.apiUrl + '/api/stages/' + stageId)
+    return axios.delete(API_URL + CONTROLLER + '/' + stageId)
   }
 }

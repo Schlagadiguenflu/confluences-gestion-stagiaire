@@ -1,20 +1,30 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configurations des requêtes API pour les stagiaires
+ * Fichier : stagiaireService.js
+ **/
+
 import axios from 'axios'
-import { state } from '../store/modules/settings'
+
+const API_URL = process.env.VUE_APP_API_URL
+const CONTROLLER = '/api/stagiaires'
 
 export default {
   getStagiaires() {
-    return axios.get(state.apiUrl + '/api/stagiaires')
+    return axios.get(API_URL + CONTROLLER)
   },
   getStagiaire(id) {
-    return axios.get(state.apiUrl + '/api/stagiaires/' + id)
+    return axios.get(API_URL + CONTROLLER + '/' + id)
   },
   putStagiaire(stagiaire) {
     return axios.put(
-      state.apiUrl + '/api/stagiaires/' + stagiaire.stagiaireId,
+      API_URL + CONTROLLER + '/' + stagiaire.stagiaireId,
       stagiaire
     )
   },
   deleteStagiaire(stagiaireId) {
-    return axios.delete(state.apiUrl + '/api/stagiaires/' + stagiaireId)
+    return axios.delete(API_URL + CONTROLLER + '/' + stagiaireId)
   }
 }

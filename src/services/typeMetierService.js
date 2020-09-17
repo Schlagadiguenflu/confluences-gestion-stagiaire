@@ -1,23 +1,33 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configurations des requêtes API pour les types de métier
+ * Fichier : typeMetierService.js
+ **/
+
 import axios from 'axios'
-import { state } from '../store/modules/settings'
+
+const API_URL = process.env.VUE_APP_API_URL
+const CONTROLLER = '/api/TypeMetiers'
 
 export default {
   getTypeMetiers() {
-    return axios.get(state.apiUrl + '/api/TypeMetiers')
+    return axios.get(API_URL + CONTROLLER)
   },
   getTypeMetier(id) {
-    return axios.get(state.apiUrl + '/api/TypeMetiers/' + id)
+    return axios.get(API_URL + CONTROLLER + '/' + id)
   },
   postTypeMetier(typeMetier) {
-    return axios.post(state.apiUrl + '/api/TypeMetiers', typeMetier)
+    return axios.post(API_URL + CONTROLLER, typeMetier)
   },
   putTypeMetier(typeMetier) {
     return axios.put(
-      state.apiUrl + '/api/TypeMetiers/' + typeMetier.typeMetierId,
+      API_URL + CONTROLLER + '/' + typeMetier.typeMetierId,
       typeMetier
     )
   },
   deleteTypeMetier(typeMetierId) {
-    return axios.delete(state.apiUrl + '/api/TypeMetiers/' + typeMetierId)
+    return axios.delete(API_URL + CONTROLLER + '/' + typeMetierId)
   }
 }
