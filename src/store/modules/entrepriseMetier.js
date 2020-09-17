@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des métiers des entreprises
+ * Fichier : entrepriseMetier.js
+ **/
+
 import EntrepriseMetierService from '@/services/entrepriseMetierService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Ajoute un métier pour une entreprise et notifie l'utilisateur en cas de succès ou erreur
   createEntrepriseMetier({ commit, dispatch }, entrepriseMetier) {
     return EntrepriseMetierService.postEntrepriseMetier(entrepriseMetier)
       .then(() => {
@@ -38,6 +47,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime un métier pour une entreprise et notifie l'utilisateur en cas de succès ou erreur
   deleteEntrepriseMetier({ dispatch }, parameters) {
     return EntrepriseMetierService.deleteEntrepriseMetier(parameters)
       .then(() => {

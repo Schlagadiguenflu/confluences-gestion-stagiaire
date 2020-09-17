@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des métiers
+ * Fichier : typeMetier.js
+ **/
+
 import TypeMetierService from '@/services/typeMetierService.js'
 
 export const namespaced = true
@@ -33,6 +41,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les types de métier et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeMetiers({ commit, dispatch }, notify) {
     return TypeMetierService.getTypeMetiers()
       .then(response => {
@@ -53,6 +62,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Récupère un type de métier spécifique et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeMetier({ commit, dispatch }, id) {
     return TypeMetierService.getTypeMetier(id)
       .then(response => {
@@ -72,6 +82,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Créé un type de métier et notifie l'utilisateur en cas de succès ou erreur
   createTypeMetier({ commit, dispatch }, typeMetier) {
     return TypeMetierService.postTypeMetier(typeMetier)
       .then(response => {
@@ -99,6 +110,7 @@ export const actions = {
         throw error
       })
   },
+  // Modifie un type de métier et notifie l'utilisateur en cas de succès ou erreur
   editTypeMetier({ commit, dispatch }, typeMetier) {
     return TypeMetierService.putTypeMetier(typeMetier)
       .then(() => {
@@ -124,6 +136,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime un type de métier et notifie l'utilisateur en cas de succès ou erreur
   deleteTypeMetier({ commit, dispatch }, typeMetierId) {
     return TypeMetierService.deleteTypeMetier(typeMetierId)
       .then(() => {

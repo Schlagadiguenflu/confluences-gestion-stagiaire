@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des type de stages
+ * Fichier : typeStage.js
+ **/
+
 import TypeStageService from '@/services/typeStageService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les types de stage et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeStages({ commit, dispatch }) {
     return TypeStageService.getTypeStages()
       .then(response => {

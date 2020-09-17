@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des contacts
+ * Fichier : contact.js
+ **/
+
 import ContactService from '@/services/contactService.js'
 
 export const namespaced = true
@@ -29,6 +37,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les contacts et notifie l'utilisateur en cas de succès ou erreur
   fetchContacts({ commit, dispatch }) {
     return ContactService.getContacts()
       .then(response => {
@@ -47,6 +56,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Récupère un contact spécifique et notifie l'utilisateur en cas de succès ou erreur
   fetchContact({ commit, dispatch }, id) {
     return ContactService.getContact(id)
       .then(response => {
@@ -66,6 +76,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Créé un contact et notifie l'utilisateur en cas de succès ou erreur
   createContact({ commit, dispatch }, contact) {
     return ContactService.postContact(contact)
       .then(response => {
@@ -91,6 +102,7 @@ export const actions = {
         throw error
       })
   },
+  // Met à jour un contact et notifie l'utilisateur en cas de succès ou erreur
   editContact({ commit, dispatch }, contact) {
     return ContactService.putContact(contact)
       .then(() => {
@@ -116,6 +128,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime un contact et notifie l'utilisateur en cas de succès ou erreur
   deleteContact({ commit, dispatch }, contactId) {
     return ContactService.deleteContact(contactId.contactId)
       .then(() => {

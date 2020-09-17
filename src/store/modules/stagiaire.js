@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des stagiaires
+ * Fichier : stagiaires.js
+ **/
+
 import StagiaireService from '@/services/stagiaireService.js'
 
 export const namespaced = true
@@ -28,6 +36,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les stagiaires et notifie l'utilisateur en cas de succès ou erreur
   fetchStagiaires({ commit, dispatch }) {
     return StagiaireService.getStagiaires()
       .then(response => {
@@ -46,6 +55,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Récupère un stagiaire et notifie l'utilisateur en cas de succès ou erreur
   fetchStagiaire({ commit, dispatch }, id) {
     return StagiaireService.getStagiaire(id)
       .then(response => {
@@ -65,6 +75,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Modifie un stagiaire et notifie l'utilisateur en cas de succès ou erreur
   editStagiaire({ commit, dispatch }, stagiaire) {
     return StagiaireService.putStagiaire(stagiaire)
       .then(() => {
@@ -90,6 +101,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime un stagiaire et notifie l'utilisateur en cas de succès ou erreur
   deleteStagiaire({ commit, dispatch }, stagiaireId) {
     return StagiaireService.deleteStagiaire(stagiaireId)
       .then(() => {

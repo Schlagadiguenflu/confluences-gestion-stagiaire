@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des domaines
+ * Fichier : typeDomaine.js
+ **/
+
 import TypeDomaineService from '@/services/typeDomaineService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les domaines et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeDomaines({ commit, dispatch }) {
     return TypeDomaineService.getTypeDomaines()
       .then(response => {

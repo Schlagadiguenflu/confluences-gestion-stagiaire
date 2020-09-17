@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des offres
+ * Fichier : typeOffre.js
+ **/
+
 import TypeOffreService from '@/services/typeOffreService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les types d'offres et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeOffres({ commit, dispatch }) {
     return TypeOffreService.getTypeOffres()
       .then(response => {

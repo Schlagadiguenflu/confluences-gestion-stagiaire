@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des entreprises
+ * Fichier : typeEntreprise.js
+ **/
+
 import TypeEntrepriseService from '@/services/typeEntrepriseService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les types d'entreprise et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeEntreprises({ commit, dispatch }) {
     return TypeEntrepriseService.getTypeEntreprises()
       .then(response => {

@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des stages
+ * Fichier : stage.js
+ **/
+
 import StageService from '@/services/stageService.js'
 
 export const namespaced = true
@@ -33,6 +41,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les stages et notifie l'utilisateur en cas de succès ou erreur
   fetchStages({ commit, dispatch }) {
     return StageService.getStages()
       .then(response => {
@@ -51,6 +60,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Récupère un stage spécifique et notifie l'utilisateur en cas de succès ou erreur
   fetchStage({ commit, dispatch }, id) {
     return StageService.getStage(id)
       .then(response => {
@@ -70,6 +80,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Créé un stage spécifique et notifie l'utilisateur en cas de succès ou erreur
   createStage({ commit, dispatch }, stage) {
     return StageService.postStage(stage)
       .then(response => {
@@ -97,6 +108,7 @@ export const actions = {
         throw error
       })
   },
+  // Modifie un stage spécifique et notifie l'utilisateur en cas de succès ou erreur
   editStage({ commit, dispatch }, stage) {
     return StageService.putStage(stage)
       .then(() => {
@@ -122,6 +134,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime un stage spécifique et notifie l'utilisateur en cas de succès ou erreur
   deleteStage({ commit, dispatch }, stageId) {
     return StageService.deleteStage(stageId)
       .then(() => {

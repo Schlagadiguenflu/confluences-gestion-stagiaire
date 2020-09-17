@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des affilisations
+ * Fichier : typeAffiliation.js
+ **/
+
 import TypeAffiliationService from '@/services/typeAffiliationService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les affiliations et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeAffiliations({ commit, dispatch }) {
     return TypeAffiliationService.getTypeAffiliations()
       .then(response => {

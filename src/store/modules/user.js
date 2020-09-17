@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des utilisateurs
+ * Fichier : user.js
+ **/
+
 import UserService from '@/services/userService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les utilisateurs et notifie l'utilisateur en cas de succès ou erreur
   fetchUsers({ commit, dispatch }) {
     return UserService.getUsers()
       .then(response => {

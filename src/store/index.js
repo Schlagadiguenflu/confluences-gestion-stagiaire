@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Configuration de Vuex
+ * Fichier : index.js
+ **/
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as settings from '@/store/modules/settings.js'

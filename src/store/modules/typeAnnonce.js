@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des annonces
+ * Fichier : typeAnnonce.js
+ **/
+
 import TypeAnnonceService from '@/services/typeAnnonceService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les annonces et notifie l'utilisateur en cas de succès ou erreur
   fetchTypeAnnonces({ commit, dispatch }) {
     return TypeAnnonceService.getTypeAnnonces()
       .then(response => {

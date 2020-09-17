@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des entreprises
+ * Fichier : entreprise.js
+ **/
+
 import EntrepriseService from '@/services/entrepriseService.js'
 
 export const namespaced = true
@@ -124,6 +132,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Récupère les entreprises et notifie l'utilisateur en cas de succès ou erreur
   fetchEntreprises({ commit, dispatch }, notify) {
     return EntrepriseService.getEntreprises()
       .then(response => {
@@ -144,6 +153,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Récupère une entreprise et notifie l'utilisateur en cas de succès ou erreur
   fetchEntreprise({ commit, dispatch }, id) {
     return EntrepriseService.getEntreprise(id)
       .then(response => {
@@ -163,6 +173,7 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Créé une entreprise et notifie l'utilisateur en cas de succès ou erreur
   createEntreprise({ commit, dispatch }, entreprise) {
     return EntrepriseService.postEntreprise(entreprise)
       .then(response => {
@@ -190,6 +201,7 @@ export const actions = {
         throw error
       })
   },
+  // Modifie une entreprise et notifie l'utilisateur en cas de succès ou erreur
   editEntreprise({ commit, dispatch }, entreprise) {
     console.log(entreprise)
     return EntrepriseService.putEntreprise(entreprise)
@@ -216,6 +228,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime une entreprise et notifie l'utilisateur en cas de succès ou erreur
   deleteEntreprise({ commit, dispatch }, entrepriseId) {
     return EntrepriseService.deleteEntreprise(entrepriseId)
       .then(() => {
@@ -235,36 +248,47 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Ajoute une offre à l'entreprise
   addOffre({ commit }, offre) {
     commit('SET_OFFRE_ENTREPRISE', offre)
   },
+  // Supprime une offre à l'entreprise
   deleteOffre({ commit }, offreId) {
     commit('DELETE_OFFRE_ENTREPRISE', offreId)
   },
+  // Ajoute un métier à l'entreprise
   addMetier({ commit }, offre) {
     commit('SET_METIER_ENTREPRISE', offre)
   },
+  // Supprime un métier à l'entreprise
   deleteMetier({ commit }, offreId) {
     commit('DELETE_METIER_ENTREPRISE', offreId)
   },
+  // Ajoute un contact à l'entreprise
   addContact({ commit }, contact) {
     commit('SET_CONTACT', contact)
   },
+  // Supprime un contact à l'entreprise
   deleteContact({ commit }, contactId) {
     commit('DELETE_CONTACT', contactId)
   },
+  // Met à jour un contact à l'entreprise
   editContact({ commit }, contact) {
     commit('EDIT_CONTACT', contact)
   },
+  // Ajoute un métier au filtre de l'entreprise
   addFilterEntrepriseMetier({ commit }, metier) {
     commit('ADD_FILTER_METIER_ENTREPRISE', metier)
   },
+  // Ajoute une offre au filtre de l'entreprise
   addFilterEntrepriseOffre({ commit }, offre) {
     commit('ADD_FILTER_OFFRE_ENTREPRISE', offre)
   },
+  // Ajoute un domaine au filtre de l'entreprise
   addFilterEntrepriseDomaine({ commit }, domaine) {
     commit('ADD_FILTER_DOMAINE_ENTREPRISE', domaine)
   },
+  // Sauvegarde le filtre de l'entreprise et l'applique
   saveFilterEntreprise({ commit, dispatch }, filter) {
     commit('SAVE_FILTER_ENTREPRISE', filter)
     return EntrepriseService.getEntreprisesWithFilter(filter)
@@ -284,15 +308,19 @@ export const actions = {
         dispatch('notification/add', notification, { root: true })
       })
   },
+  // Supprime le filtre de l'entreprise
   deleteFilterEntreprise({ commit }) {
     commit('DELETE_FILTER_ENTREPRISE')
   },
+  // Supprime un métier du filtre de l'entreprise
   deleteFilterMetier({ commit }, typeMetierId) {
     commit('DELETE_FILTER_METIER', typeMetierId)
   },
+  // Supprime un domaine du filtre de l'entreprise
   deleteFilterDomaine({ commit }, typeDomaineId) {
     commit('DELETE_FILTER_DOMAINE', typeDomaineId)
   },
+  // Supprime une offre du filtre de l'entreprise
   deleteFilterOffre({ commit }, typeOffreId) {
     commit('DELETE_FILTER_OFFRE', typeOffreId)
   }

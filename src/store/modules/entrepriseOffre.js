@@ -1,3 +1,11 @@
+/**
+ * Projet: Gestion des stagiaires
+ * Auteur : Tim Allemann
+ * Date : 16.09.2020
+ * Description : Gestion et stockage des offres des entreprises
+ * Fichier : entrepriseOffre.js
+ **/
+
 import EntrepriseOffreService from '@/services/entrepriseOffreService.js'
 
 export const namespaced = true
@@ -13,6 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
+  // Ajoute une offre pour une entreprise et notifie l'utilisateur en cas de succès ou erreur
   createEntrepriseOffre({ commit, dispatch }, entrepriseOffre) {
     return EntrepriseOffreService.postEntrepriseOffre(entrepriseOffre)
       .then(() => {
@@ -38,6 +47,7 @@ export const actions = {
         throw error
       })
   },
+  // Supprime une offre pour une entreprise et notifie l'utilisateur en cas de succès ou erreur
   deleteEntrepriseOffre({ dispatch }, parameters) {
     return EntrepriseOffreService.deleteEntrepriseOffre(parameters)
       .then(() => {
