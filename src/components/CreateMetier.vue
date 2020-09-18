@@ -117,9 +117,10 @@ export default {
               t => t.typeMetierId == entrepriseMetierClone.typeMetierId
             ).libelle
             this.addNewData(entrepriseMetierClone)
+            this.dialog = false
           })
           .catch(() => {})
-        this.dialog = false
+
         NProgress.done()
       }
     },

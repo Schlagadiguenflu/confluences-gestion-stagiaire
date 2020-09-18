@@ -93,9 +93,10 @@ export default {
           .then(() => {
             this.addNewData()
             this.$refs.formCreateMetier.reset()
+            this.dialog = false
           })
           .catch(() => {})
-        this.dialog = false
+
         NProgress.done()
       }
     },
