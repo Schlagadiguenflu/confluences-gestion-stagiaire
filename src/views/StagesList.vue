@@ -83,7 +83,9 @@ export default {
         value: 'stagiaire.firstname'
       },
       { text: 'Début', value: 'debut' },
-      { text: 'Fin', value: 'fin' }
+      { text: 'Fin', value: 'fin' },
+      { text: 'Type', value: 'typeStage.nom' },
+      { text: 'Annonce', value: 'typeAnnonce.libelle' }
     ],
     stages: []
   }),

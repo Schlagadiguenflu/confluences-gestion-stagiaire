@@ -21,6 +21,7 @@ import MetiersList from '../views/MetiersList.vue'
 import MetierEdit from '../views/MetierEdit.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
+import Unauthorized from '../views/Unauthorized.vue'
 import NProgress from 'nprogress'
 import store from '../store'
 
@@ -119,7 +120,8 @@ const routes = [
   {
     path: '/contacts',
     name: 'Contacts',
-    component: ContactsList
+    component: ContactsList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/contact/modifier/:id',
@@ -183,6 +185,12 @@ const routes = [
     props: true
   },
   {
+    path: '/unauthorized',
+    name: 'Unauthorized',
+    component: Unauthorized,
+    props: true
+  },
+  {
     path: '*',
     redirect: { name: '404', params: { resource: 'page' } }
   }
@@ -194,6 +202,23 @@ const router = new VueRouter({
   routes
 })
 
+// Vérification si l'utilisateur détient le role Teacher (true/false)
+function isTeacher() {
+  let roles = store.state.authentification.user.profile.role
+  let isTeacher = false
+  if (roles != undefined) {
+    if (roles == 'Teacher') {
+      isTeacher = true
+    }
+    for (var i = 0; i < roles.length; i++) {
+      if (roles[i] == 'Teacher') {
+        isTeacher = true
+      }
+    }
+  }
+  return isTeacher
+}
+
 // Vérification de connexion de l'utilisateur, utile surtout si l'utilisateur rafraichit la page
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
@@ -203,8 +228,15 @@ router.beforeEach(async (to, from, next) => {
         .dispatch('authentification/authenticate', to.path)
         .then(() => {})
     }
+    if (!isTeacher()) {
+      next({ name: 'Unauthorized' })
+      NProgress.done()
+    } else {
+      next()
+    }
+  } else {
+    next()
   }
-  next()
 })
 
 router.afterEach(() => {
