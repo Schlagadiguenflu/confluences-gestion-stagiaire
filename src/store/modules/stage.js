@@ -12,7 +12,17 @@ export const namespaced = true
 
 export const state = {
   stages: [],
-  stage: {}
+  stage: {},
+  filter: {
+    nom: null,
+    typeMetierId: null,
+    entrepriseId: null,
+    stagiaireId: null,
+    dateDebut: null,
+    dateFin: null,
+    typeStageId: null,
+    typeAnnonceId: null
+  }
 }
 
 export const mutations = {
@@ -152,5 +162,29 @@ export const actions = {
         }
         dispatch('notification/add', notification, { root: true })
       })
+  },
+  // Sauvegarde le filtre du stage et l'applique
+  saveFilterStage({ commit, dispatch }, filter) {
+    commit('SAVE_FILTER_STAGE', filter)
+    return StageService.getStagesWithFilter(filter)
+      .then(response => {
+        commit('SET_STAGES', response.data)
+        const notification = {
+          type: 'success',
+          message: 'Stages chargés avec filtre'
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+      .catch(error => {
+        const notification = {
+          type: 'error',
+          message: 'Problème stages avec filtre : ' + error.message
+        }
+        dispatch('notification/add', notification, { root: true })
+      })
+  },
+  // Supprime le filtre du stage
+  deleteFilterStage({ commit }) {
+    commit('DELETE_FILTER_STAGE')
   }
 }

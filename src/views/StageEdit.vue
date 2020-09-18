@@ -266,6 +266,26 @@ import NProgress from 'nprogress'
 import DeleteStage from '@/components/DeleteStage.vue'
 import moment from 'moment'
 
+function getTypeStages() {
+  store.dispatch('typeStage/fetchTypeStages', {}).then(() => {})
+}
+
+function getTypeAnnonces() {
+  store.dispatch('typeAnnonce/fetchTypeAnnonces', {}).then(() => {})
+}
+
+function getTypeMetier() {
+  store.dispatch('typeMetier/fetchTypeMetiers', {}).then(() => {})
+}
+
+function getTypeEntreprises() {
+  store.dispatch('entreprise/fetchEntreprises', {}).then(() => {})
+}
+
+function getUsers() {
+  store.dispatch('user/fetchUsers', {}).then(() => {})
+}
+
 export default {
   props: {
     stage: {
@@ -296,6 +316,15 @@ export default {
     requiredRule: [v => !!v || 'Obligatoire'],
     select: null
   }),
+
+  // Charger les différents possibilités de choix avant la création du composant
+  beforeCreate(routeTo, routeFrom, next) {
+    getTypeEntreprises(routeTo, next)
+    getTypeStages(routeTo, next)
+    getTypeAnnonces(routeTo, next)
+    getTypeMetier(routeTo, next)
+    getUsers(routeTo, next)
+  },
 
   created() {
     // Formattage des dates afin qu'elles s'affichent correctement

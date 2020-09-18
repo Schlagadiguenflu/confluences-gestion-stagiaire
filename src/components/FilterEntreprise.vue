@@ -14,10 +14,15 @@
   >
     <v-dialog v-model="dialog" max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn v-bind="attrs" v-on="on" color="primary" dark>
+        <v-btn v-bind="attrs" v-on="on" color="primary" dark class="mr-4 mb-4">
           Filtrer
         </v-btn>
-        <v-btn color="primary" dark @click="deletefilterEntreprise()">
+        <v-btn
+          color="primary"
+          dark
+          @click="deletefilterEntreprise()"
+          class="mr-4 mb-4"
+        >
           Effacer le filtre
         </v-btn>
       </template>
@@ -133,6 +138,7 @@
                 <v-text-field
                   v-model="entreprise.filter.nom"
                   :counter="50"
+                  :rules="nameRules"
                   label="Nom"
                 ></v-text-field>
                 <v-menu
@@ -225,8 +231,7 @@ export default {
     validFilterEntreprise: true,
     dialog: false,
     nameRules: [
-      v => !!v || 'Le nom est obligatoire',
-      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+      v => (v && v.length <= 50) || 'Le champ doit être moins que 50 caractères'
     ],
     codePostalRules: v => {
       if (v >= 0 && v <= 9999) return true
@@ -246,13 +251,15 @@ export default {
   methods: {
     // Sauvegarde et filtre l'entreprise
     filterEntreprise() {
-      NProgress.start()
-      store
-        .dispatch('entreprise/saveFilterEntreprise', this.entreprise.filter)
-        .then(() => {})
-        .catch(() => {})
-      this.dialog = false
-      NProgress.done()
+      if (this.$refs.formFilterEntreprise.validate()) {
+        NProgress.start()
+        store
+          .dispatch('entreprise/saveFilterEntreprise', this.entreprise.filter)
+          .then(() => {})
+          .catch(() => {})
+        this.dialog = false
+        NProgress.done()
+      }
     },
     // Efface le filtre
     deletefilterEntreprise() {

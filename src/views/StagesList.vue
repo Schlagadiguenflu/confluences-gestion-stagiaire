@@ -12,7 +12,9 @@
       <v-col cols="12" md="4">
         <CreateStage />
       </v-col>
-      <v-col cols="12" md="4"> </v-col>
+      <v-col cols="12" md="4">
+        <FilterStage />
+      </v-col>
       <v-col cols="12" md="4" class="pt-0">
         <v-text-field
           v-model="search"
@@ -51,6 +53,7 @@
 import store from '@/store/index.js'
 import { mapState } from 'vuex'
 import CreateStage from '@/components/CreateStage.vue'
+import FilterStage from '@/components/FilterStage.vue'
 import moment from 'moment'
 
 function getStages(routeTo, next) {
@@ -65,7 +68,8 @@ function loadData(routeTo, routeFrom, next) {
 
 export default {
   components: {
-    CreateStage
+    CreateStage,
+    FilterStage
   },
 
   data: () => ({
