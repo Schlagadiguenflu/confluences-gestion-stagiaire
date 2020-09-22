@@ -232,9 +232,9 @@ export default {
 /* Action button layout */
 .action-container {
   position: fixed;
-  bottom: 0px;
+  bottom: 10px;
   right: 0;
-  padding-right: 40px;
+  padding-right: 20px;
   z-index: 10;
 }
 

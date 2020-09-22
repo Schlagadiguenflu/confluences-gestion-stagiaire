@@ -52,6 +52,30 @@
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-group
+          prepend-icon="mdi-cog"
+          :value="false"
+          active-class="white--text"
+        >
+          <template v-slot:activator>
+            <v-list-item-title class="text-uppercase">
+              Configuration
+            </v-list-item-title>
+          </template>
+          <v-list-item
+            v-for="configurationLink in configurationLinks"
+            :key="configurationLink.label"
+            configurationLink
+            :to="configurationLink.url"
+          >
+            <v-list-item-icon>
+              <v-icon></v-icon>
+            </v-list-item-icon>
+            <v-list-item-title class="text-uppercase white--text">
+              {{ configurationLink.label }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list-group>
         <v-list-item @click="toggleTheme">
           <v-list-item-icon>
             <v-icon v-if="this.$vuetify.theme.dark"
@@ -82,6 +106,32 @@
         >
           {{ link.label }}
         </v-btn>
+        <v-menu v-if="this.loggedIn">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              color:white
+              text
+              rounded
+              class="my-2"
+            >
+              Configuration
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="configurationLink in configurationLinks"
+              :key="configurationLink.label"
+              configurationLink
+              :to="configurationLink.url"
+            >
+              <v-list-item-title class="text-uppercase">
+                {{ configurationLink.label }}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
         <v-btn v-if="!loggedIn" text rounded @click="login" class="my-2"
           >Se connecter</v-btn
         >
@@ -139,12 +189,36 @@ export default {
           url: '/contacts',
           icon: 'mdi-card-account-mail',
           loggedIn: true
-        },
+        }
+      ],
+      configurationLinks: [
         {
           label: 'Métiers',
-          url: '/metiers',
-          icon: 'mdi-card-account-mail',
-          loggedIn: true
+          url: '/metiers'
+        },
+        {
+          label: 'Affiliations',
+          url: '/404'
+        },
+        {
+          label: 'Annonces',
+          url: '/404'
+        },
+        {
+          label: 'Domaines',
+          url: '/404'
+        },
+        {
+          label: "Type d'entreprise",
+          url: '/404'
+        },
+        {
+          label: 'Moyens',
+          url: '/404'
+        },
+        {
+          label: 'Offres',
+          url: '/404'
         }
       ]
     }
