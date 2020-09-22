@@ -62,8 +62,29 @@ function getStages(routeTo, next) {
   })
 }
 
+function getStagesWithFilter(routeTo, next, filter) {
+  store.dispatch('stage/saveFilterStage', filter).then(() => {
+    next()
+  })
+}
+
+// Si un filtre existe l'appliquer, permet de ne pas relectionner
+// le filtre à chaque chargement de la liste des stages
 function loadData(routeTo, routeFrom, next) {
-  getStages(routeTo, next)
+  if (
+    store.state.stage.filter.nom != null ||
+    store.state.stage.filter.typeMetierId != null ||
+    store.state.stage.filter.entrepriseId != null ||
+    store.state.stage.filter.stagiaireId != null ||
+    store.state.stage.filter.dateDebut != null ||
+    store.state.stage.filter.dateFin != null ||
+    store.state.stage.filter.typeStageId != null ||
+    store.state.stage.filter.typeAnnonceId != null
+  ) {
+    getStagesWithFilter(routeTo, next, store.state.stage.filter)
+  } else {
+    getStages(routeTo, next)
+  }
 }
 
 export default {
