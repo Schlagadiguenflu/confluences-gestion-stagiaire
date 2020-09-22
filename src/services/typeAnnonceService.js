@@ -14,5 +14,20 @@ const CONTROLLER = '/api/TypeAnnonces'
 export default {
   getTypeAnnonces() {
     return axios.get(API_URL + CONTROLLER)
+  },
+  getTypeAnnonce(id) {
+    return axios.get(API_URL + CONTROLLER + '/' + id)
+  },
+  postTypeAnnonce(typeAnnonce) {
+    return axios.post(API_URL + CONTROLLER, typeAnnonce)
+  },
+  putTypeAnnonce(typeAnnonce) {
+    return axios.put(
+      API_URL + CONTROLLER + '/' + typeAnnonce.typeAnnonceId,
+      typeAnnonce
+    )
+  },
+  deleteTypeAnnonce(typeAnnonceId) {
+    return axios.delete(API_URL + CONTROLLER + '/' + typeAnnonceId)
   }
 }

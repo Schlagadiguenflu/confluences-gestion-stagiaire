@@ -54,10 +54,6 @@
 import store from '@/store/index.js'
 import NProgress from 'nprogress'
 
-function getEntreprises() {
-  store.dispatch('entreprise/fetchEntreprises', {}).then(() => {})
-}
-
 export default {
   data: () => ({
     validCreateMetier: true,
@@ -77,11 +73,6 @@ export default {
       v => !v || v.length <= 60 || 'Le champ doit être moins que 60 caractères'
     ]
   }),
-
-  // Charger les différents possibilités de choix avant la création du composant
-  beforeCreate(routeTo, routeFrom, next) {
-    getEntreprises(routeTo, next)
-  },
 
   methods: {
     // Si le formulaire est valide, création d'un métier à une entreprise

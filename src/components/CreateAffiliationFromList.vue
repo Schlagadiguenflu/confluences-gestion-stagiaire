@@ -33,7 +33,7 @@
             ></v-text-field>
             <v-text-field
               v-model="typeAffiliation.libelle"
-              :counter="60"
+              :counter="50"
               :rules="libelleRules"
               label="Nom"
               required
@@ -74,7 +74,7 @@ export default {
     ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
-      v => !v || v.length <= 60 || 'Le champ doit être moins que 60 caractères'
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 60 caractères'
     ]
   }),
 

@@ -20,6 +20,7 @@ import ContactEdit from '../views/ContactEdit.vue'
 import MetiersList from '../views/MetiersList.vue'
 import MetierEdit from '../views/MetierEdit.vue'
 import AffiliationsList from '../views/AffiliationsList.vue'
+import AffiliationEdit from '../views/AffiliationEdit.vue'
 import AnnoncesList from '../views/AnnoncesList.vue'
 import DomainesList from '../views/DomainesList.vue'
 import TypeEntreprisesList from '../views/TypeEntreprisesList.vue'
@@ -184,6 +185,28 @@ const routes = [
     name: 'Affiliations',
     component: AffiliationsList,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/affiliation/modifier/:id',
+    name: 'TypeAffiliation-Modifier',
+    component: AffiliationEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeAffiliation/fetchTypeAffiliation', routeTo.params.id)
+        .then(typeAffiliation => {
+          routeTo.params.typeAffiliation = typeAffiliation
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'affiliation' } })
+          } else {
+            next({ name: 'network-issue' })
+          }
+        })
+    }
   },
   {
     path: '/annonces',
