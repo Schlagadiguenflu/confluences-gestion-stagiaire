@@ -70,7 +70,6 @@ function loadData(routeTo, routeFrom, next) {
     store.state.entreprise.filter.createur != null ||
     store.state.entreprise.filter.dateModification != null
   ) {
-    console.log('with filter')
     getEntreprisesWithFilter(routeTo, next, store.state.entreprise.filter)
   } else {
     getEntreprises(routeTo, next)
