@@ -41,7 +41,8 @@
           v-for="link in getMenus"
           :key="link.label"
           link
-          :to="link.url"
+          :to="{ name: link.routeName }"
+          exact
         >
           <v-list-item-icon>
             <v-icon>{{ link.icon }}</v-icon>
@@ -66,7 +67,7 @@
             v-for="configurationLink in configurationLinks"
             :key="configurationLink.label"
             configurationLink
-            :to="configurationLink.url"
+            :to="{ name: configurationLink.routeName }"
           >
             <v-list-item-icon>
               <v-icon></v-icon>
@@ -102,7 +103,8 @@
           text
           rounded
           class="my-2"
-          :to="link.url"
+          :to="{ name: link.routeName }"
+          exact
         >
           {{ link.label }}
         </v-btn>
@@ -124,7 +126,7 @@
               v-for="configurationLink in configurationLinks"
               :key="configurationLink.label"
               configurationLink
-              :to="configurationLink.url"
+              :to="{ name: configurationLink.routeName }"
             >
               <v-list-item-title class="text-uppercase">
                 {{ configurationLink.label }}
@@ -162,31 +164,31 @@ export default {
       links: [
         {
           label: 'Accueil',
-          url: '/',
+          routeName: 'Home',
           icon: 'mdi-home',
           loggedIn: false
         },
         {
           label: 'Entreprises',
-          url: '/entreprises',
+          routeName: 'Entreprises',
           icon: 'mdi-office-building-outline',
           loggedIn: true
         },
         {
           label: 'Stages',
-          url: '/stages',
+          routeName: 'Stages',
           icon: 'mdi-briefcase-outline',
           loggedIn: true
         },
         {
           label: 'Stages par stagiaire',
-          url: '/stagiaires',
+          routeName: 'Stagiaires',
           icon: 'mdi-account-hard-hat',
           loggedIn: true
         },
         {
           label: 'Contacts',
-          url: '/contacts',
+          routeName: 'Contacts',
           icon: 'mdi-card-account-mail',
           loggedIn: true
         }
@@ -194,31 +196,31 @@ export default {
       configurationLinks: [
         {
           label: 'Métiers',
-          url: '/metiers'
+          routeName: 'Metiers'
         },
         {
           label: 'Affiliations',
-          url: '/404'
+          routeName: 'Affiliations'
         },
         {
           label: 'Annonces',
-          url: '/404'
+          routeName: 'Annonces'
         },
         {
           label: 'Domaines',
-          url: '/404'
+          routeName: 'Domaines'
         },
         {
           label: "Type d'entreprise",
-          url: '/404'
+          routeName: 'Type-Entreprises'
         },
         {
           label: 'Moyens',
-          url: '/404'
+          routeName: 'Moyens'
         },
         {
           label: 'Offres',
-          url: '/404'
+          routeName: 'Offres'
         }
       ]
     }
