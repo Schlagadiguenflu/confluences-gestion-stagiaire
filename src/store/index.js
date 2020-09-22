@@ -21,6 +21,7 @@ import * as typeMetier from '@/store/modules/typeMetier.js'
 import * as typeAnnonce from '@/store/modules/typeAnnonce.js'
 import * as typeAffiliation from '@/store/modules/typeAffiliation.js'
 import * as typeStage from '@/store/modules/typeStage.js'
+import * as typeMoyen from '@/store/modules/typeMoyen.js'
 import * as contact from '@/store/modules/contact.js'
 import * as user from '@/store/modules/user.js'
 import * as stage from '@/store/modules/stage.js'
@@ -46,6 +47,7 @@ export default new Vuex.Store({
     typeAnnonce,
     typeAffiliation,
     typeStage,
+    typeMoyen,
     contact,
     user,
     stage,

@@ -19,6 +19,12 @@ import ContactsList from '../views/ContactsList.vue'
 import ContactEdit from '../views/ContactEdit.vue'
 import MetiersList from '../views/MetiersList.vue'
 import MetierEdit from '../views/MetierEdit.vue'
+import AffiliationsList from '../views/AffiliationsList.vue'
+import AnnoncesList from '../views/AnnoncesList.vue'
+import DomainesList from '../views/DomainesList.vue'
+import TypeEntreprisesList from '../views/TypeEntreprisesList.vue'
+import MoyensList from '../views/MoyensList.vue'
+import TypeOffresList from '../views/TypeOffresList.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
 import Unauthorized from '../views/Unauthorized.vue'
@@ -172,6 +178,42 @@ const routes = [
           }
         })
     }
+  },
+  {
+    path: '/affiliations',
+    name: 'Affiliations',
+    component: AffiliationsList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/annonces',
+    name: 'Annonces',
+    component: AnnoncesList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/domaines',
+    name: 'Domaines',
+    component: DomainesList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/typeentreprises',
+    name: 'Type-Entreprises',
+    component: TypeEntreprisesList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/moyens',
+    name: 'Moyens',
+    component: MoyensList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/offres',
+    name: 'Offres',
+    component: TypeOffresList,
+    meta: { requiresAuth: true }
   },
   {
     path: '/callback',
