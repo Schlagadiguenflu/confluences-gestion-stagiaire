@@ -195,10 +195,6 @@ export default {
       ],
       configurationLinks: [
         {
-          label: 'Métiers',
-          routeName: 'Metiers'
-        },
-        {
           label: 'Affiliations',
           routeName: 'Affiliations'
         },
@@ -211,8 +207,8 @@ export default {
           routeName: 'Domaines'
         },
         {
-          label: "Type d'entreprise",
-          routeName: 'Type-Entreprises'
+          label: 'Métiers',
+          routeName: 'Metiers'
         },
         {
           label: 'Moyens',
@@ -221,6 +217,10 @@ export default {
         {
           label: 'Offres',
           routeName: 'Offres'
+        },
+        {
+          label: "Type d'entreprise",
+          routeName: 'Type-Entreprises'
         }
       ]
     }

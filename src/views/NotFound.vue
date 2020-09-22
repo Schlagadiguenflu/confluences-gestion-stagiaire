@@ -11,7 +11,16 @@
     <v-row class="mt-5">
       <v-col class="text-center" cols="12" tag="h1">
         <h2>Oups</h2>
-        <h3>La ressource que vous cherchez n'existe pas</h3>
+        <h3 v-if="resource == 'page'">
+          La {{ resource }} que vous cherchez n'existe pas
+        </h3>
+        <h3 v-else-if="resource != undefined && beginsVowel">
+          L' {{ resource }} que vous cherchez n'existe pas
+        </h3>
+        <h3 v-else-if="resource != undefined">
+          Le-la {{ resource }} que vous cherchez n'existe pas
+        </h3>
+        <h3 v-else>La ressource que vous cherchez n'existe pas</h3>
         <router-link :to="{ name: 'Home' }">Retourner à l'accueil </router-link>
       </v-col>
     </v-row>
@@ -24,6 +33,12 @@ export default {
     resource: {
       type: String,
       required: false
+    }
+  },
+  computed: {
+    beginsVowel() {
+      const regex = new RegExp('^[aeiou].*', 'i')
+      return regex.test(this.resource)
     }
   }
 }

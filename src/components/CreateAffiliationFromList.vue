@@ -74,7 +74,7 @@ export default {
     ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
-      v => !v || v.length <= 50 || 'Le champ doit être moins que 60 caractères'
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
     ]
   }),
 

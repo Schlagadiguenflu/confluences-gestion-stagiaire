@@ -11,7 +11,8 @@ import TypeAffiliationService from '@/services/typeAffiliationService.js'
 export const namespaced = true
 
 export const state = {
-  typeAffiliations: []
+  typeAffiliations: [],
+  typeAffiliation: {}
 }
 
 export const mutations = {

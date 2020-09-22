@@ -22,6 +22,7 @@ import MetierEdit from '../views/MetierEdit.vue'
 import AffiliationsList from '../views/AffiliationsList.vue'
 import AffiliationEdit from '../views/AffiliationEdit.vue'
 import AnnoncesList from '../views/AnnoncesList.vue'
+import AnnonceEdit from '../views/AnnonceEdit.vue'
 import DomainesList from '../views/DomainesList.vue'
 import TypeEntreprisesList from '../views/TypeEntreprisesList.vue'
 import MoyensList from '../views/MoyensList.vue'
@@ -56,6 +57,9 @@ const routes = [
       store
         .dispatch('entreprise/fetchEntreprise', routeTo.params.id)
         .then(entreprise => {
+          if (entreprise == undefined) {
+            next({ name: '404', params: { resource: 'entreprise' } })
+          }
           routeTo.params.entreprise = entreprise
           next()
         })
@@ -63,7 +67,7 @@ const routes = [
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'entreprise' } })
           } else {
-            next({ name: 'network-issue' })
+            next(routeFrom)
           }
         })
     }
@@ -84,6 +88,9 @@ const routes = [
       store
         .dispatch('stage/fetchStage', routeTo.params.id)
         .then(stage => {
+          if (stage == undefined) {
+            next({ name: '404', params: { resource: 'stage' } })
+          }
           routeTo.params.stage = stage
           next()
         })
@@ -91,7 +98,7 @@ const routes = [
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'stage' } })
           } else {
-            next({ name: 'network-issue' })
+            next(routeFrom)
           }
         })
     }
@@ -112,6 +119,9 @@ const routes = [
       store
         .dispatch('stagiaire/fetchStagiaire', routeTo.params.id)
         .then(stagiaire => {
+          if (stagiaire == undefined) {
+            next({ name: '404', params: { resource: 'stagiaire' } })
+          }
           routeTo.params.stagiaire = stagiaire
           next()
         })
@@ -119,7 +129,7 @@ const routes = [
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'stagiaire' } })
           } else {
-            next({ name: 'network-issue' })
+            next(routeFrom)
           }
         })
     }
@@ -140,6 +150,9 @@ const routes = [
       store
         .dispatch('contact/fetchContact', routeTo.params.id)
         .then(contact => {
+          if (contact == undefined) {
+            next({ name: '404', params: { resource: 'contact' } })
+          }
           routeTo.params.contact = contact
           next()
         })
@@ -147,7 +160,7 @@ const routes = [
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'contact' } })
           } else {
-            next({ name: 'network-issue' })
+            next(routeFrom)
           }
         })
     }
@@ -168,6 +181,9 @@ const routes = [
       store
         .dispatch('typeMetier/fetchTypeMetier', routeTo.params.id)
         .then(typeMetier => {
+          if (typeMetier == undefined) {
+            next({ name: '404', params: { resource: 'métier' } })
+          }
           routeTo.params.typeMetier = typeMetier
           next()
         })
@@ -175,7 +191,7 @@ const routes = [
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'metier' } })
           } else {
-            next({ name: 'network-issue' })
+            next(routeFrom)
           }
         })
     }
@@ -196,6 +212,9 @@ const routes = [
       store
         .dispatch('typeAffiliation/fetchTypeAffiliation', routeTo.params.id)
         .then(typeAffiliation => {
+          if (typeAffiliation == undefined) {
+            next({ name: '404', params: { resource: 'affiliation' } })
+          }
           routeTo.params.typeAffiliation = typeAffiliation
           next()
         })
@@ -203,7 +222,7 @@ const routes = [
           if (error.response && error.response.status == 404) {
             next({ name: '404', params: { resource: 'affiliation' } })
           } else {
-            next({ name: 'network-issue' })
+            next(routeFrom)
           }
         })
     }
@@ -213,6 +232,31 @@ const routes = [
     name: 'Annonces',
     component: AnnoncesList,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/annonce/modifier/:id',
+    name: 'TypeAnnonce-Modifier',
+    component: AnnonceEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeAnnonce/fetchTypeAnnonce', routeTo.params.id)
+        .then(typeAnnonce => {
+          if (typeAnnonce == undefined) {
+            next({ name: '404', params: { resource: 'annonce' } })
+          }
+          routeTo.params.typeAnnonce = typeAnnonce
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'annonce' } })
+          } else {
+            next(routeFrom)
+          }
+        })
+    }
   },
   {
     path: '/domaines',

@@ -2,34 +2,27 @@
   -- Projet: Gestion des stagiaires
   -- Auteur : Tim Allemann
   -- Date : 16.09.2020
-  -- Description : Formulaire de modification d'une affiliation
-  -- Fichier : AffiliationEdit.vue
+  -- Description : Formulaire de modification d'une annonce
+  -- Fichier : AnnonceEdit.vue
   -->
 
 <template>
   <v-container>
     <v-row>
       <v-col>
-        <h1>Affiliation</h1>
+        <h1>Annonce</h1>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
         <v-form
-          ref="formCreateTypeAffiliation"
-          v-model="validCreateTypeAffiliation"
+          ref="formCreateTypeAnnonce"
+          v-model="validCreateTypeAnnonce"
           lazy-validation
         >
           <v-text-field
-            v-model="typeAffiliation.code"
-            :counter="10"
-            label="Code"
-            :rules="codeRules"
-            required
-          ></v-text-field>
-          <v-text-field
-            v-model="typeAffiliation.libelle"
-            :counter="50"
+            v-model="typeAnnonce.libelle"
+            :counter="30"
             :rules="libelleRules"
             label="Nom"
             required
@@ -52,7 +45,7 @@
             >
               Sauvegarder
             </v-btn>
-            <DeleteTypeAffiliation :typeAffiliation="this.typeAffiliation" />
+            <DeleteTypeAnnonce :typeAnnonce="this.typeAnnonce" />
             <v-btn
               class="ma-2"
               tile
@@ -73,44 +66,39 @@
 <script>
 import store from '@/store/index.js'
 import NProgress from 'nprogress'
-import DeleteTypeAffiliation from '@/components/DeleteTypeAffiliation.vue'
+import DeleteTypeAnnonce from '@/components/DeleteTypeAnnonce.vue'
 
 export default {
   props: {
-    typeAffiliation: {
+    typeAnnonce: {
       type: Object,
       required: true
     }
   },
 
   components: {
-    DeleteTypeAffiliation
+    DeleteTypeAnnonce
   },
 
   data: () => ({
-    validCreateTypeAffiliation: true,
+    validCreateTypeAnnonce: true,
     dialog: false,
-    codeRules: [
-      v => !!v || 'Le champ est obligatoire',
-      v => /(\b[A-Z0-9]{1,}\b)/.test(v) || 'En majuscule seulement',
-      v => (v && v.length <= 10) || 'Le nom doit être moins que 10 caractères'
-    ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
-      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
+      v => !v || v.length <= 30 || 'Le champ doit être moins que 30 caractères'
     ]
   }),
 
   methods: {
-    // Si le formulaire est valide, sauvegarde de l'affiliation
+    // Si le formulaire est valide, sauvegarde de l'annonce
     submit() {
-      if (this.$refs.formCreateTypeAffiliation.validate()) {
+      if (this.$refs.formCreateTypeAnnonce.validate()) {
         NProgress.start()
         store
-          .dispatch('typeAffiliation/editTypeAffiliation', this.typeAffiliation)
+          .dispatch('typeAnnonce/editTypeAnnonce', this.typeAnnonce)
           .then(() => {
             this.$router.push({
-              name: 'Affiliations'
+              name: 'Annonces'
             })
           })
           .catch(() => {})

@@ -2,14 +2,14 @@
   -- Projet: Gestion des stagiaires
   -- Auteur : Tim Allemann
   -- Date : 16.09.2020
-  -- Description : Formulaire de suppression d'une affiliation
-  -- Fichier : DeleteTypeAffiliation.vue
+  -- Description : Formulaire de suppression d'une annonce
+  -- Fichier : DeleteTypeAnnonce.vue
   -->
 
 <template>
   <v-form
-    ref="formDeleteTypeAffiliation"
-    v-model="validCreateTypeAffiliation"
+    ref="formDeleteTypeAnnonce"
+    v-model="validCreateTypeAnnonce"
     lazy-validation
   >
     <v-dialog v-model="dialog" max-width="600px">
@@ -28,7 +28,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Supprimer une affiliation</span>
+          <span class="headline">Supprimer une annonce</span>
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">
@@ -40,7 +40,7 @@
           <v-btn color="blue darken-1" text @click="dialog = false">
             Fermer
           </v-btn>
-          <v-btn color="red darken-1" text @click="deleteTypeAffiliation()">
+          <v-btn color="red darken-1" text @click="deleteTypeAnnonce()">
             Supprimer
           </v-btn>
         </v-card-actions>
@@ -55,29 +55,29 @@ import NProgress from 'nprogress'
 
 export default {
   props: {
-    typeAffiliation: {
+    typeAnnonce: {
       type: Object,
       required: true
     }
   },
 
   data: () => ({
-    validCreateTypeAffiliation: true,
+    validCreateTypeAnnonce: true,
     dialog: false
   }),
 
   methods: {
-    // Supprime une affiliation
-    deleteTypeAffiliation() {
+    // Supprime une annonce
+    deleteTypeAnnonce() {
       NProgress.start()
       store
         .dispatch(
-          'typeAffiliation/deleteTypeAffiliation',
-          this.typeAffiliation.typeAffiliationId
+          'typeAnnonce/deleteTypeAnnonce',
+          this.typeAnnonce.typeAnnonceId
         )
         .then(() => {
           this.$router.push({
-            name: 'Affiliations'
+            name: 'Annonces'
           })
         })
         .catch(() => {})
