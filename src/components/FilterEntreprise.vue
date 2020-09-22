@@ -231,7 +231,10 @@ export default {
     validFilterEntreprise: true,
     dialog: false,
     nameRules: [
-      v => (v && v.length <= 50) || 'Le champ doit être moins que 50 caractères'
+      v =>
+        !v ||
+        (v && v.length <= 50) ||
+        'Le champ doit être moins que 50 caractères'
     ],
     codePostalRules: v => {
       if (v >= 0 && v <= 9999) return true
