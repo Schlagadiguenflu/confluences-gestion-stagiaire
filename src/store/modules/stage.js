@@ -47,6 +47,21 @@ export const mutations = {
   },
   DELETE_STAGE(state) {
     state.stage = null
+  },
+  SAVE_FILTER_STAGE(state, filter) {
+    state.filter = filter
+  },
+  DELETE_FILTER_STAGE() {
+    state.filter = {
+      nom: null,
+      typeMetierId: null,
+      entrepriseId: null,
+      stagiaireId: null,
+      dateDebut: null,
+      dateFin: null,
+      typeStageId: null,
+      typeAnnonceId: null
+    }
   }
 }
 

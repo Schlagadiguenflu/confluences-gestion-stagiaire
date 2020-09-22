@@ -16,7 +16,7 @@
         <v-btn
           color="primary"
           dark
-          @click="deletefilterEntreprise()"
+          @click="deletefilterStage()"
           class="mr-4 mb-4"
         >
           Effacer le filtre
@@ -182,7 +182,7 @@ export default {
     validFilterStage: true,
     dialog: false,
     nameRules: [
-      v => (v && v.length <= 50) || 'Le champ doit être moins que 50 caractères'
+      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
     ]
   }),
 
