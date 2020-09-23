@@ -41,7 +41,7 @@
           >
             <v-list disabled>
               <v-subheader
-                >Il faut supprimer les affiliations liées au stagiaire avant de
+                >Il faut supprimer l'affiliation liée aux stagiaires avant de
                 pouvoir supprimer l'affiliation</v-subheader
               >
               <v-list-item-group

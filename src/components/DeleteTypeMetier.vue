@@ -34,13 +34,46 @@
           <h3 class="mb-3">
             Attention une suppression est définitive !
           </h3>
+          <v-card
+            class="mx-auto"
+            tile
+            v-if="typeMetier.entrepriseMetiers.length > 0"
+          >
+            <v-list disabled>
+              <v-subheader
+                >Il faut supprimer le métier lié aux entreprises avant de
+                supprimer le métier</v-subheader
+              >
+              <v-list-item-group
+                v-model="typeMetier.entrepriseMetiers"
+                color="primary"
+              >
+                <v-list-item
+                  v-for="(entrepriseMetier, i) in typeMetier.entrepriseMetiers"
+                  :key="i"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title
+                      name="nom"
+                      v-text="entrepriseMetier.entreprise.nom"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Fermer
           </v-btn>
-          <v-btn color="red darken-1" text @click="deleteTypeMetier()">
+          <v-btn
+            color="red darken-1"
+            text
+            @click="deleteTypeMetier()"
+            v-if="typeMetier.entrepriseMetiers.length == 0"
+          >
             Supprimer
           </v-btn>
         </v-card-actions>
