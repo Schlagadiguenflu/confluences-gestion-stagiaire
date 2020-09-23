@@ -11,7 +11,8 @@ import TypeAnnonceService from '@/services/typeAnnonceService.js'
 export const namespaced = true
 
 export const state = {
-  typeAnnonces: []
+  typeAnnonces: [],
+  typeAnnonce: {}
 }
 
 export const mutations = {
@@ -22,7 +23,7 @@ export const mutations = {
     state.typeAnnonce = typeAnnonce
   },
   ADD_TYPEANNONCE(state, typeAnnonceNew) {
-    state.typeAnnonces.push({
+    state.typeAnnonces.unshift({
       ...typeAnnonceNew
     })
   },
@@ -30,7 +31,7 @@ export const mutations = {
     state.typeAnnonces = state.typeAnnonces.filter(
       typeAnnonce => typeAnnonce.typeAnnonceId !== typeAnnonceNew.typeAnnonceId
     )
-    state.typeAnnonces.push({
+    state.typeAnnonces.unshift({
       ...typeAnnonceNew
     })
   },
@@ -86,7 +87,7 @@ export const actions = {
   createTypeAnnonce({ commit, dispatch }, typeAnnonce) {
     return TypeAnnonceService.postTypeAnnonce(typeAnnonce)
       .then(response => {
-        commit('ADD_TYPEANNONCE', typeAnnonce)
+        commit('ADD_TYPEANNONCE', response.data)
         commit('SET_TYPEANNONCE', response.data)
         const notification = {
           type: 'success',

@@ -11,7 +11,8 @@ import TypeDomaineService from '@/services/typeDomaineService.js'
 export const namespaced = true
 
 export const state = {
-  typeDomaines: []
+  typeDomaines: [],
+  typeDomaine: {}
 }
 
 export const mutations = {
@@ -30,7 +31,7 @@ export const mutations = {
     state.typeDomaines = state.typeDomaines.filter(
       typeDomaine => typeDomaine.typeDomaineId !== typeDomaineNew.typeDomaineId
     )
-    state.typeDomaines.push({
+    state.typeDomaines.unshift({
       ...typeDomaineNew
     })
   },
@@ -86,7 +87,7 @@ export const actions = {
   createTypeDomaine({ commit, dispatch }, typeDomaine) {
     return TypeDomaineService.postTypeDomaine(typeDomaine)
       .then(response => {
-        commit('ADD_TYPEDOMAINE', typeDomaine)
+        commit('ADD_TYPEDOMAINE', response.data)
         commit('SET_TYPEDOMAINE', response.data)
         const notification = {
           type: 'success',

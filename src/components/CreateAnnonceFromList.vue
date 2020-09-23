@@ -74,7 +74,6 @@ export default {
         store
           .dispatch('typeAnnonce/createTypeAnnonce', this.typeAnnonce)
           .then(() => {
-            this.addNewData()
             this.$refs.formCreateAnnonce.reset()
             this.dialog = false
           })
@@ -82,13 +81,6 @@ export default {
 
         NProgress.done()
       }
-    },
-    // Ajoute l'annonce
-    addNewData() {
-      store
-        .dispatch('typeAnnonce/fetchTypeAnnonces', this.typeAnnonce)
-        .then(() => {})
-        .catch(() => {})
     }
   }
 }

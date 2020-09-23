@@ -82,7 +82,6 @@ export default {
         store
           .dispatch('typeMetier/createTypeMetier', this.typeMetier)
           .then(() => {
-            this.addNewData()
             this.$refs.formCreateMetier.reset()
             this.dialog = false
           })
@@ -90,13 +89,6 @@ export default {
 
         NProgress.done()
       }
-    },
-    // Ajoute le métier à l'entreprise
-    addNewData() {
-      store
-        .dispatch('typeMetier/fetchTypeMetiers', this.typeMetier)
-        .then(() => {})
-        .catch(() => {})
     }
   }
 }

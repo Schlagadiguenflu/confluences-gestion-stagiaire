@@ -23,7 +23,7 @@ export const mutations = {
     state.typeAffiliation = typeAffiliation
   },
   ADD_TYPEAFFILIATION(state, typeAffiliationNew) {
-    state.typeAffiliations.push({
+    state.typeAffiliations.unshift({
       ...typeAffiliationNew
     })
   },
@@ -33,7 +33,7 @@ export const mutations = {
         typeAffiliation.typeAffiliationId !==
         typeAffiliationNew.typeAffiliationId
     )
-    state.typeAffiliations.push({
+    state.typeAffiliations.unshift({
       ...typeAffiliationNew
     })
   },

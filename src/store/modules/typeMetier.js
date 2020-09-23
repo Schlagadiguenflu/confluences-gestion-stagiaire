@@ -23,7 +23,7 @@ export const mutations = {
     state.typeMetier = typeMetier
   },
   ADD_TYPEMETIER(state, typeMetierNew) {
-    state.typeMetiers.push({
+    state.typeMetiers.unshift({
       ...typeMetierNew
     })
   },
@@ -31,7 +31,7 @@ export const mutations = {
     state.typeMetiers = state.typeMetiers.filter(
       typeMetier => typeMetier.typeMetierId !== typeMetierNew.typeMetierId
     )
-    state.typeMetiers.push({
+    state.typeMetiers.unshift({
       ...typeMetierNew
     })
   },
@@ -86,7 +86,7 @@ export const actions = {
   createTypeMetier({ commit, dispatch }, typeMetier) {
     return TypeMetierService.postTypeMetier(typeMetier)
       .then(response => {
-        commit('ADD_TYPEMETIER', typeMetier)
+        commit('ADD_TYPEMETIER', response.data)
         commit('SET_TYPEMETIER', response.data)
         const notification = {
           type: 'success',

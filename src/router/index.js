@@ -28,6 +28,7 @@ import DomaineEdit from '../views/DomaineEdit.vue'
 import TypeEntreprisesList from '../views/TypeEntreprisesList.vue'
 import TypeStagesList from '../views/TypeStagesList.vue'
 import MoyensList from '../views/MoyensList.vue'
+import MoyenEdit from '../views/MoyenEdit.vue'
 import TypeOffresList from '../views/TypeOffresList.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
@@ -308,6 +309,31 @@ const routes = [
     name: 'Moyens',
     component: MoyensList,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/moyen/modifier/:id',
+    name: 'TypeMoyen-Modifier',
+    component: MoyenEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeMoyen/fetchTypeMoyen', routeTo.params.id)
+        .then(typeMoyen => {
+          if (typeMoyen == undefined) {
+            next({ name: '404', params: { resource: 'moyen' } })
+          }
+          routeTo.params.typeMoyen = typeMoyen
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'moyen' } })
+          } else {
+            next(routeFrom)
+          }
+        })
+    }
   },
   {
     path: '/offres',
