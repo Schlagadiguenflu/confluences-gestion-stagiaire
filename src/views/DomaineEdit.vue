@@ -93,7 +93,7 @@ export default {
     codeRules: [
       v => !!v || 'Le champ est obligatoire',
       v => /(\b[A-Z0-9]{1,}\b)/.test(v) || 'En majuscule seulement',
-      v => (v && v.length <= 10) || 'Le nom doit être moins que 10 caractères'
+      v => (v && v.length <= 3) || 'Le nom doit être moins que 3 caractères'
     ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
