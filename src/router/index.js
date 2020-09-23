@@ -2,7 +2,7 @@
  * Projet: Gestion des stagiaires
  * Auteur : Tim Allemann
  * Date : 16.09.2020
- * Description : Fichier de configuration pour la navigation entre les composants
+ * Description : Fichier de configuration pour la navigation entre les vues
  * Fichier : index.js
  **/
 
@@ -24,7 +24,9 @@ import AffiliationEdit from '../views/AffiliationEdit.vue'
 import AnnoncesList from '../views/AnnoncesList.vue'
 import AnnonceEdit from '../views/AnnonceEdit.vue'
 import DomainesList from '../views/DomainesList.vue'
+import DomaineEdit from '../views/DomaineEdit.vue'
 import TypeEntreprisesList from '../views/TypeEntreprisesList.vue'
+import TypeStagesList from '../views/TypeStagesList.vue'
 import MoyensList from '../views/MoyensList.vue'
 import TypeOffresList from '../views/TypeOffresList.vue'
 import Callback from '../views/Callback'
@@ -265,9 +267,40 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/domaine/modifier/:id',
+    name: 'TypeDomaine-Modifier',
+    component: DomaineEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeDomaine/fetchTypeDomaine', routeTo.params.id)
+        .then(typeDomaine => {
+          if (typeDomaine == undefined) {
+            next({ name: '404', params: { resource: 'domaine' } })
+          }
+          routeTo.params.typeDomaine = typeDomaine
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'domaine' } })
+          } else {
+            next(routeFrom)
+          }
+        })
+    }
+  },
+  {
     path: '/typeentreprises',
     name: 'Type-Entreprises',
     component: TypeEntreprisesList,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/typestages',
+    name: 'Type-Stages',
+    component: TypeStagesList,
     meta: { requiresAuth: true }
   },
   {

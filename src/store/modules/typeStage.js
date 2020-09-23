@@ -22,10 +22,17 @@ export const mutations = {
 
 export const actions = {
   // Récupère les types de stage et notifie l'utilisateur en cas de succès ou erreur
-  fetchTypeStages({ commit, dispatch }) {
+  fetchTypeStages({ commit, dispatch }, notify) {
     return TypeStageService.getTypeStages()
       .then(response => {
         commit('SET_TYPESTAGES', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Types de stages chargés'
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {

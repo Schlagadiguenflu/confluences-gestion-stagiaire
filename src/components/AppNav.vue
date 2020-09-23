@@ -221,6 +221,10 @@ export default {
         {
           label: "Type d'entreprise",
           routeName: 'Type-Entreprises'
+        },
+        {
+          label: 'Type de stage',
+          routeName: 'Type-Stages'
         }
       ]
     }

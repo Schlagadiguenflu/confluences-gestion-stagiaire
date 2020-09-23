@@ -22,6 +22,7 @@ export const state = {
   currentPageTypeAnnonce: 1,
   currentPageTypeDomaine: 1,
   currentPageTypeEntreprise: 1,
+  currentPageTypeStage: 1,
   currentPageTypeMoyen: 1,
   currentPageTypeOffre: 1
 }
@@ -56,6 +57,9 @@ export const mutations = {
   },
   SET_CURRENTPAGETYPEENTREPRISE(state, number) {
     state.currentPageTypeEntreprise = number
+  },
+  SET_CURRENTPAGETYPESTAGE(state, number) {
+    state.currentPageTypeStage = number
   },
   SET_CURRENTPAGETYPEMOYEN(state, number) {
     state.currentPageTypeMoyen = number
@@ -105,6 +109,10 @@ export const actions = {
   // Affecte le numéro de page consulté du tableau des types d'entreprises
   setCurrentPageTypeEntreprise({ commit }, number) {
     commit('SET_CURRENTPAGETYPEENTREPRISE', number.number)
+  },
+  // Affecte le numéro de page consulté du tableau des types de stages
+  setCurrentPageTypeStage({ commit }, number) {
+    commit('SET_CURRENTPAGETYPESTAGE', number.number)
   },
   // Affecte le numéro de page consulté du tableau des types de moyens
   setCurrentPageTypeMoyen({ commit }, number) {
