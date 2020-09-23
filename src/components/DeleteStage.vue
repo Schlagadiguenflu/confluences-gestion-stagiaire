@@ -2,49 +2,47 @@
   -- Projet: Gestion des stagiaires
   -- Auteur : Tim Allemann
   -- Date : 16.09.2020
-  -- Description : Formulaire de création d'un type de stage depuis la liste des stages
-  -- Fichier : CreateTypeStageFromList.vue
+  -- Description : Formulaire de suppression d'un stage
+  -- Fichier : DeleteStage.vue
   -->
 
 <template>
-  <v-row>
-    <v-form
-      ref="formCreateTypeStage"
-      v-model="validCreateTypeStage"
-      lazy-validation
-    >
-      <v-dialog v-model="dialog" max-width="600px">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn v-bind="attrs" v-on="on" class="mx-3" color="primary">
-            Ajouter un taux d'occupation
+  <v-form ref="formDeleteStage" v-model="validCreateStage" lazy-validation>
+    <v-dialog v-model="dialog" max-width="600px">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-bind="attrs"
+          v-on="on"
+          tile
+          color="red"
+          dark
+          min-width="150"
+          class="ma-2"
+        >
+          Supprimer
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Supprimer un stage</span>
+        </v-card-title>
+        <v-card-text>
+          <h3 class="mb-3">
+            Attention une suppression est définitive !
+          </h3>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false">
+            Fermer
           </v-btn>
-        </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">Ajouter un taux d'occupation</span>
-          </v-card-title>
-          <v-card-text>
-            <v-text-field
-              v-model="typeStage.nom"
-              :counter="50"
-              :rules="libelleRules"
-              label="Nom"
-              required
-            ></v-text-field>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Fermer
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="submit()">
-              Sauvegarder
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-form>
-  </v-row>
+          <v-btn color="red darken-1" text @click="deleteStage()">
+            Supprimer
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-form>
 </template>
 
 <script>
@@ -52,35 +50,32 @@ import store from '@/store/index.js'
 import NProgress from 'nprogress'
 
 export default {
+  props: {
+    stage: {
+      type: Object,
+      required: true
+    }
+  },
+
   data: () => ({
-    validCreateTypeStage: true,
-    dialog: false,
-    typeStage: {
-      typeStageId: 0,
-      code: null,
-      libelle: null
-    },
-    libelleRules: [
-      v => !!v || 'Le champ est obligatoire',
-      v => !v || v.length <= 50 || 'Le champ doit être moins que 50 caractères'
-    ]
+    validCreateStage: true,
+    dialog: false
   }),
 
   methods: {
-    // Si le formulaire est valide, création d'un type de stage
-    submit() {
-      if (this.$refs.formCreateTypeStage.validate()) {
-        NProgress.start()
-        store
-          .dispatch('typeStage/createTypeStage', this.typeStage)
-          .then(() => {
-            this.$refs.formCreateTypeStage.reset()
-            this.dialog = false
+    // Supprime un stage
+    deleteStage() {
+      NProgress.start()
+      store
+        .dispatch('stage/deleteStage', this.stage.stageId)
+        .then(() => {
+          this.$router.push({
+            name: 'Stages'
           })
-          .catch(() => {})
-
-        NProgress.done()
-      }
+        })
+        .catch(() => {})
+      this.dialog = false
+      NProgress.done()
     }
   }
 }
