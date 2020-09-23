@@ -219,11 +219,11 @@ export default {
           routeName: 'Offres'
         },
         {
-          label: "Type d'entreprise",
+          label: "Statuts d'entreprise",
           routeName: 'Type-Entreprises'
         },
         {
-          label: 'Type de stage',
+          label: "Taux d'occupation",
           routeName: 'Type-Stages'
         }
       ]

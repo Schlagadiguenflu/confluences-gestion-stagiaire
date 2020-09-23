@@ -34,13 +34,46 @@
           <h3 class="mb-3">
             Attention une suppression est définitive !
           </h3>
+          <v-card
+            class="mx-auto"
+            tile
+            v-if="typeAffiliation.aspNetUsers.length > 0"
+          >
+            <v-list disabled>
+              <v-subheader
+                >Il faut supprimer les affiliations liées au stagiaire avant de
+                pouvoir supprimer l'affiliation</v-subheader
+              >
+              <v-list-item-group
+                v-model="typeAffiliation.aspNetUsers"
+                color="primary"
+              >
+                <v-list-item
+                  v-for="(user, i) in typeAffiliation.aspNetUsers"
+                  :key="i"
+                >
+                  <v-list-item-content>
+                    <v-list-item-title
+                      name="nom"
+                      v-text="user.firstname + ' ' + user.lastName"
+                    ></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false">
             Fermer
           </v-btn>
-          <v-btn color="red darken-1" text @click="deleteTypeAffiliation()">
+          <v-btn
+            color="red darken-1"
+            text
+            @click="deleteTypeAffiliation()"
+            v-if="typeAffiliation.aspNetUsers.length == 0"
+          >
             Supprimer
           </v-btn>
         </v-card-actions>

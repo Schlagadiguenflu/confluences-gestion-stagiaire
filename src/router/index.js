@@ -26,10 +26,13 @@ import AnnonceEdit from '../views/AnnonceEdit.vue'
 import DomainesList from '../views/DomainesList.vue'
 import DomaineEdit from '../views/DomaineEdit.vue'
 import TypeEntreprisesList from '../views/TypeEntreprisesList.vue'
+import TypeEntrepriseEdit from '../views/TypeEntrepriseEdit.vue'
 import TypeStagesList from '../views/TypeStagesList.vue'
+import TypeStageEdit from '../views/TypeStageEdit.vue'
 import MoyensList from '../views/MoyensList.vue'
 import MoyenEdit from '../views/MoyenEdit.vue'
 import TypeOffresList from '../views/TypeOffresList.vue'
+import TypeOffreEdit from '../views/TypeOffreEdit.vue'
 import Callback from '../views/Callback'
 import NotFound from '../views/NotFound.vue'
 import Unauthorized from '../views/Unauthorized.vue'
@@ -299,10 +302,60 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/typeentreprise/modifier/:id',
+    name: 'TypeEntreprise-Modifier',
+    component: TypeEntrepriseEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeEntreprise/fetchTypeEntreprise', routeTo.params.id)
+        .then(typeEntreprise => {
+          if (typeEntreprise == undefined) {
+            next({ name: '404', params: { resource: "statut d'entreprise" } })
+          }
+          routeTo.params.typeEntreprise = typeEntreprise
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: "statut d'entreprise" } })
+          } else {
+            next(routeFrom)
+          }
+        })
+    }
+  },
+  {
     path: '/typestages',
     name: 'Type-Stages',
     component: TypeStagesList,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/typestage/modifier/:id',
+    name: 'TypeStage-Modifier',
+    component: TypeStageEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeStage/fetchTypeStage', routeTo.params.id)
+        .then(typeStage => {
+          if (typeStage == undefined) {
+            next({ name: '404', params: { resource: "taux d'occupation" } })
+          }
+          routeTo.params.typeStage = typeStage
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: "taux d'occupation" } })
+          } else {
+            next(routeFrom)
+          }
+        })
+    }
   },
   {
     path: '/moyens',
@@ -340,6 +393,31 @@ const routes = [
     name: 'Offres',
     component: TypeOffresList,
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/offre/modifier/:id',
+    name: 'TypeOffre-Modifier',
+    component: TypeOffreEdit,
+    meta: { requiresAuth: true },
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      store
+        .dispatch('typeOffre/fetchTypeOffre', routeTo.params.id)
+        .then(typeOffre => {
+          if (typeOffre == undefined) {
+            next({ name: '404', params: { resource: 'offre' } })
+          }
+          routeTo.params.typeOffre = typeOffre
+          next()
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({ name: '404', params: { resource: 'offre' } })
+          } else {
+            next(routeFrom)
+          }
+        })
+    }
   },
   {
     path: '/callback',

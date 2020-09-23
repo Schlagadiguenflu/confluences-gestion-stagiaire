@@ -1,9 +1,82 @@
+<!-- 
+  -- Projet: Gestion des stagiaires
+  -- Auteur : Tim Allemann
+  -- Date : 16.09.2020
+  -- Description : Formulaire de création d'une offre depuis la liste des offres
+  -- Fichier : CreateOffreFromList.vue
+  -->
+
 <template>
-  <div></div>
+  <v-row>
+    <v-form ref="formCreateOffre" v-model="validCreateOffre" lazy-validation>
+      <v-dialog v-model="dialog" max-width="600px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn v-bind="attrs" v-on="on" class="mx-3" color="primary">
+            Ajouter une offre
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title>
+            <span class="headline">Ajouter une offre</span>
+          </v-card-title>
+          <v-card-text>
+            <v-text-field
+              v-model="typeOffre.libelle"
+              :counter="30"
+              :rules="libelleRules"
+              label="Nom"
+              required
+            ></v-text-field>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Fermer
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="submit()">
+              Sauvegarder
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-form>
+  </v-row>
 </template>
 
 <script>
-export default {}
-</script>
+import store from '@/store/index.js'
+import NProgress from 'nprogress'
 
-<style></style>
+export default {
+  data: () => ({
+    validCreateOffre: true,
+    dialog: false,
+    typeOffre: {
+      typeOffreId: 0,
+      libelle: null
+    },
+    libelleRules: [
+      v => !!v || 'Le champ est obligatoire',
+      v => !v || v.length <= 30 || 'Le champ doit être moins que 30 caractères'
+    ]
+  }),
+
+  methods: {
+    // Si le formulaire est valide, création d'une offre
+    submit() {
+      if (this.$refs.formCreateOffre.validate()) {
+        NProgress.start()
+        store
+          .dispatch('typeOffre/createTypeOffre', this.typeOffre)
+          .then(() => {
+            this.$refs.formCreateOffre.reset()
+            this.dialog = false
+          })
+          .catch(() => {})
+
+        NProgress.done()
+      }
+    }
+  }
+}
+</script>
