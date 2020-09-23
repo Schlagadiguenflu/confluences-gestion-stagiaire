@@ -36,6 +36,6 @@ export default {
   top: 60px;
   right: 0;
   padding-right: 40px;
-  z-index: 10;
+  z-index: 201;
 }
 </style>
