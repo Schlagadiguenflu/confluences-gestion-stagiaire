@@ -22,10 +22,17 @@ export const mutations = {
 
 export const actions = {
   // Récupère les types d'offres et notifie l'utilisateur en cas de succès ou erreur
-  fetchTypeOffres({ commit, dispatch }) {
+  fetchTypeOffres({ commit, dispatch }, notify) {
     return TypeOffreService.getTypeOffres()
       .then(response => {
         commit('SET_TYPEOFFRES', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Offres chargées'
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {

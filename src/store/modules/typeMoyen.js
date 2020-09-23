@@ -22,10 +22,17 @@ export const mutations = {
 
 export const actions = {
   // Récupère les types de moyens et notifie l'utilisateur en cas de succès ou erreur
-  fetchTypeMoyens({ commit, dispatch }) {
+  fetchTypeMoyens({ commit, dispatch }, notify) {
     return TypeMoyenService.getTypeMoyens()
       .then(response => {
         commit('SET_TYPEMOYENS', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Moyens chargés'
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {

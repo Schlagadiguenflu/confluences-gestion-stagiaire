@@ -22,10 +22,17 @@ export const mutations = {
 
 export const actions = {
   // Récupère les types d'entreprise et notifie l'utilisateur en cas de succès ou erreur
-  fetchTypeEntreprises({ commit, dispatch }) {
+  fetchTypeEntreprises({ commit, dispatch }, notify) {
     return TypeEntrepriseService.getTypeEntreprises()
       .then(response => {
         commit('SET_TYPEENTREPRISES', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: "Types d'entreprises chargées"
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {

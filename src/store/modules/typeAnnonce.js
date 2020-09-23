@@ -41,10 +41,17 @@ export const mutations = {
 
 export const actions = {
   // Récupère les annonces et notifie l'utilisateur en cas de succès ou erreur
-  fetchTypeAnnonces({ commit, dispatch }) {
+  fetchTypeAnnonces({ commit, dispatch }, notify) {
     return TypeAnnonceService.getTypeAnnonces()
       .then(response => {
         commit('SET_TYPEANNONCES', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Annonces chargées'
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {
@@ -62,7 +69,7 @@ export const actions = {
         commit('SET_TYPEANNONCE', response.data)
         const notification = {
           type: 'success',
-          message: 'Aannonce chargée'
+          message: 'Annonce chargée'
         }
         dispatch('notification/add', notification, { root: true })
         return response.data

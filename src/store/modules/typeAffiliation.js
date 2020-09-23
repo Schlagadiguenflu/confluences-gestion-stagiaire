@@ -44,10 +44,17 @@ export const mutations = {
 
 export const actions = {
   // Récupère les affiliations et notifie l'utilisateur en cas de succès ou erreur
-  fetchTypeAffiliations({ commit, dispatch }) {
+  fetchTypeAffiliations({ commit, dispatch }, notify) {
     return TypeAffiliationService.getTypeAffiliations()
       .then(response => {
         commit('SET_TYPEAFFILIATIONS', response.data)
+        if (notify == true) {
+          const notification = {
+            type: 'success',
+            message: 'Affiliations chargées'
+          }
+          dispatch('notification/add', notification, { root: true })
+        }
       })
       .catch(error => {
         const notification = {
