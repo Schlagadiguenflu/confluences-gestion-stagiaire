@@ -17,7 +17,7 @@ export default {
   },
   deleteEntrepriseMetier(payload) {
     return axios.delete(
-      API_URL + CONTROLLER + payload.entrepriseId + '/' + payload.metierId
+      API_URL + CONTROLLER + '/' + payload.entrepriseId + '/' + payload.metierId
     )
   }
 }
