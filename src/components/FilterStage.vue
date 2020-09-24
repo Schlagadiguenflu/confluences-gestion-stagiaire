@@ -140,7 +140,7 @@
                   :items="typeStage.typeStages"
                   item-value="typeStageId"
                   item-text="nom"
-                  label="Type de stage"
+                  label="Taux d'occupation"
                   clearable
                 ></v-autocomplete>
                 <v-autocomplete

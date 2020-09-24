@@ -312,14 +312,14 @@ const routes = [
         .dispatch('typeEntreprise/fetchTypeEntreprise', routeTo.params.id)
         .then(typeEntreprise => {
           if (typeEntreprise == undefined) {
-            next({ name: '404', params: { resource: "statut d'entreprise" } })
+            next({ name: '404', params: { resource: 'catégorie' } })
           }
           routeTo.params.typeEntreprise = typeEntreprise
           next()
         })
         .catch(error => {
           if (error.response && error.response.status == 404) {
-            next({ name: '404', params: { resource: "statut d'entreprise" } })
+            next({ name: '404', params: { resource: 'catégorie' } })
           } else {
             next(routeFrom)
           }

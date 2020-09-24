@@ -28,7 +28,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Supprimer un statut d'entreprise</span>
+          <span class="headline">Supprimer une catégorie</span>
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">

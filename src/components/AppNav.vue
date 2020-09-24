@@ -220,7 +220,7 @@ export default {
           routeName: 'Offres'
         },
         {
-          label: "Statuts d'entreprise",
+          label: "Catégorie d'entreprise",
           routeName: 'Type-Entreprises'
         },
         {

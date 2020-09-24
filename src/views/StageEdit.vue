@@ -30,7 +30,7 @@
             :items="typeStage.typeStages"
             item-value="typeStageId"
             item-text="nom"
-            label="Type de stage"
+            label="Taux d'occupation"
             :rules="requiredRule"
           ></v-autocomplete>
         </v-col>

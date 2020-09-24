@@ -10,7 +10,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1>Statut d'entreprise</h1>
+        <h1>Catégorie pour l'entreprise</h1>
       </v-col>
     </v-row>
     <v-row>

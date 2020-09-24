@@ -16,12 +16,12 @@
       <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" v-on="on" class="mx-3" color="primary">
-            Ajouter un statut d'entreprise
+            Ajouter une catégorie
           </v-btn>
         </template>
         <v-card>
           <v-card-title>
-            <span class="headline">Ajouter un statut d'entreprise</span>
+            <span class="headline">Ajouter un catégorie</span>
           </v-card-title>
           <v-card-text>
             <v-text-field
