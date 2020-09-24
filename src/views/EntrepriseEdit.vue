@@ -31,7 +31,7 @@
         </v-col>
         <v-col cols="12" md="9">
           <v-row>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-menu
                 ref="menuContact"
                 v-model="menuContact"
@@ -68,7 +68,7 @@
                 </v-date-picker>
               </v-menu>
             </v-col>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-autocomplete
                 v-model="entreprise.formateurIdDernierContact"
                 :items="user.users"
@@ -78,13 +78,23 @@
                 clearable
               ></v-autocomplete>
             </v-col>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="3">
               <v-autocomplete
                 v-model="entreprise.stagiaireIdDernierContact"
                 :items="user.users"
                 item-value="id"
                 item-text="nom"
                 label="Pour"
+                clearable
+              ></v-autocomplete>
+            </v-col>
+            <v-col cols="12" md="3">
+              <v-autocomplete
+                v-model="entreprise.typeMoyenId"
+                :items="typeMoyen.typeMoyens"
+                item-value="typeMoyenId"
+                item-text="libelle"
+                label="Moyen de communication"
                 clearable
               ></v-autocomplete>
             </v-col>
@@ -287,6 +297,10 @@ function getTypeDomaines() {
   store.dispatch('typeDomaine/fetchTypeDomaines', {}).then(() => {})
 }
 
+function getTypeMoyens() {
+  store.dispatch('typeMoyen/fetchTypeMoyens', {}).then(() => {})
+}
+
 function getUsers() {
   store.dispatch('user/fetchUsers', {}).then(() => {})
 }
@@ -338,6 +352,7 @@ export default {
   beforeCreate(routeTo, routeFrom, next) {
     getTypeEntreprises(routeTo, next)
     getTypeDomaines(routeTo, next)
+    getTypeMoyens(routeTo, next)
     getUsers(routeTo, next)
   },
 
@@ -350,7 +365,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['typeEntreprise', 'typeDomaine', 'user'])
+    ...mapState(['typeEntreprise', 'typeDomaine', 'typeMoyen', 'user'])
   },
 
   methods: {
