@@ -17,23 +17,10 @@
 </template>
 
 <script>
-import { authComputed } from '../vuex/helpers'
 export default {
   data() {
     return {
       name: 'Confluences - Gestion des stagiaires'
-    }
-  },
-  computed: {
-    ...authComputed,
-    getMenus: function() {
-      if (this.loggedIn) {
-        return this.links
-      } else {
-        return this.links.filter(function(link) {
-          return !link.loggedIn
-        })
-      }
     }
   }
 }
