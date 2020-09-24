@@ -57,6 +57,7 @@
           prepend-icon="mdi-cog"
           :value="false"
           active-class="white--text"
+          v-if="this.loggedIn"
         >
           <template v-slot:activator>
             <v-list-item-title class="text-uppercase">
