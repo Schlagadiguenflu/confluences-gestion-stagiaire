@@ -18,7 +18,7 @@
         <v-col cols="12" md="4">
           <v-text-field
             v-model="stage.nom"
-            :counter="50"
+            :counter="30"
             :rules="nameRules"
             label="Nom"
             required
@@ -305,7 +305,7 @@ export default {
     valid: true,
     nameRules: [
       v => !!v || 'Le nom est obligatoire',
-      v => (v && v.length <= 50) || 'Le nom doit être moins que 50 caractères'
+      v => (v && v.length <= 30) || 'Le nom doit être moins que 30 caractères'
     ],
     horaireRules: [
       v =>
