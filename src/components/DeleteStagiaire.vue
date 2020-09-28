@@ -49,7 +49,7 @@
                   v-for="(stage, i) in stagiaire.stageStagiaires"
                   :key="i"
                 >
-                  <v-list-item-content>
+                  <v-list-item-content v-if="stage.entreprise != null">
                     <v-list-item-title
                       name="libelle"
                       v-text="stage.entreprise.nom"
