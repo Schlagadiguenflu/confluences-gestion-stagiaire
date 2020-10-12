@@ -21,18 +21,17 @@
           lazy-validation
         >
           <v-text-field
-            v-model="typeMetier.code"
-            :counter="10"
-            label="Code"
-            :rules="codeRules"
-            required
-          ></v-text-field>
-          <v-text-field
             v-model="typeMetier.libelle"
             :counter="60"
             :rules="libelleRules"
             label="Nom"
             required
+          ></v-text-field>
+          <v-text-field
+            v-model="typeMetier.oldNames"
+            :counter="300"
+            label="Anciens noms"
+            :rules="oldNamesRules"
           ></v-text-field>
         </v-form>
       </v-col>
@@ -90,10 +89,8 @@ export default {
   data: () => ({
     validCreateTypeMetier: true,
     dialog: false,
-    codeRules: [
-      v => !!v || 'Le champ est obligatoire',
-      v => /(\b[A-Z0-9]{1,}\b)/.test(v) || 'En majuscule seulement',
-      v => (v && v.length <= 10) || 'Le nom doit être moins que 10 caractères'
+    oldNamesRules: [
+      v => !v || v.length <= 300 || 'Le champ doit être moins que 300 caractères'
     ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',

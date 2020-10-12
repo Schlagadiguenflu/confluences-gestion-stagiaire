@@ -63,12 +63,12 @@ export default {
     search: '',
     headers: [
       {
-        text: 'Code',
-        value: 'code'
-      },
-      {
         text: 'Nom',
         value: 'libelle'
+      },
+      {
+        text: 'Anciens noms',
+        value: 'oldNames'
       }
     ],
     typeMetiers: []
