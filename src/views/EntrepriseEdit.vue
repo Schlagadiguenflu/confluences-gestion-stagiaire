@@ -233,10 +233,10 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="12">
           <EntrepriseContactList :entreprise="entreprise" />
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="12">
           <v-card class="mx-auto px-0" outlined>
             <v-list>
               <v-subheader>Stages</v-subheader>
