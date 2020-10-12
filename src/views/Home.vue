@@ -11,27 +11,18 @@
     <section id="hero">
       <v-row no-gutters>
         <v-img
-          :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
+          :max-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
           src="@/assets/background-img.jpg"
         >
           <v-theme-provider dark>
-            <v-container fill-height>
+            <v-container fill-height fluid>
               <v-row
                 align="center"
                 class="white--text mx-auto"
                 justify="center"
               >
                 <v-col class="white--text text-center" cols="12" tag="h1">
-                  <span
-                    :class="[
-                      $vuetify.breakpoint.smAndDown ? 'display-0' : 'display-1'
-                    ]"
-                    class="font-weight-light"
-                  >
-                    BIENVENUE SUR VOTRE
-                  </span>
-
-                  <br />
+                  
 
                   <span
                     :class="[
@@ -39,8 +30,20 @@
                     ]"
                     class="font-weight-black"
                   >
-                    GESTION DES STAGIAIRES
+                    BASE EMPLOI
                   </span>
+                  <br />
+                  <span
+                    v-if="loggedIn"
+                    :class="[
+                      $vuetify.breakpoint.smAndDown ? 'display-0' : 'display-1'
+                    ]"
+                    class="font-weight-light"
+                  >
+                    BIENVENUE
+                  </span>
+
+                  
                 </v-col>
 
                 <v-btn
@@ -87,12 +90,16 @@
 
 <script>
 // @ is an alias to /src
+import { authComputed } from '../vuex/helpers'
 export default {
   name: 'Home',
   data() {
     return {
       name: 'Confluences - Gestion des stagiaires'
     }
+  },
+  computed: {
+    ...authComputed
   }
 }
 </script>

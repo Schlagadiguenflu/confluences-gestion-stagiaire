@@ -94,7 +94,13 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app color="primary" dark elevate-on-scroll>
-      <v-toolbar-title class="text-uppercase">{{ name }}</v-toolbar-title>
+      <v-toolbar-title class="text-uppercase">
+        <v-img
+        lazy-src="@/assets/logo_white.png"
+        src="@/assets/logo_white.png"
+        max-width="115"
+      ></v-img>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="d-none d-md-flex">
         <v-btn
