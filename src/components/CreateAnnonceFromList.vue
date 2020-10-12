@@ -16,12 +16,12 @@
       <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn v-bind="attrs" v-on="on" class="mx-3" color="primary">
-            Ajouter une annonce
+            Ajouter une annonce de stage
           </v-btn>
         </template>
         <v-card>
           <v-card-title>
-            <span class="headline">Ajouter une annonce</span>
+            <span class="headline">Ajouter une annonce de stage</span>
           </v-card-title>
           <v-card-text>
             <v-text-field

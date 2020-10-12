@@ -200,7 +200,7 @@ export default {
           routeName: 'Affiliations'
         },
         {
-          label: 'Annonces',
+          label: 'Annonces de stages',
           routeName: 'Annonces'
         },
         {
@@ -212,7 +212,7 @@ export default {
           routeName: 'Metiers'
         },
         {
-          label: 'Moyens',
+          label: 'Communications',
           routeName: 'Moyens'
         },
         {

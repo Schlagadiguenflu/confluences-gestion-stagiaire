@@ -10,7 +10,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1>Moyen</h1>
+        <h1>Communication</h1>
       </v-col>
     </v-row>
     <v-row>

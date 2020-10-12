@@ -24,7 +24,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Supprimer un moyen</span>
+          <span class="headline">Supprimer une communication</span>
         </v-card-title>
         <v-card-text>
           <h3 class="mb-3">
@@ -33,7 +33,7 @@
           <v-card class="mx-auto" tile v-if="typeMoyen.entrepris.length > 0">
             <v-list disabled>
               <v-subheader>
-                Il faut supprimer le moyen lié aux entreprises
+                Il faut supprimer la communication liée aux entreprises
               </v-subheader>
               <v-list-item-group v-model="typeMoyen.entrepris" color="primary">
                 <v-list-item

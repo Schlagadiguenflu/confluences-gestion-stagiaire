@@ -10,7 +10,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1>Annonce</h1>
+        <h1>Annonce de stage</h1>
       </v-col>
     </v-row>
     <v-row>
