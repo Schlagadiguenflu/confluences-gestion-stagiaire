@@ -25,13 +25,6 @@
           </v-card-title>
           <v-card-text>
             <v-text-field
-              v-model="typeDomaine.code"
-              :counter="3"
-              label="Code"
-              :rules="codeRules"
-              required
-            ></v-text-field>
-            <v-text-field
               v-model="typeDomaine.libelle"
               :counter="60"
               :rules="libelleRules"
@@ -67,11 +60,6 @@ export default {
       code: null,
       libelle: null
     },
-    codeRules: [
-      v => !!v || 'Le champ est obligatoire',
-      v => /(\b[A-Z0-9]{1,}\b)/.test(v) || 'En majuscule seulement',
-      v => (v && v.length <= 3) || 'Le nom doit être moins que 3 caractères'
-    ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
       v => !v || v.length <= 60 || 'Le champ doit être moins que 60 caractères'

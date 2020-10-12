@@ -63,10 +63,6 @@ export default {
     search: '',
     headers: [
       {
-        text: 'Code',
-        value: 'code'
-      },
-      {
         text: 'Nom',
         value: 'libelle'
       }
