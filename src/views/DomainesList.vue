@@ -65,6 +65,10 @@ export default {
       {
         text: 'Nom',
         value: 'libelle'
+      },
+      {
+        text: 'Anciens noms',
+        value: 'oldNames'
       }
     ],
     typeDomaines: []

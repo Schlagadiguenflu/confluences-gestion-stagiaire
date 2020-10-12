@@ -27,6 +27,12 @@
             label="Nom"
             required
           ></v-text-field>
+          <v-text-field
+            v-model="typeDomaine.oldNames"
+            :counter="300"
+            label="Anciens noms"
+            :rules="oldNamesRules"
+          ></v-text-field>
         </v-form>
       </v-col>
     </v-row>
@@ -83,6 +89,9 @@ export default {
   data: () => ({
     validCreateTypeDomaine: true,
     dialog: false,
+    oldNamesRules: [
+      v => !v || v.length <= 300 || 'Le champ doit être moins que 300 caractères'
+    ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
       v => !v || v.length <= 60 || 'Le champ doit être moins que 60 caractères'
