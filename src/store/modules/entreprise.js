@@ -49,6 +49,16 @@ export const mutations = {
       entrepriseOffre => entrepriseOffre.typeOffreId !== offreId
     )
   },
+  SET_DOMAINE_ENTREPRISE(state, domaine) {
+    state.entreprise.entrepriseDomaines.push({
+      ...domaine
+    })
+  },
+  DELETE_DOMAINE_ENTREPRISE(state, domaineId) {
+    state.entreprise.entrepriseDomaines = state.entreprise.entrepriseDomaines.filter(
+      entrepriseDomaine => entrepriseDomaine.typeDomaineId !== domaineId
+    )
+  },
   SET_METIER_ENTREPRISE(state, metier) {
     state.entreprise.entrepriseMetiers.push({
       ...metier
@@ -263,6 +273,14 @@ export const actions = {
   // Supprime un métier à l'entreprise
   deleteMetier({ commit }, offreId) {
     commit('DELETE_METIER_ENTREPRISE', offreId)
+  },
+  // Ajoute un domaine à l'entreprise
+  addDomaine({ commit }, domaine) {
+    commit('SET_DOMAINE_ENTREPRISE', domaine)
+  },
+  // Supprime un domaine à l'entreprise
+  deleteDomaine({ commit }, domaineId) {
+    commit('DELETE_DOMAINE_ENTREPRISE', domaineId)
   },
   // Ajoute un contact à l'entreprise
   addContact({ commit }, contact) {

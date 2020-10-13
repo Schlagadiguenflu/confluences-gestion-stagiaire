@@ -202,14 +202,7 @@
           </v-row>
         </v-col>
         <v-col cols="12" md="8">
-          <v-autocomplete
-            v-model="entreprise.typeDomaineId"
-            :items="typeDomaine.typeDomaines"
-            item-value="typeDomaineId"
-            item-text="libelle"
-            label="Domaine"
-            clearable
-          ></v-autocomplete>
+          <EntrepriseDomaineList :entreprise="entreprise" />
           <v-row>
             <v-col cols="12" md="6">
               <EntrepriseMetierList :entreprise="entreprise" />
@@ -283,6 +276,7 @@ import store from '@/store/index.js'
 import { mapState } from 'vuex'
 import NProgress from 'nprogress'
 import EntrepriseOffreList from '@/components/EntrepriseOffreList.vue'
+import EntrepriseDomaineList from '@/components/EntrepriseDomaineList.vue'
 import EntrepriseMetierList from '@/components/EntrepriseMetierList.vue'
 import EntrepriseStageList from '@/components/EntrepriseStageList.vue'
 import EntrepriseContactList from '@/components/EntrepriseContactList.vue'
@@ -316,6 +310,7 @@ export default {
   components: {
     EntrepriseOffreList,
     EntrepriseMetierList,
+    EntrepriseDomaineList,
     EntrepriseStageList,
     EntrepriseContactList,
     DeleteEntreprise

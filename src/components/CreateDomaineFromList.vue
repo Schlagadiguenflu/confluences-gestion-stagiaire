@@ -32,11 +32,11 @@
               required
             ></v-text-field>
             <v-text-field
-            v-model="typeDomaine.oldNames"
-            :counter="300"
-            label="Anciens noms"
-            :rules="oldNamesRules"
-          ></v-text-field>
+              v-model="typeDomaine.oldNames"
+              :counter="300"
+              label="Anciens noms"
+              :rules="oldNamesRules"
+            ></v-text-field>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -67,7 +67,8 @@ export default {
       libelle: null
     },
     oldNamesRules: [
-      v => !v || v.length <= 300 || 'Le champ doit être moins que 300 caractères'
+      v =>
+        !v || v.length <= 300 || 'Le champ doit être moins que 300 caractères'
     ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',

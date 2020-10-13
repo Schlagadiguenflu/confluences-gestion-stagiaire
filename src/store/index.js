@@ -14,6 +14,7 @@ import * as authentification from '@/store/modules/authentification.js'
 import * as entreprise from '@/store/modules/entreprise.js'
 import * as entrepriseOffre from '@/store/modules/entrepriseOffre.js'
 import * as entrepriseMetier from '@/store/modules/entrepriseMetier.js'
+import * as entrepriseDomaine from '@/store/modules/entrepriseDomaine.js'
 import * as typeEntreprise from '@/store/modules/typeEntreprise.js'
 import * as typeDomaine from '@/store/modules/typeDomaine.js'
 import * as typeOffre from '@/store/modules/typeOffre.js'
@@ -40,6 +41,7 @@ export default new Vuex.Store({
     entreprise,
     entrepriseOffre,
     entrepriseMetier,
+    entrepriseDomaine,
     typeEntreprise,
     typeDomaine,
     typeOffre,

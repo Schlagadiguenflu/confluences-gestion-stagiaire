@@ -90,7 +90,7 @@ export default {
         text: 'Nom',
         value: 'nom'
       },
-      { text: 'Domaine', value: 'typeDomaine.libelle' },
+      { text: 'Domaine', value: 'domaines' },
       { text: 'Ville', value: 'ville' },
       { text: 'Code postal', value: 'codePostal' }
     ],
