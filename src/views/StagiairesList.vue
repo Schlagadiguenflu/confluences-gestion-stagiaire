@@ -56,6 +56,10 @@ export default {
     search: '',
     headers: [
       {
+        text: 'Trigramme',
+        value: 'username'
+      },
+      {
         text: 'Prenom',
         value: 'prenom'
       },
