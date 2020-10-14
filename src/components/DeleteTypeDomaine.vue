@@ -30,24 +30,29 @@
           <h3 class="mb-3">
             Attention une supression est définitive
           </h3>
-          <v-card class="mx-auto" tile v-if="typeDomaine.entrepris.length > 0">
+          <v-card
+            class="mx-auto"
+            tile
+            v-if="typeDomaine.entrepriseDomaines.length > 0"
+          >
             <v-list disabled>
               <v-subheader
                 >Il faut supprimer le domaine lié aux entreprises avant de
                 supprimer le domaine</v-subheader
               >
               <v-list-item-group
-                v-model="typeDomaine.entrepris"
+                v-model="typeDomaine.entrepriseDomaines"
                 color="primary"
               >
                 <v-list-item
-                  v-for="(entreprise, i) in typeDomaine.entrepris"
+                  v-for="(entrepriseDomaine,
+                  i) in typeDomaine.entrepriseDomaines"
                   :key="i"
                 >
                   <v-list-item-content>
                     <v-list-item-title
                       name="nom"
-                      v-text="entreprise.nom"
+                      v-text="entrepriseDomaine.entreprise.nom"
                     ></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
@@ -64,7 +69,7 @@
             color="red darken-1"
             text
             @click="deleteTypeDomaine()"
-            v-if="typeDomaine.entrepris.length == 0"
+            v-if="typeDomaine.entrepriseDomaines.length == 0"
           >
             Supprimer
           </v-btn>

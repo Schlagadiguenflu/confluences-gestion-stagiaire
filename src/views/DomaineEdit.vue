@@ -90,7 +90,8 @@ export default {
     validCreateTypeDomaine: true,
     dialog: false,
     oldNamesRules: [
-      v => !v || v.length <= 300 || 'Le champ doit être moins que 300 caractères'
+      v =>
+        !v || v.length <= 300 || 'Le champ doit être moins que 300 caractères'
     ],
     libelleRules: [
       v => !!v || 'Le champ est obligatoire',
