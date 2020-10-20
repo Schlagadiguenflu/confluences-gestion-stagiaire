@@ -67,7 +67,7 @@ export default {
         value: 'libelle'
       },
       {
-        text: 'Anciens noms',
+        text: 'Autres noms',
         value: 'oldNames'
       }
     ],

@@ -34,7 +34,7 @@
             <v-text-field
               v-model="typeDomaine.oldNames"
               :counter="300"
-              label="Anciens noms"
+              label="Autres noms"
               :rules="oldNamesRules"
             ></v-text-field>
           </v-card-text>
